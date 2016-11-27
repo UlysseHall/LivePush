@@ -1,0 +1,3 @@
+social_homepage:
+    path:     /
+    defaults: { _controller: SocialBundle:Main:index }
