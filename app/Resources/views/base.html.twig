@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
         {% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('bundles/livepush/css/style-base.css') }}">
+			<link rel="stylesheet" href="{{ asset('ressources/css/style-base.css') }}">
 			<link rel="stylesheet" href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}">
 		{% endblock %}
     </head>
@@ -35,21 +35,6 @@
 						<a class="btn btn-default" href="#registerCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="registerCollapse">
 							Connexion
 						</a>
-						
-						<form class="form-horizontal collapse" id="registerCollapse" action="{{ path('fos_user_security_check') }}" method="post">
-							{% if csrf_token is defined and csrf_token %}
-								<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-							{% endif %}
-							<div class="form-group">
-								<input type="email" id="username" name="_username" required="required" class="form-control" placeholder="Email HETIC">
-							</div>
-							<div class="form-group">
-								<input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Mot de passe">
-							</div>
-							<input type="checkbox" id="remember_me" name="_remember_me" value="on">
-							<input type="submit" id="_submit" name="_submit" class="btn btn-default">
-						</form>
-						
 					{% else %}
 						<a href="{{ path('fos_user_profile_show') }}" class="nav-account-link-profile">
 							{{ app.user.username }}
@@ -57,6 +42,20 @@
 					{% endif %}
 				</div>
 			</nav>
+			
+			<form class="form-horizontal collapse col-xs-3 pull-right col-xs-pull-1 nav-login-form" id="registerCollapse" action="{{ path('fos_user_security_check') }}" method="post">
+				{% if csrf_token is defined and csrf_token %}
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+				{% endif %}
+				<div class="form-group">
+					<input type="email" id="username" name="_username" required="required" class="form-control" placeholder="Email HETIC">
+				</div>
+				<div class="form-group">
+					<input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Mot de passe">
+				</div>
+				<input type="checkbox" id="remember_me" name="_remember_me" value="on">
+				<input type="submit" id="_submit" name="_submit" class="btn btn-default">
+			</form>
 			
 			{% block body %}
 			{% endblock %}
