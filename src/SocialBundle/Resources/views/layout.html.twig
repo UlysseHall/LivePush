@@ -1,11 +1,12 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Main{% endblock %}
+{% block title %}
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
 
 	{% block social_body %}
-	
 	{% endblock %}
 
 {% endblock %}

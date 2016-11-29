@@ -4,17 +4,63 @@
         <meta charset="UTF-8" />
         <title>
 			{% block title %}
-				Welcome!
+				LivePush
 			{% endblock %}
 		</title>
         {% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/livepush/css/style-base.css') }}">
+			<link rel="stylesheet" href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}">
 		{% endblock %}
     </head>
+	
     <body>
-        {% block body %}
-		{% endblock %}
+	
+		<div class="container-fluid">
+		
+			<nav class="row">
+				<div class="nav-logo col-xs-6">
+					<a href="{{ path('social_home') }}">
+						<h2>
+							Livepush
+						</h2>
+					</a>
+				</div>
+				
+				<div class="nav-account-buttons col-xs-6 pull-right" style="text-align:right;">
+					{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						<a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">
+							Inscription
+						</a>
+						
+						<a class="btn btn-default" href="#registerCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="registerCollapse">
+							Connexion
+						</a>
+						
+						<form class="form-horizontal collapse" id="registerCollapse" action="{{ path('fos_user_security_check') }}" method="post">
+							{% if csrf_token is defined and csrf_token %}
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+							{% endif %}
+							<div class="form-group">
+								<input type="email" id="username" name="_username" required="required" class="form-control" placeholder="Email HETIC">
+							</div>
+							<div class="form-group">
+								<input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Mot de passe">
+							</div>
+							<input type="checkbox" id="remember_me" name="_remember_me" value="on">
+							<input type="submit" id="_submit" name="_submit" class="btn btn-default">
+						</form>
+					{% endif %}
+				</div>
+			</nav>
+			
+			{% block body %}
+			{% endblock %}
+		
+		</div>
 		
         {% block javascripts %}
+			<script src="{{ asset('bundles/jquery/jquery.js') }}"></script>
+			<script src="{{ asset('bundles/bootstrap/js/bootstrap.js') }}"></script>
 		{% endblock %}
     </body>
 </html>
