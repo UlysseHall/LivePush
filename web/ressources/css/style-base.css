@@ -1,6 +1,6 @@
 nav	{
 		background-color: #D4CDCD;
-		padding: 5px 10% 5px 10%;
+		padding: 5px 15% 5px 15%;
 		display: flex !important;
 	}
 		
@@ -31,3 +31,7 @@ nav	{
 .nav-login-form	{
 					background-color: #D4CDCD;
 				}
+				
+.nav-account-drop-options	{
+								align-self: center;
+							}
