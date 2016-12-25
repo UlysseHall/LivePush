@@ -8,9 +8,11 @@
 				LivePush
 			{% endblock %}
 		</title>
+		
+		<link rel="stylesheet" href="{{ asset('ressources/css/style-base.css') }}">
         {% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('ressources/css/style-base.css') }}">
 			<link rel="stylesheet" href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('bundles/materialize/css/materialize.min.css') }}">
 		{% endblock %}
     </head>
 	
@@ -65,6 +67,7 @@
         {% block javascripts %}
 			<script src="{{ asset('bundles/jquery/jquery.js') }}"></script>
 			<script src="{{ asset('bundles/bootstrap/js/bootstrap.js') }}"></script>
+			<script src="{{ asset('bundles/materialize/js/materialize.min.js') }}"></script>
 		{% endblock %}
     </body>
 </html>
