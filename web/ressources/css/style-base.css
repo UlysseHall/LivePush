@@ -30,6 +30,7 @@ nav	{
 								
 .nav-login-form	{
 					background-color: #D4CDCD;
+					position: absolute !important;
 				}
 				
 .nav-account-drop-options	{
