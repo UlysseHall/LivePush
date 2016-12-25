@@ -32,7 +32,7 @@
 							Inscription
 						</a>
 						
-						<a class="btn btn-default" href="#registerCollapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="registerCollapse">
+						<a class="btn btn-default" href="{{ path('fos_user_security_login') }}">
 							Connexion
 						</a>
 					{% else %}
@@ -55,20 +55,6 @@
 					{% endif %}
 				</div>
 			</nav>
-			
-			<form class="form-horizontal collapse col-xs-3 pull-right col-xs-pull-1 nav-login-form" id="registerCollapse" action="{{ path('fos_user_security_check') }}" method="post">
-				{% if csrf_token is defined and csrf_token %}
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-				{% endif %}
-				<div class="form-group">
-					<input type="email" id="username" name="_username" required="required" class="form-control" placeholder="Email HETIC">
-				</div>
-				<div class="form-group">
-					<input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Mot de passe">
-				</div>
-				<input type="checkbox" id="remember_me" name="_remember_me" value="on">
-				<input type="submit" id="_submit" name="_submit" class="btn btn-default">
-			</form>
 			
 			{% block body %}
 			{% endblock %}
