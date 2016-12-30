@@ -29,22 +29,22 @@
 				
 				<div class="nav-account-button col-xs-6 pull-right">
 					{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-						<a href="{{ path('fos_user_registration_register') }}">
+						<a href="{{ path('fos_user_registration_register') }}" class="nav-account-button-link">
 							<span class="glyphicon glyphicon-pencil"></span>Inscription
 						</a>
 						
-						<a href="{{ path('fos_user_security_login') }}">
+						<a href="{{ path('fos_user_security_login') }}" class="nav-account-button-link">
 							<span class="glyphicon glyphicon-user"></span>Connexion
 						</a>
 					{% else %}
-						<a href="{{ path('fos_user_profile_show') }}" class="nav-account-link-profile">
-							{{ app.user.username }}
+						<a href="{{ path('fos_user_profile_show') }}" class="nav-account-button-link">
+							{{ app.user.username|capitalize }}
 						</a>
 						
 						<div class="btn-group nav-account-drop-options">
-							<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a type="button" class="dropdown-toggle nav-account-drop-options-triangle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="glyphicon glyphicon-triangle-bottom"></span>
-							</button>
+							</a>
 							
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="{{ path('fos_user_profile_edit') }}">Editer profil</a></li>
