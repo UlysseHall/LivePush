@@ -8,11 +8,9 @@
 				LivePush
 			{% endblock %}
 		</title>
-		
-		<link rel="stylesheet" href="{{ asset('ressources/css/style-base.css') }}">
         {% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('ressources/css/app/style-base.css') }}">
 			<link rel="stylesheet" href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}">
-			<link rel="stylesheet" href="{{ asset('bundles/materialize/css/materialize.min.css') }}">
 		{% endblock %}
     </head>
 	
@@ -21,7 +19,7 @@
 		<div class="container-fluid">
 		
 			<nav class="row">
-				<div class="nav-logo col-xs-6">
+				<div class="col-xs-6">
 					<a href="{{ path('social_home') }}">
 						<h2>
 							Livepush
@@ -31,12 +29,12 @@
 				
 				<div class="nav-account-button col-xs-6 pull-right">
 					{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-						<a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">
-							Inscription
+						<a href="{{ path('fos_user_registration_register') }}">
+							<span class="glyphicon glyphicon-pencil"></span>Inscription
 						</a>
 						
-						<a class="btn btn-default" href="{{ path('fos_user_security_login') }}">
-							Connexion
+						<a href="{{ path('fos_user_security_login') }}">
+							<span class="glyphicon glyphicon-user"></span>Connexion
 						</a>
 					{% else %}
 						<a href="{{ path('fos_user_profile_show') }}" class="nav-account-link-profile">
@@ -67,7 +65,6 @@
         {% block javascripts %}
 			<script src="{{ asset('bundles/jquery/jquery.js') }}"></script>
 			<script src="{{ asset('bundles/bootstrap/js/bootstrap.js') }}"></script>
-			<script src="{{ asset('bundles/materialize/js/materialize.min.js') }}"></script>
 		{% endblock %}
     </body>
 </html>

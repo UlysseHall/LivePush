@@ -1,0 +1,84 @@
+@font-face
+{
+	font-family: "FrancoisOne";
+	src: url(../../font/francoisone/FrancoisOne.ttf);
+}
+
+@font-face
+{
+	font-family: "OpenSans";
+	src: url(../../font/opensans/OpenSans-Regular.ttf);
+}
+
+@font-face
+{
+	font-family: "Montserrat";
+	src: url(../../font/montserrat/Montserrat-Regular.ttf);
+}
+
+nav
+{
+	background-color: #1D2247;
+	padding: 5px 15% 5px 15%;
+	display: flex !important;
+}
+
+nav h2	
+{
+	margin: 0px;
+	display: inline-block;
+	text-decoration: none;
+	color: white;
+	font-family: "FrancoisOne", Arial, sans-serif;
+}
+
+.nav-account-button
+{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.nav-account-button a, .nav-account-button a:hover, .nav-account-button a:active, .nav-account-button a:visited, .nav-account-button a:link
+{
+	color: white;
+	text-decoration: none;
+	font-family: "Montserrat", Arial, sans-serif;
+	display: flex;
+	align-items: center;
+	padding: 0px 10px 0px 10px;
+	border-radius: 4px;
+}
+
+.nav-account-button a:hover
+{
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-account-button a:first-child
+{
+	margin-right: 10px;
+}
+
+.nav-account-button a span
+{
+	margin-right: 7px;
+}
+	
+.nav-account-link-profile
+{
+	background-color: #BEB8B8;
+	padding: 0px 15px 0px 15px;
+	display: flex;
+	align-items: center;
+}
+
+.nav-account-link-profile, .nav-account-link-profile:hover, .nav-account-link-profile:active, .nav-account-link-profile:visited, .nav-account-link-profile:link
+{
+	color: black;
+	text-decoration: none;
+}
+
+.nav-account-drop-options
+{
+	align-self: center;
+}
