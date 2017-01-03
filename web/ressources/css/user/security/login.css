@@ -1,0 +1,18 @@
+.login-container
+{
+	background-color: #F1F1F1;
+}
+
+.login-header h1
+{
+	text-align: center;
+	font-family: "Montserrat", Arial, sans-serif;
+	font-weight: 900;
+}
+
+hr
+{
+	border: 0px;
+	height: 1px;
+	background-color: #1d2247;
+}

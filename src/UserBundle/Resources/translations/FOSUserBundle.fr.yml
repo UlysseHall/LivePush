@@ -73,8 +73,8 @@ layout:
     logged_in_as: 'Connecté en tant que %username%'
 form:
     group_name: 'Nom du groupe'
-    username: 'Nom d''utilisateur'
-    email: 'Adresse e-mail HETIC'
+    username: 'Prénom + Nom'
+    email: 'Adresse e-mail'
     current_password: 'Mot de passe actuel'
     password: 'Mot de passe'
     password_confirmation: 'Confirmation mot de passe'
