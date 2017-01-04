@@ -1,14 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('ressources/css/user/security/login.css') }}">
+	<link rel="stylesheet" href="{{ asset('ressources/css/user/form.css') }}">
 {% endblock %}
 
-<div class="col-xs-6 col-xs-offset-3 login-container">
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 form-container">
 
-	<div class="login-header">
+	<div class="form-header">
 		<h1>Connexion</h1>
-		<hr>
+		
 	</div>
 
 	{% if error %}
@@ -21,19 +21,25 @@
 		{% endif %}
 
 		<div class="form-group">
-			<label class="control-label" for="username">{{ 'security.login.username'|trans }}</label>
-			<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+			<label class="control-label col-xs-4 col-xs-offset-1" for="username">{{ 'security.login.username'|trans }}</label>
+			<div class="col-xs-4">
+				<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+			</div>
 		</div>
 		
 		<div class="form-group">
-			<label class="control-label" for="password">{{ 'security.login.password'|trans }}</label>
-			<input class="form-control" type="password" id="password" name="_password" required="required" />
+			<label class="control-label  col-xs-4 col-xs-offset-1" for="password">{{ 'security.login.password'|trans }}</label>
+			<div class="col-xs-4">
+				<input class="form-control" type="password" id="password" name="_password" required="required" />
+			</div>
 		</div>
-			
-		<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-		<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
-		<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+		<div class="form-group">
+			<div class="col-xs-offset-5 form-submit-container">
+				<input class="btn btn-default" type="submit" id="_submit" name="_submit" value="Valider" />
+			</div>
+		</div>
+		
 	</form>
 
 </div>

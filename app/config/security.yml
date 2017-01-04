@@ -24,3 +24,5 @@ security:
                 target: /
             remember_me:
                 secret: %secret%
+                lifetime: 50000000
+                always_remember_me: true
