@@ -11,7 +11,7 @@ group:
         deleted: 'Le groupe a été supprimé'
 security:
     login:
-        username: 'Nom d''utilisateur'
+        username: 'Adresse mail'
         password: 'Mot de passe'
         remember_me: 'Se souvenir de moi'
         submit: 'Connexion'
@@ -73,7 +73,7 @@ layout:
     logged_in_as: 'Connecté en tant que %username%'
 form:
     group_name: 'Nom du groupe'
-    username: 'Prénom + Nom'
+    username: 'Prénom Nom'
     email: 'Adresse e-mail'
     current_password: 'Mot de passe actuel'
     password: 'Mot de passe'

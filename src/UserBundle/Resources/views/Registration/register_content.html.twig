@@ -1,8 +1,60 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-{{ form_end(form) }}
+<div class="row">
+	<div class="col-xs-12 form-container">
+
+		<div class="form-header">
+			<h1>Inscription</h1>
+		</div>
+
+		<form action="{{ path('fos_user_registration_register') }}" method="POST" class="fos_user_registration_register form-horizontal" role="form">
+			
+			{% if form_errors(form.email) or form_errors(form.username) or form_errors(form.plainPassword.first) or form_errors(form.plainPassword.second)%}
+				<div class="alert alert-danger col-xs-6 col-xs-offset-3" role="alert">
+					{{ form_errors(form.email) }}
+					{{ form_errors(form.username) }}
+					{{ form_errors(form.plainPassword.first) }}
+					{{ form_errors(form.plainPassword.second) }}
+				</div>
+			{% endif %}
+			
+			<div class="form-group">
+				{{ form_label(form.email, "Adresse mail", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
+				<div class="col-xs-3">
+					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'maxlength': 255}}) }}
+				</div>
+			</div>
+			
+			<div class="form-group">
+				{{ form_label(form.username, "Prénom Nom", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
+				<div class="col-xs-3">
+					{{ form_widget(form.username, {'attr': {'class': 'form-control', 'maxlength': 30}}) }}
+				</div>
+			</div>
+			
+			<div class="form-group">
+				{{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
+				<div class="col-xs-3">
+					{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+			
+			<div class="form-group">
+				{{ form_label(form.plainPassword.second, "Vérification", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
+				<div class="col-xs-3">
+					{{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-xs-offset-5 form-submit-container">
+					<input type="submit" value="Valider" class="btn btn-default"/>
+				</div>
+			</div>
+			
+			{{ form_rest(form) }} 
+				
+		</form>
+		
+	</div>
+</div>

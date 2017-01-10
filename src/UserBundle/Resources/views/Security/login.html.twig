@@ -1,4 +1,8 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/user/form.css') }}">
+{% endblock %}
 
 {% block fos_user_content %}
     {{ include('FOSUserBundle:Security:login_content.html.twig') }}

@@ -37,9 +37,9 @@
 							<span class="glyphicon glyphicon-user"></span>Connexion
 						</a>
 					{% else %}
-						<a href="{{ path('fos_user_profile_show') }}" class="nav-account-button-link">
+						<div href="{{ path('fos_user_profile_show') }}" class="nav-account-button-link">
 							{{ app.user.username|capitalize }}
-						</a>
+						</div>
 						
 						<div class="btn-group nav-account-drop-options">
 							<a type="button" class="dropdown-toggle nav-account-drop-options-triangle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
