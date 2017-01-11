@@ -1,0 +1,21 @@
+{% extends "SocialBundle::layout.html.twig" %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/home.css') }}">
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('ressources/js/social/containerHeight.js') }}"></script>
+{% endblock %}
+
+{% block social_body %}
+
+	<div class="row home-container">
+	
+		<section class="home-problems col-xs-3">
+		
+		</section>
+	
+	</div>
+
+{% endblock %}

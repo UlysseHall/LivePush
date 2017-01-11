@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MainController extends Controller
 {
-    public function indexAction()
+    public function homeAction()
     {
-        return $this->render('SocialBundle:Main:index.html.twig');
+        return $this->render('SocialBundle:Main:home.html.twig');
     }
 }
