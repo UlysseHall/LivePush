@@ -1,18 +1,14 @@
-$(function(){
-    var windowH = $(window).height();
-    var wrapperH = $('.home-container').height();
-    if(windowH > wrapperH) {                            
-        $('.home-container').css({'height':($(window).height())+'px'});
-    }                                                                               
-    $(window).resize(function(){
-        var windowH = $(window).height();
-        var wrapperH = $('.home-container').height();
-        var differenceH = windowH - wrapperH;
-        var newH = wrapperH + differenceH;
-        var truecontentH = $('.home-problems').height();
-        if(windowH > truecontentH) {
-            $('.home-container').css('height', (newH)+'px');
-        }
-
-    })          
+$(function() {
+	function resize()
+	{
+		var totalHeight = $(window).outerHeight();
+		var navHeight = $("nav").outerHeight();
+		$(".home-container").outerHeight(totalHeight - navHeight);
+	}
+	
+	resize();
+	
+	$(window).resize(function() {
+		resize();
+	});
 });

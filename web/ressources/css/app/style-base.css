@@ -16,6 +16,12 @@
 	src: url(../../font/montserrat/Montserrat-Regular.ttf);
 }
 
+@font-face
+{
+	font-family: "MontserratBold";
+	src: url(../../font/montserrat/Montserrat-Bold.ttf);
+}
+
 nav
 {
 	background-color: #1D2247;
@@ -51,6 +57,7 @@ nav h2
 	align-items: center;
 	padding: 0px 10px 0px 10px;
 	border-radius: 4px;
+	transition: 0.2s;
 }
 
 .nav-account-button-link:hover
@@ -61,6 +68,11 @@ nav h2
 .nav-account-button-link:first-child
 {
 	margin-right: 10px;
+}
+
+.nav-account-button-link-user
+{
+	cursor: default;
 }
 
 .nav-account-button a span
