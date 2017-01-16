@@ -1,3 +1,7 @@
 social_home:
     path:     /
     defaults: { _controller: SocialBundle:Main:home }
+
+social_problem_add:
+    path:    /problem-add
+    defaults: { _controller: SocialBundle:Main:problemAdd }

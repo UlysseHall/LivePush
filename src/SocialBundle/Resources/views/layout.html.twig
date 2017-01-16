@@ -4,9 +4,48 @@
 	{{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/layout.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('ressources/js/social/containerHeight.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 
-	{% block social_body %}
-	{% endblock %}
+<div class="row home-container">
+
+	<section class="home-problems col-xs-3">
+
+		{% if connected == false %}
+			<a href="{{ path('fos_user_security_login') }}">
+		{% endif %}
+
+		<a href="
+			{% if connected == true %}
+				{{ path('social_problem_add') }}
+			{% else %}
+				{{ path('fos_user_security_login') }}
+			{% endif %}
+		">
+			<div class="problem-add col-xs-12">
+				J'ai un problème !
+			</div>
+		</a>
+
+		{% block social_left_pan %}
+		{% endblock %}
+
+	</section>
+
+	<section class="home-content col-xs-9">
+		{% block social_right_pan %}
+		{% endblock %}
+	</section
+
+</div>
 
 {% endblock %}

@@ -10,4 +10,9 @@ class MainController extends Controller
     {
         return $this->render('SocialBundle:Main:home.html.twig');
     }
+
+	public function problemAddAction()
+	{
+		return $this->render('SocialBundle:Main:problemAdd.html.twig');
+	}
 }

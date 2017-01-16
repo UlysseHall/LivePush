@@ -1,33 +1,10 @@
 {% extends "SocialBundle::layout.html.twig" %}
+
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/home.css') }}">
 {% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-	<script src="{{ asset('ressources/js/social/containerHeight.js') }}"></script>
-{% endblock %}
 
-{% block social_body %}
-
-	<div class="row home-container">
-	
-		<section class="home-problems col-xs-3">
-			
-			{% if connected == false %}
-				<a href="{{ path('fos_user_security_login') }}">
-			{% endif %}
-			
-			<div class="problem-add col-xs-12">
-				J'ai un problème !
-			</div>
-			
-			{% if connected == false %}
-				</a>
-			{% endif %}
-			
-		</section>
-	
-	</div>
+{% block social_left_pan %}
 
 {% endblock %}

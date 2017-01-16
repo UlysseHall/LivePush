@@ -1,0 +1,44 @@
+{% extends "SocialBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemAdd.css') }}">
+{% endblock %}
+
+{% block social_right_pan %}
+
+	<div class="col-xs-10 col-xs-offset-1">
+
+		<h1>Ajoute ton problème</h1>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="title" class="col-xs-3 control-label">Titre</label>
+				<div class="col-xs-7">
+					<input type="text" maxlength="255" class="form-control" id="title" placeholder="Titre du problème">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="content" class="col-xs-3 control-label">Description</label>
+				<div class="col-xs-7">
+					<textarea class="form-control" row="10" id="content" placeholder="Description du problème"></textarea>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="langage" class="col-xs-3 control-label">Langage</label>
+				<div class="col-xs-7">
+					<select class="form-control" id="langage">
+				    	<option>HTML</option>
+				    	<option>CSS</option>
+				    	<option>PHP</option>
+				    	<option>JS</option>
+				  	</select>
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+{% endblock %}
