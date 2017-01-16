@@ -7,34 +7,45 @@
 
 {% block social_right_pan %}
 
-	<div class="col-xs-10 col-xs-offset-1">
+	<div class="col-md-10 col-md-offset-1">
 
-		<h1>Ajoute ton problème</h1>
+		<h1>Renseigne ton problème</h1>
 
 		<form class="form-horizontal">
 			<div class="form-group">
 				<label for="title" class="col-xs-3 control-label">Titre</label>
-				<div class="col-xs-7">
+				<div class="col-md-7 col-sm-9">
 					<input type="text" maxlength="255" class="form-control" id="title" placeholder="Titre du problème">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="content" class="col-xs-3 control-label">Description</label>
-				<div class="col-xs-7">
+				<div class="col-md-7 col-sm-9">
 					<textarea class="form-control" row="10" id="content" placeholder="Description du problème"></textarea>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="langage" class="col-xs-3 control-label">Langage</label>
-				<div class="col-xs-7">
+				<label for="langage" class="col-xs-3 control-label">Technologie problématique</label>
+				<div class="col-md-7 col-sm-9">
 					<select class="form-control" id="langage">
 				    	<option>HTML</option>
 				    	<option>CSS</option>
 				    	<option>PHP</option>
 				    	<option>JS</option>
+                        <option>Python</option>
+                        <option>Jquery</option>
+                        <option>Bootstrap</option>
+                        <option>GIT</option>
+						<option>Autre</option>
 				  	</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-md-9 col-sm-offset-3 col-xs-offset-5">
+					<button type="submit" class="btn btn-success">Valider</button>
 				</div>
 			</div>
 		</form>
