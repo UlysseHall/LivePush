@@ -2,7 +2,9 @@
 
 namespace SocialBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use SocialBundle\Validator\GoodLangage;
 
 /**
  * Problem
@@ -25,6 +27,7 @@ class Problem
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -32,6 +35,8 @@ class Problem
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", minMessage="Le titre doit avoir au moins {{ limit }} caractères", max="255", maxMessage="Le titre doit avoir au plus {{ limit }} caractères")
      */
     private $titre;
 
@@ -46,12 +51,16 @@ class Problem
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", minMessage="La description doit avoir au moins {{ limit }} caractères")
      */
     private $contenu;
 
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @GoodLangage()
      * @ORM\Column(name="langage", type="string", length=255)
      */
     private $langage;
@@ -60,6 +69,7 @@ class Problem
      * @var bool
      *
      * @ORM\Column(name="resolu", type="boolean")
+     * @Assert\Type(type="bool")
      */
     private $resolu;
 

@@ -11,34 +11,34 @@
 
 		<h1>Renseigne ton problème</h1>
 
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" action="{{ path('social_problem_add_upload') }}">
 			<div class="form-group">
 				<label for="title" class="col-xs-3 control-label">Titre</label>
 				<div class="col-md-7 col-sm-9">
-					<input type="text" maxlength="255" class="form-control" id="title" placeholder="Titre du problème">
+					<input type="text" maxlength="255" class="form-control" id="title" name="pbAddTitle" placeholder="Titre du problème" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="content" class="col-xs-3 control-label">Description</label>
 				<div class="col-md-7 col-sm-9">
-					<textarea class="form-control" row="10" id="content" placeholder="Description du problème"></textarea>
+					<textarea class="form-control" row="10" id="content" name="pbAddContent" placeholder="Description du problème" required></textarea>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="langage" class="col-xs-3 control-label">Technologie problématique</label>
 				<div class="col-md-7 col-sm-9">
-					<select class="form-control" id="langage">
-				    	<option>HTML</option>
-				    	<option>CSS</option>
-				    	<option>PHP</option>
-				    	<option>JS</option>
-                        <option>Python</option>
-                        <option>Jquery</option>
-                        <option>Bootstrap</option>
-                        <option>GIT</option>
-						<option>Autre</option>
+					<select class="form-control" id="langage" name="pbAddLangage">
+				    	<option value="HTML">HTML</option>
+				    	<option value="CSS">CSS</option>
+				    	<option value="PHP">PHP</option>
+				    	<option value="JS">JS</option>
+                        <option value="Python">Python</option>
+                        <option value="Jquery">Jquery</option>
+                        <option value="Bootstrap">Bootstrap</option>
+                        <option value="GIT">GIT</option>
+						<option value="Autre">Autre</option>
 				  	</select>
 				</div>
 			</div>

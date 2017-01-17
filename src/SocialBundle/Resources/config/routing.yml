@@ -5,3 +5,7 @@ social_home:
 social_problem_add:
     path:    /problem-add
     defaults: { _controller: SocialBundle:Main:problemAdd }
+
+social_problem_add_upload:
+    path:    /problem-add-upload
+    defaults: { _controller: SocialBundle:Main:problemAddUpload }
