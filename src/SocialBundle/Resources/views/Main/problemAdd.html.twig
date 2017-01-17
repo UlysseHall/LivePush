@@ -15,14 +15,14 @@
 			<div class="form-group">
 				<label for="title" class="col-xs-3 control-label">Titre</label>
 				<div class="col-md-7 col-sm-9">
-					<input type="text" maxlength="255" class="form-control" id="title" name="pbAddTitle" placeholder="Titre du problème" required>
+					<input type="text" maxlength="255" minlength="3" class="form-control" id="title" name="pbAddTitle" placeholder="Titre du problème" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="content" class="col-xs-3 control-label">Description</label>
 				<div class="col-md-7 col-sm-9">
-					<textarea class="form-control" row="10" id="content" name="pbAddContent" placeholder="Description du problème" required></textarea>
+					<textarea class="form-control" minlength="3" row="10" id="content" name="pbAddContent" placeholder="Description du problème" required></textarea>
 				</div>
 			</div>
 
