@@ -4,6 +4,7 @@ namespace SocialBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use SocialBundle\Validator\GoodLangage;
 
 /**
@@ -72,6 +73,14 @@ class Problem
      * @Assert\Type(type="bool")
      */
     private $resolu;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="titreSlug", type="string", length=255, unique=true)
+    * @Gedmo\Slug(fields={"titre"})
+    */
+    private $titreSlug;
 
 	
 	public function __construct()
@@ -233,5 +242,29 @@ class Problem
     public function getResolu()
     {
         return $this->resolu;
+    }
+
+    /**
+     * Set titreSlug
+     *
+     * @param string $titreSlug
+     *
+     * @return Problem
+     */
+    public function setTitreSlug($titreSlug)
+    {
+        $this->titreSlug = $titreSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get titreSlug
+     *
+     * @return string
+     */
+    public function getTitreSlug()
+    {
+        return $this->titreSlug;
     }
 }
