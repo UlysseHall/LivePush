@@ -7,6 +7,7 @@
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/layout.css') }}">
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemDisplay.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -20,23 +21,18 @@
 
 	<section class="home-problems col-xs-3">
 
-		{% if connected == false %}
-			<a href="{{ path('fos_user_security_login') }}">
-		{% endif %}
-
-		<a href="
+		<a class="problem-add col-xs-12" href="
 			{% if connected == true %}
 				{{ path('social_problem_add') }}
 			{% else %}
 				{{ path('fos_user_security_login') }}
 			{% endif %}
 		">
-			<div class="problem-add col-xs-12">
-				J'ai un problème !
-			</div>
+            J'ai un problème !
 		</a>
 
 		{% block social_left_pan %}
+		    {{ render(controller("SocialBundle:Main:problemsGet")) }}
 		{% endblock %}
 
 	</section>

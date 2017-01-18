@@ -46,4 +46,14 @@ class MainController extends Controller
 		
 		return $this->redirectToRoute("social_home");
     }
+    
+    public function problemsGetAction()
+    {
+        $pbRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Problem");
+        $listProblems = $pbRep->findAll();
+        
+        return $this->render("SocialBundle:Main:problemDisplay.html.twig", array(
+            "listProblems" => $listProblems
+        ));
+    }
 }

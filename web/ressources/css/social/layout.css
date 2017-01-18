@@ -5,13 +5,19 @@
 	padding: 0px;
 }
 
-.problem-add
+.problem-add,
+.problem-add:hover,
+.problem-add:link,
+.problem-add:visited,
+.problem-add:active
 {
+    margin-bottom: 10px;
 	background-color: #2ecc71;
 	text-align: center;
 	color: white;
 	font-family: "MontserratBold", Arial, sans-serif;
 	text-transform: uppercase;
+    text-decoration: none;
 	padding-top: 8px;
 	padding-bottom: 8px;
 	transition: 0.4s;

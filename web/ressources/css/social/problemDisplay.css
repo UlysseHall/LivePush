@@ -1,0 +1,12 @@
+.list-pb-display
+{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.list-pb-display-li
+{
+    width: 100%;
+}
