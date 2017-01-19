@@ -1,9 +1,9 @@
-<ul class="list-pb-display">
+<ul class="list-pb-display row">
         
     {% for problem in listProblems %}
         
-        <li class="list-pb-display-li">
-            {{ problem.titre }}
+        <li class="list-pb-display-li col-xs-12">
+            {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
         </li>
         
       {% endfor %}

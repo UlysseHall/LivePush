@@ -50,7 +50,7 @@ class MainController extends Controller
     public function problemsGetAction()
     {
         $pbRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Problem");
-        $listProblems = $pbRep->findAll();
+        $listProblems = $pbRep->findBy(array(), array('date' => 'desc'));
         
         return $this->render("SocialBundle:Main:problemDisplay.html.twig", array(
             "listProblems" => $listProblems
