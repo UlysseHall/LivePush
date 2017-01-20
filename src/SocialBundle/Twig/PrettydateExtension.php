@@ -17,20 +17,17 @@ class PrettydateExtension extends \Twig_Extension
         $time = time() - $time;
         $time = ($time<1)? 1 : $time;
         $tokens = array (
-            31536000 => 'an',
-            2592000 => 'mois',
-            604800 => 'semaine',
-            86400 => 'jour',
-            3600 => 'heure',
-            60 => 'minute',
-            1 => 'seconde'
+            86400 => 'j',
+            3600 => 'h',
+            60 => 'm',
+            1 => 's'
         );
 
         foreach ($tokens as $unit => $text)
         {
             if ($time < $unit) continue;
             $numberOfUnits = floor($time / $unit);
-            return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+            return $numberOfUnits . $text;
         }
     }
     

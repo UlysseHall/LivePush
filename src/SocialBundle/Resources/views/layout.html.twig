@@ -13,6 +13,7 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('ressources/js/social/containerHeight.js') }}"></script>
+	<script src="{{ asset('ressources/js/social/langageLogoHeigth.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -21,15 +22,17 @@
 
 	<section class="home-problems col-xs-3">
 
-		<a class="problem-add col-xs-12" href="
-			{% if connected == true %}
-				{{ path('social_problem_add') }}
-			{% else %}
-				{{ path('fos_user_security_login') }}
-			{% endif %}
-		">
-            J'ai un problème !
-		</a>
+        <div class="row">  
+		    <a class="problem-add col-xs-12" href="
+		    	{% if connected == true %}
+		    		{{ path('social_problem_add') }}
+		    	{% else %}
+		    		{{ path('fos_user_security_login') }}
+		    	{% endif %}
+		    ">
+                J'ai un problème !
+		    </a>
+        </div>
 
 		{% block social_left_pan %}
 		    {{ render(controller("SocialBundle:Main:problemsGet")) }}

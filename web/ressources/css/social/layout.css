@@ -2,7 +2,13 @@
 {
 	background-color: #efefef;
 	height: 100%;
-	padding: 0px;
+	padding: 0;
+    overflow-y: auto;
+}
+
+.home-problems .row
+{
+    margin: 0;
 }
 
 .problem-add,

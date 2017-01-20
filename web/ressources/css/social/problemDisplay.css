@@ -6,8 +6,48 @@
     list-style: none;
 }
 
-.list-pb-display-li
+.list-pb-display li
 {
     width: 100%;
-    background-color: #dadada;
+    background-color: #dedede;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.list-pb-display li .col
+{
+    padding: 0;
+}
+
+.pb-display-logo
+{
+    padding: 0px 10px 0px 10px;
+}
+
+.pb-display-logo img
+{
+    width: 100%;
+}
+
+.pb-display-titre
+{
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pb-display-date
+{
+    padding-right: 10px !important;
+    text-align: right;
+    font-style: italic;
+    float: right;
+}
+
+.pb-display-auteur
+{
+    color: #6e6e6f;
+    font-family: "Opensans", Arial, sans-serif;
+    letter-spacing: 0.08em;
 }
