@@ -3,25 +3,27 @@
     {% for problem in listProblems %}
         
         <li class="col-xs-12">
-            <div class="row">
-               
-                <div class="col-xs-2 pb-display-logo">
-                    <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
-                </div>
-                
-                <div class="col-md-7 col pb-display-titre">
-                    {{ problem.titre }}
-                </div>
+            <a href="{{ path('social_problem_show', {'problem_titreSlug': problem.titreSlug}) }}">
+                <div class="row">
 
-                <div class="col-xs-2 col pb-display-date">
-                    {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
-                </div>
+                    <div class="col-xs-2 pb-display-logo">
+                        <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
+                    </div>
 
-                <div class="col-xs-4 col pb-display-auteur">
-                    {{ problem.auteur|capitalize }}
+                    <div class="col-md-7 col pb-display-titre">
+                        {{ problem.titre }}
+                    </div>
+
+                    <div class="col-xs-2 col pb-display-date">
+                        {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
+                    </div>
+
+                    <div class="col-xs-4 col pb-display-auteur">
+                        {{ problem.auteur|capitalize }}
+                    </div>
+
                 </div>
-                
-            </div>
+            </a>
         </li>
         
       {% endfor %}

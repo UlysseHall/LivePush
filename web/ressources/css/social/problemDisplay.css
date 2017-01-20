@@ -14,6 +14,11 @@
     margin-bottom: 10px;
 }
 
+.list-pb-display li a
+{
+    text-decoration: none;
+}
+
 .list-pb-display li .col
 {
     padding: 0;
@@ -35,6 +40,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #333;
 }
 
 .pb-display-date
@@ -43,6 +49,7 @@
     text-align: right;
     font-style: italic;
     float: right;
+    color: #333;
 }
 
 .pb-display-auteur

@@ -1,0 +1,27 @@
+{% extends "SocialBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemPage.css') }}">
+{% endblock %}
+
+{% block social_right_pan %}
+
+    <div class="row pb-page-header">
+        <h1>
+            {{ problem.titre }}
+            
+            <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
+            
+            <span class="pb-page-date">
+                {{ problem.auteur|capitalize }} - 
+                Il y a {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
+            </span>
+        </h1>
+    </div>
+    
+    <div class="row pb-page-content">
+        {{ problem.contenu }}
+    </div>
+
+{% endblock %}

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SocialBundle\Entity\Problem;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class MainController extends Controller
 {
@@ -54,6 +55,16 @@ class MainController extends Controller
         
         return $this->render("SocialBundle:Main:problemDisplay.html.twig", array(
             "listProblems" => $listProblems
+        ));
+    }
+    
+    /**
+     * @ParamConverter("problem", options={"mapping": {"problem_titreSlug": "titreSlug"}})
+     */
+    public function problemShowAction(Problem $problem)
+    {
+        return $this->render("SocialBundle:Main:problemPage.html.twig", array(
+            "problem" => $problem
         ));
     }
 }

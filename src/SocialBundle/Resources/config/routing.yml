@@ -9,3 +9,7 @@ social_problem_add:
 social_problem_add_upload:
     path:    /problem-add-upload
     defaults: { _controller: SocialBundle:Main:problemAddUpload }
+
+social_problem_show:
+    path:    /problem-page/{problem_titreSlug}
+    defaults: { _controller: SocialBundle:Main:problemShow }
