@@ -5,13 +5,18 @@
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemAdd.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('ressources/js/social/problemCountFile.js') }}"></script>
+{% endblock %}
+
 {% block social_right_pan %}
 
 	<div class="col-md-10 col-md-offset-1">
 
 		<h1>Renseigne ton problème</h1>
 
-		<form class="form-horizontal" method="post" action="{{ path('social_problem_add_upload') }}">
+		<form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ path('social_problem_add_upload') }}">
 			<div class="form-group">
 				<label for="title" class="col-xs-3 control-label">Titre</label>
 				<div class="col-md-7 col-sm-9">
@@ -41,6 +46,19 @@
 						<option value="Autre">Autre</option>
 				  	</select>
 				</div>
+			</div>
+			
+			<div class="form-group">
+                <label for="files" class="col-xs-3 control-label">Fichier(s) représentatif(s)</label>
+                <div class="col-md-7 col-sm-9">
+                    <label>
+                        <span class="btn btn-default">
+                            Importer <span class="badge badge-nb-fichiers">0</span>
+                            <input type="file" name="files[]" id="files" multiple>
+                        </span>
+                    </label>
+                    <div class="noms-fichiers"></div>
+                </div>
 			</div>
 			
 			<div class="form-group">

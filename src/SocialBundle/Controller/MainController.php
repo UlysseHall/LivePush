@@ -27,12 +27,25 @@ class MainController extends Controller
         $title = ucfirst(htmlspecialchars($request->request->get('pbAddTitle')));
         $content = ucfirst(htmlspecialchars($request->request->get('pbAddContent')));
         $langage = htmlspecialchars($request->request->get('pbAddLangage'));
+        $files = $_FILES['files'];
+        $asFile = false;
+        
+        if($files["name"][0] != "" && isset($files["name"][0]))
+        {
+            $asFile = true;
+        }
+        
+        if($asFile && count($files['name']) > 6)
+        {
+            return new Response("Nombre de fichiers dépassé");
+        }
         
         $problem = new Problem;
         $problem->setTitre($title);
         $problem->setContenu($content);
         $problem->setLangage($langage);
         $problem->setAuteur($this->getUser());
+        if($asFile) { $problem->setNbFiles(count($files['name'])); }
         
         $validator = $this->get('validator');
         $listErrors = $validator->validate($problem);
@@ -44,8 +57,23 @@ class MainController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($problem);
 		$em->flush();
+        
+        $pbId = $problem->getId();
+        
+        if($asFile)
+        {
+            for($i = 0; $i < count($files['name']); $i++)
+            {
+                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pbId . "." . $i . ".txt"))
+                {
+                    $em->remove($problem);
+                    $em->flush();
+                    return new Response("Erreur lors du téléchargement des fichiers");
+                }
+            }
+        }
 		
-		return $this->redirectToRoute("social_home");
+		return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
     }
     
     public function problemsGetAction()

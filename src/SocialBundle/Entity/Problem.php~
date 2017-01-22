@@ -81,6 +81,13 @@ class Problem
     * @Gedmo\Slug(fields={"titre"})
     */
     private $titreSlug;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbFiles", type="integer")
+     */
+    private $nbFiles;
 
 	
 	public function __construct()
@@ -242,5 +249,29 @@ class Problem
     public function getResolu()
     {
         return $this->resolu;
+    }
+
+    /**
+     * Set titreSlug
+     *
+     * @param string $titreSlug
+     *
+     * @return Problem
+     */
+    public function setTitreSlug($titreSlug)
+    {
+        $this->titreSlug = $titreSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get titreSlug
+     *
+     * @return string
+     */
+    public function getTitreSlug()
+    {
+        return $this->titreSlug;
     }
 }

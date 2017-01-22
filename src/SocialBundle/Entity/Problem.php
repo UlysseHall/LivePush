@@ -81,12 +81,20 @@ class Problem
     * @Gedmo\Slug(fields={"titre"})
     */
     private $titreSlug;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbFiles", type="integer")
+     */
+    private $nbFiles;
 
 	
 	public function __construct()
 	{
 		$this->date = new \Datetime();
 		$this->resolu = false;
+        $this->nbFiles = 0;
 	}
 	
 	
@@ -266,5 +274,29 @@ class Problem
     public function getTitreSlug()
     {
         return $this->titreSlug;
+    }
+
+    /**
+     * Set nbFiles
+     *
+     * @param integer $nbFiles
+     *
+     * @return Problem
+     */
+    public function setNbFiles($nbFiles)
+    {
+        $this->nbFiles = $nbFiles;
+
+        return $this;
+    }
+
+    /**
+     * Get nbFiles
+     *
+     * @return integer
+     */
+    public function getNbFiles()
+    {
+        return $this->nbFiles;
     }
 }
