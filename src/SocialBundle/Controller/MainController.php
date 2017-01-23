@@ -27,11 +27,11 @@ class MainController extends Controller
         $title = ucfirst(htmlspecialchars($request->request->get('pbAddTitle')));
         $content = ucfirst(htmlspecialchars($request->request->get('pbAddContent')));
         $langage = htmlspecialchars($request->request->get('pbAddLangage'));
-        $files = $_FILES['files'];
         $asFile = false;
         
-        if($files["name"][0] != "" && isset($files["name"][0]))
+        if(isset($_FILES['files']["name"][0]) && $_FILES['files']["name"][0] != "")
         {
+            $files = $_FILES['files'];
             $asFile = true;
         }
         
@@ -64,6 +64,14 @@ class MainController extends Controller
         {
             for($i = 0; $i < count($files['name']); $i++)
             {
+                if($files["size"][$i] > 2097152)
+                {
+                    $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $files["name"][$i] . " dépasse la taille maximum de 2Mo");
+                    $em->remove($problem);
+                    $em->flush();
+                    return $this->redirectToRoute("social_problem_add");
+                }
+                
                 if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pbId . "." . $i . ".txt"))
                 {
                     $em->remove($problem);

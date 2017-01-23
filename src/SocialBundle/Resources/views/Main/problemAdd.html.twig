@@ -15,6 +15,12 @@
 	<div class="col-md-10 col-md-offset-1">
 
 		<h1>Renseigne ton problème</h1>
+		
+		{% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
 
 		<form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ path('social_problem_add_upload') }}">
 			<div class="form-group">
@@ -53,7 +59,7 @@
                 <div class="col-md-7 col-sm-9">
                     <label>
                         <span class="btn btn-default">
-                            Importer <span class="badge badge-nb-fichiers">0</span>
+                            Importer <span class="badge badge-nb-fichiers">Poids max par fichier : 2Mo</span>
                             <input type="file" name="files[]" id="files" multiple>
                         </span>
                     </label>
