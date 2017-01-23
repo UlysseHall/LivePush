@@ -9,7 +9,7 @@
 
     <div class="row pb-page-header">
         <h1>
-            {{ problem.titre }}
+            {{ problem.titre|raw }}
             
             <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
             
@@ -21,7 +21,13 @@
     </div>
     
     <div class="row pb-page-content">
-        {{ problem.contenu }}
+        {{ problem.contenu|raw }}
     </div>
+    
+    {% if problem.nbFiles > 0 %}
+        <div class="row pb-page-files">
+            <p>{{ problem.nbFiles }} fichier{% if problem.nbFiles > 1 %}s{% endif %}</p>
+        </div>
+    {% endif %}
 
 {% endblock %}

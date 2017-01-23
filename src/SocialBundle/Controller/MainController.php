@@ -5,6 +5,7 @@ namespace SocialBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SocialBundle\Entity\Problem;
+use SocialBundle\Entity\Fichier;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -72,13 +73,23 @@ class MainController extends Controller
                     return $this->redirectToRoute("social_problem_add");
                 }
                 
-                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pbId . "." . $i . ".txt"))
+                $pathName = $pbId . "." . $i . ".txt";
+                
+                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pathName))
                 {
                     $em->remove($problem);
                     $em->flush();
                     return new Response("Erreur lors du téléchargement des fichiers");
                 }
+                
+                $fichier = new Fichier;
+                $fichier->setProblem($problem);
+                $fichier->setName($files["name"][$i]);
+                $fichier->setPathName($pathName);
+                
+                $em->persist($fichier);
             }
+            $em->flush();
         }
 		
 		return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
@@ -99,8 +110,15 @@ class MainController extends Controller
      */
     public function problemShowAction(Problem $problem)
     {
+        $fichierRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Fichier");
+        $listFichiers = $fichierRep->findBy(
+            array("problem" => $problem),
+            array("pathName" => "desc")
+        );
+        
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
-            "problem" => $problem
+            "problem" => $problem,
+            "listFichiers" => $listFichiers
         ));
     }
 }
