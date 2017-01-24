@@ -1,0 +1,25 @@
+<?php
+
+$tab = [12, 46, 1, 12, 34, 33, 0, 2];
+
+function sortMe(array $a) : array
+{
+    $continue = true; //Variable bool permettant de savoir quand arrêter le tri
+    $iteration = 0; //Variable comptant le nombre d'itérations
+    
+    while($continue){
+         $continue = false; //Si aucuns index n'est inversé, $continue restera à false et stopera la boucle
+         for($i = 0; $i < count($a) - 1; $i++){
+            if($a[$i] > $a[$i+1]){ //Si la valeur d'un index $i est inférieur à la valeur de $i+1, on inverses les index et donc leur valeur dans le tableau
+                $int = $a[$i]; //Variable intermédiaire
+                $a[$i] = $a[$i+1];
+                $a[$i+1] = $int;
+                $continue = true; //Si il y a eu un échange de valeurs, le tri n'est pas fini
+            }
+        }
+        $iteration++;
+    }
+    return($a);
+}
+
+var_dump(sortMe($tab));
