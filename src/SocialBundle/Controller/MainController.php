@@ -113,12 +113,19 @@ class MainController extends Controller
         $fichierRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Fichier");
         $listFichiers = $fichierRep->findBy(
             array("problem" => $problem),
-            array("pathName" => "desc")
+            array("pathName" => "asc")
         );
+		
+		$fichiersContent = [];
+		
+		foreach($listFichiers as $fichier)
+		{
+			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => file_get_contents("ressources/txt/" . $fichier->getPathName())]);
+		}
         
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
             "problem" => $problem,
-            "listFichiers" => $listFichiers
+			"fichiersContent" => $fichiersContent
         ));
     }
 }

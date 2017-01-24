@@ -1,0 +1,126 @@
+{% extends "UHMainBundle::layout-admin.html.twig" %}
+
+{% block title %}
+	Modifier Photo
+{% endblock %}
+
+{% block uhmain_body %}
+	{% if etape == 1 %}
+		<div class="col-xs-8 col-xs-offset-2">
+			<h2 style="text-align:center; color:#cbcdc2;">Dans quelle catégorie se trouve l'image à modifier ?</h2>
+			<hr>
+		
+			<div class="col-xs-4">
+				<a href="{{ path('uh_main_admin_photo_edit', {'categorie': 'nat-mor'}) }}" class="btn btn-default btn-block">
+					Nature Morte
+				</a>
+			</div>
+		
+			<div class="col-xs-4">
+				<a href="{{ path('uh_main_admin_photo_edit', {'categorie': 'rep'}) }}" class="btn btn-default btn-block">
+					Reportage
+				</a>
+			</div>
+		
+			<div class="col-xs-4">
+				<a href="{{ path('uh_main_admin_photo_edit', {'categorie': 'blog'}) }}" class="btn btn-default btn-block">
+					Blog
+				</a>
+			</div>
+		</div>
+	{% elseif etape == 2 %}
+		<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 uh-gallerie-thumb">
+		<h2 style="text-align:center; color:#cbcdc2;">Dans quelle collection se trouve l'image à modifier ?</h2>
+		<hr>
+		
+			{% for gallerie in listGalleries %}
+				{% if loop.index0 is divisible by(6) %}
+					<div class="col-xs-2" style="padding:0px !important">
+				{% else %}
+					<div class="col-xs-2" style="padding:0px !important">
+				{% endif %}
+						{% if gallerie.thumb == null %} {% set thumbImg = "default" %} {% else %} {% set thumbImg = gallerie.thumb %} {% endif %}
+						<div class="col-xs-12" style="padding:4px !important;">
+							<a href="{{ path('uh_main_admin_photo_edit', {'categorie': type, 'collection': gallerie.slug}) }}">
+								<div style="border:1px hidden white;" onmouseover="overBorder({{ loop.index }})" onmouseout="outBorder({{ loop.index }})" id="{{ loop.index }}">
+									<img style="margin-left: auto;" width="100%" src="{{ asset('photos/thumbnail/'~categorie~'/'~thumbImg~'.jpg') }}">
+								</div>
+							</a>
+						</div>
+					</div>
+			{% endfor %}
+			</div>
+			<script type="text/javascript">
+				function overBorder(id)
+				{
+					document.getElementById(id).style.borderStyle="solid";
+					document.getElementById(id).style.margin="-1px";
+				}
+				function outBorder(id)
+				{
+					document.getElementById(id).style.borderStyle="hidden";
+					document.getElementById(id).style.margin="0px";
+				}
+			</script>
+		</div>
+	{% elseif etape == 3 %}
+		<div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 uh-collection">
+		<h2 style="text-align:center; color:#cbcdc2;">Quelle est la photo à modifier ?</h2>
+		<hr>
+			{% for photo in listPhotos %}
+				<a href="{{ path('uh_main_admin_photo_edit', {'categorie': type, 'collection': collection, 'id': photo.id}) }}">
+					<div class="col-md-10 col-md-offset-1 col-xs-12" style="margin-bottom: 20px;">
+						<img width="100%" src="{{ asset('photos/gallerie/'~categorie~'/'~photo.slug~'.jpg') }}">
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		
+	{% elseif etape == 4 %}
+		<div class="col-xs-offset-2">
+		<form action="{{ path('uh_main_admin_photo_edit') }}" method="POST" role="form" class="form-horizontal">
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3" for="menu">Affiché dans le menu ?</label>
+				<div class="col-xs-5">
+					<input {% if photo.menu == true %} checked="checked" {% endif %} class="form-control" type="checkbox" id="menu" name="menu" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3" for="favori">Mettre en avant dans le menu ?</label>
+				<div class="col-xs-5">
+					<input {% if photo.favori == true %} checked="checked" {% endif %} class="form-control" type="checkbox" id="favori" name="favori" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3" for="ordre">Ordre</label>
+				<div class="col-xs-5">
+					<input class="form-control" value="{{ photo.ordre }}" type="number" id="ordre" name="ordre" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3" for="collection">Collection</label>
+				<div class="col-xs-5">
+					<select id="collection" name="collection" class="form-control">
+						{% for gallerie in listGallerie %}
+							<option {% if photo.gallerie == gallerie %} selected="selected" {% endif %} value="{{ gallerie.id }}">{{ gallerie.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			
+			<input type="hidden" name="photoId" value="{{ photo.id }}" />
+			
+			<div class="form-group">
+				<div class="col-xs-offset-5">
+					<input type="submit" class="btn btn-success" id="submit" value="Valider" />
+				</div>
+			</div>
+			
+		</form>
+		</div>
+	{% endif %}
+{% endblock %}

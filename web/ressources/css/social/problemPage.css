@@ -2,6 +2,7 @@
 {
     background-color: #ecf0f1;
     padding: 30px;
+	word-break: break-all;
 }
 
 h1
@@ -36,13 +37,25 @@ h1 img
 {
     background-color: #2c3e50;
     color: #fff;
-    padding: 30px;
+    padding: 0 30px 0 30px;
+}
+
+.pb-page-files img
+{
+	width: 20%;
 }
 
 .pb-page-files p
 {
-    font-weight: bold;
+	color: #fff;
+	font-size: 1.15em;
+	margin-top: 10px;
+	margin-bottom: 0;
+	font-weight: bold;
     text-align: center;
-    font-size: 1.8em;
-    margin: 0;
+}
+
+.file-container
+{
+	margin: 20px 0 20px 0;
 }

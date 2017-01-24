@@ -10,7 +10,7 @@
 {
     width: 100%;
     background-color: #dedede;
-    padding: 3px 0 3px 0;
+    padding: 5px 0 5px 0;
     margin-bottom: 10px;
 }
 
@@ -27,11 +27,12 @@
 .pb-display-logo
 {
     padding: 0px 10px 0px 10px;
+	float: left;
 }
 
 .pb-display-logo img
 {
-    width: 100%;
+    width: 3em;
 }
 
 .pb-display-titre
@@ -49,7 +50,8 @@
     text-align: right;
     font-style: italic;
     float: right;
-    color: #333;
+    color: #6e6e6f;
+	font-weight: bold;
 }
 
 .pb-display-auteur

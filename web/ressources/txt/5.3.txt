@@ -1,0 +1,91 @@
+{% extends "UHMainBundle::layout-admin.html.twig" %}
+
+{% block title %}
+	Ajouter Photo
+{% endblock %}
+
+{% block uhmain_body %}
+	<div class="col-xs-offset-2">
+	{{ form_start(form, {'attr': {'class': 'form-horizontal', 'action': path('uh_main_admin_photo_add'), 'method': 'POST', 'role': 'form'}}) }}
+		
+		{{ form_errors(form) }}
+		{% if form_errors(form.type) or form_errors(form.menu) or form_errors(form.favori) or form_errors(form.gallerie) or form_errors(form.smImg) or form_errors(form.mdImg) or form_errors(form.lgImg) %}
+			<div class="alert alert-danger col-xs-8 col-xs-offset-2" style="padding:8px;" role="alert">
+				{{ form_errors(form.type) }}
+				{{ form_errors(form.menu) }}
+				{{ form_errors(form.favori) }}
+				{{ form_errors(form.gallerie) }}
+				{{ form_errors(form.smImg) }}
+				{{ form_errors(form.mdImg) }}
+				{{ form_errors(form.lgImg) }}
+			</div>
+		{% endif %}
+		
+		<div class="form-group">
+			{{ form_label(form.type, "Catégorie", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.menu, "Affiché dans le menu ?", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.menu, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.favori, "Mettre en avant dans le menu ?", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.favori, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.ordre, "Ordre (de 1 à 999)", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.ordre, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.gallerie, "Collection", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.gallerie, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.smImg, "Thumbnail (121x155)", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.smImg, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.mdImg, "Menu (356x456)", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.mdImg, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			{{ form_label(form.lgImg, "Gallerie (602x770) ou (924xlibre)", {'label_attr': {'class': 'col-xs-3 control-label'}}) }}
+			<div class="col-xs-5">
+				{{ form_widget(form.lgImg, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-xs-offset-5">
+				<input type="submit" value="Ajouter" class="btn btn-success"/>
+			</div>
+		</div>
+	
+		{{ form_rest(form) }} 
+		
+	{{ form_end(form) }}
+	</div>
+	<br><p style="font-weight:bold; text-align:center;">Les images portait nécessites les 3 formats, les images paysage ne nécessites que le format Gallerie</p>
+{% endblock %}

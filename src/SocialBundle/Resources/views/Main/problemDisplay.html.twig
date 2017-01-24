@@ -5,21 +5,22 @@
         <li class="col-xs-12">
             <a href="{{ path('social_problem_show', {'problem_titreSlug': problem.titreSlug}) }}">
                 <div class="row">
-
-                    <div class="col-xs-2 pb-display-logo">
-                        <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
-                    </div>
-
-                    <div class="col-md-7 col pb-display-titre">
+                   
+                    <div class="col-xs-9 col pb-display-titre">
+                    	<div class="pb-display-logo">
+                    		<img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
+                    	</div>
+                       
                         {{ problem.titre|raw }}
+                        <br>
+                        
+                        <span class="pb-display-auteur">
+                        	{{ problem.auteur }}
+                        </span>
                     </div>
 
-                    <div class="col-xs-2 col pb-display-date">
+                    <div class="col-xs-3 col pb-display-date">
                         {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
-                    </div>
-
-                    <div class="col-xs-4 col pb-display-auteur">
-                        {{ problem.auteur|capitalize }}
                     </div>
 
                 </div>

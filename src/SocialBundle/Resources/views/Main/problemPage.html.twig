@@ -14,7 +14,7 @@
             <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
             
             <span class="pb-page-date">
-                {{ problem.auteur|capitalize }} - 
+                {{ problem.auteur }} - 
                 Il y a {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
             </span>
         </h1>
@@ -26,7 +26,17 @@
     
     {% if problem.nbFiles > 0 %}
         <div class="row pb-page-files">
-            <p>{{ problem.nbFiles }} fichier{% if problem.nbFiles > 1 %}s{% endif %}</p>
+            
+			{% for fichier in fichiersContent %}
+				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container">
+					<center>
+						<img src="{{ asset('ressources/img/icons/file.png') }}" alt="file-icon">
+					</center>
+					
+					<p>{{ fichier.name }}</p>
+				</div>
+			{% endfor %}
+       
         </div>
     {% endif %}
 
