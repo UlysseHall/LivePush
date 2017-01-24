@@ -75,7 +75,7 @@ class MainController extends Controller
                 
                 $pathName = $pbId . "." . $i . ".txt";
 
-                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt" . $pathName))
+                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pathName))
                 {
                     $em->remove($problem);
                     $em->flush();
@@ -120,7 +120,7 @@ class MainController extends Controller
 		
 		foreach($listFichiers as $fichier)
 		{
-			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => file_get_contents("ressources/txt" . $fichier->getPathName())]);
+			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => file_get_contents("ressources/txt/" . $fichier->getPathName())]);
 		}
         
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
