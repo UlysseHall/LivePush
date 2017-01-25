@@ -5,6 +5,11 @@
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemPage.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
+{% endblock %}
+
 {% block social_right_pan %}
 
     <div class="row pb-page-header">
@@ -28,9 +33,9 @@
         <div class="row pb-page-files">
             
 			{% for fichier in fichiersContent %}
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container">
+				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container" data-file-code="{{ fichier.content }}" data-file-name="{{ fichier.name }}">
 					<center>
-						<img src="{{ asset('ressources/img/icons/file.png') }}" alt="file-icon">
+						<img class="page-file-icon" src="{{ asset('ressources/img/icons/file.png') }}" alt="file-icon">
 					</center>
 					
 					<p>{{ fichier.name }}</p>

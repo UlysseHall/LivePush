@@ -4,6 +4,7 @@
 	height: 100%;
 	padding: 0;
     overflow-y: auto;
+	transition: width 0.8s;
 }
 
 .home-problems .row
@@ -32,4 +33,9 @@
 .problem-add:hover
 {
 	background-color: #27ae60;
+}
+
+.home-content
+{
+	transition: width 0.8s;
 }

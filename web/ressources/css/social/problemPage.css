@@ -43,6 +43,7 @@ h1 img
 .pb-page-files img
 {
 	width: 20%;
+	cursor: pointer;
 }
 
 .pb-page-files p

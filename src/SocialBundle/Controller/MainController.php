@@ -65,7 +65,7 @@ class MainController extends Controller
         {
             for($i = 0; $i < count($files['name']); $i++)
             {
-                if($files["size"][$i] > 2097152)
+                if($files["size"][$i] > 2097152 || $files["error"][$i] == 1)
                 {
                     $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $files["name"][$i] . " dépasse la taille maximum de 2Mo");
                     $em->remove($problem);
