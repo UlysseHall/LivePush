@@ -2,10 +2,10 @@ $(function()
 {
 	function displayCode(name, code)
 	{
-		$(".home-content").css("width", "50%");
-		$(".home-problems").css("width", "50%");
-		$(".home-problems").html("<pre><code class='display-code-tag'>");
+		$(".home-content, .home-problems").css("width", "50%");
+		$(".home-problems").html("<pre class='display-code-tag prettyprint linenums'>");
 		$(".home-problems .display-code-tag").text(code);
+        PR.prettyPrint();
 	}
 	
 	$(".page-file-icon").click(function() {

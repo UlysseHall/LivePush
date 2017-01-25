@@ -3,11 +3,13 @@
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/problemPage.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/code-prettify/skins/desert.css') }}">
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
+	<script src="{{ asset('bundles/code-prettify/prettify.js') }}"></script>
 {% endblock %}
 
 {% block social_right_pan %}
