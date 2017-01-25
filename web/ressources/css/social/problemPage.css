@@ -46,17 +46,32 @@ h1 img
 	cursor: pointer;
 }
 
-.pb-page-files p
+.page-file-name
 {
 	color: #fff;
-	font-size: 1.15em;
+	font-size: 1em;
 	margin-top: 10px;
 	margin-bottom: 0;
 	font-weight: bold;
     text-align: center;
+    cursor: pointer;
 }
 
 .file-container
 {
 	margin: 20px 0 20px 0;
+}
+
+pre
+{
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding-left: 5px;
+    height: 100%;
+}
+
+.file-unfocus
+{
+    opacity: 0.5;
 }

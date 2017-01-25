@@ -8,8 +8,8 @@
 
 {% block javascripts %}
 	{{ parent() }}
-	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
 	<script src="{{ asset('bundles/code-prettify/prettify.js') }}"></script>
+	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
 {% endblock %}
 
 {% block social_right_pan %}
@@ -40,7 +40,7 @@
 						<img class="page-file-icon" src="{{ asset('ressources/img/icons/file.png') }}" alt="file-icon">
 					</center>
 					
-					<p>{{ fichier.name }}</p>
+					<p class="page-file-name">{{ fichier.name }}</p>
 				</div>
 			{% endfor %}
        
