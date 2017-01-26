@@ -67,11 +67,40 @@ pre
     border: none;
     border-radius: 0;
     margin: 0;
-    padding-left: 5px;
-    height: 100%;
+    padding: 0 0 0 5px;
+}
+
+pre::before
+{
+    content: none !important;
 }
 
 .file-unfocus
 {
     opacity: 0.5;
+}
+
+.file-display-header
+{
+    background-color: #333;
+    padding: 5px;
+    text-align: center;
+}
+
+.file-display-header p
+{
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.5);
+    margin: 0;
+}
+
+.file-display-header .file-undisplay
+{
+    font-size: 1.5em;
+    float: right;
+    color: #e74c3c;
 }
