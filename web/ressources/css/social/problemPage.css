@@ -103,4 +103,5 @@ pre::before
     font-size: 1.5em;
     float: right;
     color: #e74c3c;
+    cursor: pointer;
 }

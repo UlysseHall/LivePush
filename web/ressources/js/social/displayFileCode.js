@@ -1,10 +1,20 @@
 $(function()
 {
+    var homeProblemsHTML = $(".home-problems").html();
+    
     function resizeCode()
     {
         var headerHeight = $("div.file-display-header").outerHeight();
         var containerHeight = $(".home-problems").outerHeight();
         $("pre.display-code-tag").outerHeight(containerHeight-headerHeight);
+    }
+    
+    function undisplayCode()
+    {
+        $(".home-problems").css("width", "25%");
+        $(".home-content").css("width", "75%");
+        $(".home-problems").html(homeProblemsHTML);
+        $(".file-container").removeClass("file-unfocus");
     }
     
 	function displayCode(name, code, fileElement)
@@ -18,8 +28,11 @@ $(function()
         $(".file-container").addClass("file-unfocus");
         $(fileElement).closest(".file-container").removeClass("file-unfocus");
         resizeCode();
+        
+        $(".file-undisplay").click(function(){
+            undisplayCode();
+        });
 	}
-    
 	
 	$(".page-file-icon, .page-file-name").click(function() {
 		var name = $(this).closest(".file-container").data("file-name");
