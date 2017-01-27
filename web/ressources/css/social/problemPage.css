@@ -104,4 +104,26 @@ pre::before
     float: right;
     color: #e74c3c;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.file-display-header .file-undisplay:hover
+{
+    color: #c0392b;
+}
+
+section.pb-comments
+{
+    background-color: #ecf0f1;
+    padding-top: 40px;
+}
+
+section.pb-comments .form-group
+{
+    padding: 0;
+}
+
+.form-group button
+{
+    font-weight: bold;
 }

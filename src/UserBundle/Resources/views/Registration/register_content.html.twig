@@ -21,14 +21,14 @@
 			<div class="form-group">
 				{{ form_label(form.email, "Adresse mail", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
 				<div class="col-xs-3">
-					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'maxlength': 255}}) }}
+					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'maxlength': 255, 'placeholder': 'jean.neymar@gmail.com'}}) }}
 				</div>
 			</div>
 			
 			<div class="form-group">
 				{{ form_label(form.username, "Prénom Nom", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
 				<div class="col-xs-3">
-					{{ form_widget(form.username, {'attr': {'class': 'form-control', 'maxlength': 30}}) }}
+					{{ form_widget(form.username, {'attr': {'class': 'form-control', 'maxlength': 30, 'placeholder': 'Jean Neymar'}}) }}
 				</div>
 			</div>
 			

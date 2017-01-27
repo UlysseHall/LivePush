@@ -24,3 +24,8 @@
 {
 	padding-left: 15px;
 }
+
+input[type=submit]
+{
+    font-weight: bold;
+}

@@ -43,3 +43,8 @@ input[type=file]
 {
     font-style: italic;
 }
+
+button[type=submit]
+{
+    font-weight: bold;
+}
