@@ -19,7 +19,7 @@ $(function()
     
 	function displayCode(name, code, fileElement)
 	{
-        var headerNavHtml = "<div class='file-display-header row'><p>"+name+"</p><span class='glyphicon glyphicon-remove file-undisplay'></span></div>";
+        var headerNavHtml = "<div class='file-display-header row'><p class='pb-code-edit'>Corriger ce code</p><p>"+name+"</p><span class='glyphicon glyphicon-remove file-undisplay'></span></div>";
         
 		$(".home-content, .home-problems").css("width", "50%");
 		$(".home-problems").html(headerNavHtml+"<pre class='display-code-tag prettyprint linenums row'></pre>");
@@ -31,6 +31,22 @@ $(function()
         
         $(".file-undisplay").click(function(){
             undisplayCode();
+        });
+        
+        $("p.pb-code-edit").click(function() {
+            $(".home-problems").html(headerNavHtml+"<pre class='display-code-tag prettyprint linenums row'></pre>");
+		    $(".home-problems .display-code-tag").text(code);
+            $("pre.display-code-tag").attr("contenteditable", "true").css({"transition": "border 0.1s", "border-top": "2px solid #2ecc71", "color": "white"});
+            
+            $(".file-undisplay").click(function(){
+                undisplayCode();
+            });
+            
+            $("p.pb-code-edit").text("Valider").click(function() {
+                var codeEdited = $("pre.display-code-tag").text();
+                undisplayCode();
+                $(".form-confirmation").prepend("<div class='label label-success label-code-saved'>Correction enregistrée</div>");
+            })
         });
 	}
 	

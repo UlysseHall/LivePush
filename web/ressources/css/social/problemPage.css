@@ -75,6 +75,11 @@ pre::before
     content: none !important;
 }
 
+pre:focus
+{
+    outline:0;
+}
+
 .file-unfocus
 {
     opacity: 0.5;
@@ -87,15 +92,29 @@ pre::before
     text-align: center;
 }
 
-.file-display-header p
+.file-display-header p,
+.file-display-header p.pb-code-edit
 {
     display: inline-block;
     color: white;
     font-weight: bold;
-    padding: 3px;
+    padding: 3px 5px 3px 5px;
     border-radius: 5px;
     background-color: rgba(0,0,0,0.5);
     margin: 0;
+}
+
+.file-display-header p.pb-code-edit
+{
+    background-color: #2ecc71;
+    float: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.file-display-header p.pb-code-edit:hover
+{
+    background-color: #27ae60;
 }
 
 .file-display-header .file-undisplay
@@ -126,4 +145,9 @@ section.pb-comments .form-group
 .form-group button
 {
     font-weight: bold;
+}
+
+.label-code-saved
+{
+    font-size: 0.9em;
 }
