@@ -113,7 +113,7 @@ class MainController extends Controller
     {
         $fichierRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Fichier");
         $listFichiers = $fichierRep->findBy(
-            array("problem" => $problem),
+            array("problem" => $problem, "comment" => null),
             array("pathName" => "asc")
         );
 		
@@ -164,7 +164,8 @@ class MainController extends Controller
         
         if($hasCorrection)
         {
-            $correcPathName = "c." . $problem->getId() . "." . $commentId;
+            $correcPathName = "c." . $problem->getId() . "." . $commentId . ".txt";
+            file_put_contents("ressources/txt/".$correcPathName, $correctionContent);
             $correction = new Fichier;
             $correction->setName($correctionName);
             $correction->setPathName($correcPathName);
