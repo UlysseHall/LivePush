@@ -94,6 +94,7 @@ class Problem
 	{
 		$this->date = new \Datetime();
 		$this->resolu = false;
+        $this->nbFiles = 0;
 	}
 	
 	
@@ -273,5 +274,29 @@ class Problem
     public function getTitreSlug()
     {
         return $this->titreSlug;
+    }
+
+    /**
+     * Set nbFiles
+     *
+     * @param integer $nbFiles
+     *
+     * @return Problem
+     */
+    public function setNbFiles($nbFiles)
+    {
+        $this->nbFiles = $nbFiles;
+
+        return $this;
+    }
+
+    /**
+     * Get nbFiles
+     *
+     * @return integer
+     */
+    public function getNbFiles()
+    {
+        return $this->nbFiles;
     }
 }

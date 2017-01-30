@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SocialBundle\Entity\Problem;
 use SocialBundle\Entity\Fichier;
+use SocialBundle\Entity\Comment;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -127,5 +128,53 @@ class MainController extends Controller
             "problem" => $problem,
 			"fichiersContent" => $fichiersContent
         ));
+    }
+    
+    /**
+     * @ParamConverter("problem", options={"mapping": {"problem_id": "id"}})
+     */
+    public function problemCommentAddAction(Problem $problem)
+    {
+        $request = Request::createFromGlobals();
+        $content = ucfirst(htmlspecialchars($request->request->get('comment')));
+        $hasCorrection = false;
+        
+        if(null !== $request->request->get('editedCodeName') && null !== $request->request->get('editedCodeContent'))
+        {
+            $correctionName = $request->request->get('editedCodeName');
+            $correctionContent = $request->request->get('editedCodeContent');
+            $hasCorrection = true;
+        }
+        
+        $comment = new Comment;
+        $comment->setAuteur($this->getUser());
+        $comment->setContenu($content);
+        $comment->setProblem($problem);
+        
+        if($hasCorrection)
+        {
+            $comment->setCorrection(true);
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
+        
+        $commentId = $comment->getId();
+        
+        if($hasCorrection)
+        {
+            $correcPathName = "c." . $problem->getId() . "." . $commentId;
+            $correction = new Fichier;
+            $correction->setName($correctionName);
+            $correction->setPathName($correcPathName);
+            $correction->setProblem($problem);
+            $correction->setComment($comment);
+            
+            $em->persist($correction);
+            $em->flush();
+        }
+        
+        return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
     }
 }

@@ -40,6 +40,11 @@ class Fichier
      * @ORM\JoinColumn(nullable=false)
      */
     private $problem;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment", cascade={"persist"})
+     */
+    private $comment;
 
 
     /**
@@ -98,5 +103,53 @@ class Fichier
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set pathName
+     *
+     * @param string $pathName
+     *
+     * @return Fichier
+     */
+    public function setPathName($pathName)
+    {
+        $this->pathName = $pathName;
+
+        return $this;
+    }
+
+    /**
+     * Get pathName
+     *
+     * @return string
+     */
+    public function getPathName()
+    {
+        return $this->pathName;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \SocialBundle\Entity\Comment $comment
+     *
+     * @return Fichier
+     */
+    public function setComment(\SocialBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \SocialBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

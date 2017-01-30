@@ -49,7 +49,7 @@
     
     <section class="pb-comments row col-xs-10 col-xs-offset-1">
        
-        <form class="comment-form" method="POST">
+        <form class="comment-form" method="POST" action="{{ path('social_problem_comment_add', {'problem_id': problem.id}) }}">
            <div class="form-group row col-xs-10 col-xs-offset-1">
                 <textarea class="form-control comment-input" minlength="2" rows="4" id="comment" name="comment" placeholder="Publiez une solution" required></textarea>
            </div>
