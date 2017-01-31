@@ -31,6 +31,7 @@ h1 img
     padding: 30px;
     line-height: 1.5em;
     font-size: 1.25em;
+	background-color: #fff;
 }
 
 .pb-page-files
@@ -133,7 +134,7 @@ pre:focus
 
 section.pb-comments
 {
-    background-color: #ecf0f1;
+    background-color: #fff;
     padding-top: 40px;
 }
 
@@ -150,4 +151,52 @@ section.pb-comments .form-group
 .label-code-saved
 {
     font-size: 0.9em;
+}
+
+.pb-comments-list
+{
+	padding: 10px 20px 10px 20px;
+}
+
+div.pb-comments-comment
+{
+	background-color: #ecf0f1;
+	padding: 10px 15px 10px 15px;
+	margin-bottom: 15px;
+	border-radius: 10px;
+}
+
+div.pb-comments-comment p.com-author
+{
+	font-family: "Opensans", Arial, sans-serif;
+	color: #6e6e6f;
+	font-size: 1.2em;
+}
+
+div.pb-comments-comment p.com-content
+{
+	font-family: "Montserrat";
+	padding: 0 10px 0 10px;
+	margin-bottom: 0;
+}
+
+div.com-date-container
+{
+	text-align: right;
+	padding: 0 15px 0 0;
+	font-style: italic;
+	font-weight: bold;
+	color: #6e6e6f;
+}
+
+.label-has-correction-container
+{
+	margin-top: 10px;
+	font-size: 1.2em;
+}
+
+.label-has-correction
+{
+	cursor: pointer;
+	padding: 6px;
 }

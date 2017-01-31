@@ -111,22 +111,48 @@ class MainController extends Controller
      */
     public function problemShowAction(Problem $problem)
     {
-        $fichierRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Fichier");
+		$em = $this->getDoctrine()->getManager();
+        $fichierRep = $em->getRepository("SocialBundle:Fichier");
+		$comRep = $em->getRepository("SocialBundle:Comment");
+		
         $listFichiers = $fichierRep->findBy(
             array("problem" => $problem, "comment" => null),
             array("pathName" => "asc")
         );
 		
+		$listComs = $comRep->findBy(
+            array("problem" => $problem),
+            array("date" => "desc")
+        );
+		
 		$fichiersContent = [];
+		$comsContent = [];
 		
 		foreach($listFichiers as $fichier)
 		{
 			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => file_get_contents("ressources/txt/" . $fichier->getPathName())]);
 		}
+		
+		foreach($listComs as $com)
+		{
+			if($com->getCorrection())
+			{
+				$editedCode = $fichierRep->findOneBy(array("comment" => $com->getId()));
+				$editedCodeName = $editedCode->getName();
+				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
+				
+				array_push($comsContent, ["author" => $com->getAuteur()->getUsername(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent]);
+			}
+			else
+			{
+				array_push($comsContent, ["author" => $com->getAuteur()->getUsername(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => null, "editedContent" => null]);
+			}
+		}
         
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
             "problem" => $problem,
-			"fichiersContent" => $fichiersContent
+			"fichiersContent" => $fichiersContent,
+			"comsContent" => $comsContent
         ));
     }
     
@@ -142,7 +168,7 @@ class MainController extends Controller
         if(null !== $request->request->get('editedCodeName') && null !== $request->request->get('editedCodeContent'))
         {
             $correctionName = $request->request->get('editedCodeName');
-            $correctionContent = $request->request->get('editedCodeContent');
+            $correctionContent = str_replace('$quot;', '"', $request->request->get('editedCodeContent'));
             $hasCorrection = true;
         }
         

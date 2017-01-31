@@ -15,9 +15,10 @@ $(function()
         $(".home-content").css("width", "75%");
         $(".home-problems").html(homeProblemsHTML);
         $(".file-container").removeClass("file-unfocus");
+		$(".pb-comments-comment").removeClass("file-unfocus");
     }
     
-	function displayCode(name, code, fileElement)
+	function displayCode(name, code)
 	{
         $("div.label-code-saved").remove();
         $("textarea.comment-input").popover("hide");
@@ -29,8 +30,6 @@ $(function()
 		$(".home-problems").html(headerNavHtml+"<pre class='display-code-tag prettyprint linenums row'></pre>");
 		$(".home-problems .display-code-tag").text(code);
         PR.prettyPrint();
-        $(".file-container").addClass("file-unfocus");
-        $(fileElement).closest(".file-container").removeClass("file-unfocus");
         resizeCode();
         
         $(".file-undisplay").click(function(){
@@ -67,7 +66,21 @@ $(function()
 	$(".page-file-icon, .page-file-name").click(function() {
         var name = $(this).closest(".file-container").data("file-name");
         var code = $(this).closest(".file-container").data("file-code");
-        displayCode(name, code, this);
+        displayCode(name, code);
+		
+		$(".file-container").addClass("file-unfocus");
+        $(this).closest(".file-container").removeClass("file-unfocus");
+		$(".pb-comments-comment").removeClass("file-unfocus");
+	});
+	
+	$(".label-has-correction").click(function() {
+		var labName = $(this).data("edited-code-name") + " <span style='color: #2ecc71'>(corrigé)</span>";
+		var labCode = $(this).data("edited-code");
+		displayCode(labName, labCode);
+		
+		$(".pb-comments-comment").addClass("file-unfocus");
+		$(this).closest(".pb-comments-comment").removeClass("file-unfocus");
+		$(".file-container").removeClass("file-unfocus");
 	});
     
     $(window).resize(function() {

@@ -49,7 +49,7 @@
     
     <section class="pb-comments row col-xs-10 col-xs-offset-1">
        
-        <form class="comment-form" method="POST" action="{{ path('social_problem_comment_add', {'problem_id': problem.id}) }}">
+        <form class="comment-form row" method="POST" action="{{ path('social_problem_comment_add', {'problem_id': problem.id}) }}">
            <div class="form-group row col-xs-10 col-xs-offset-1">
                 <textarea class="form-control comment-input" minlength="2" rows="4" id="comment" name="comment" placeholder="Publiez une solution" required></textarea>
            </div>
@@ -58,6 +58,30 @@
                 <button type="submit" class="btn btn-success pull-right">Publier</button>
            </div>
         </form>
+        
+        <div class="row pb-comments-list">
+			{% for com in comsContent %}
+				<div class="col-xs-12 pb-comments-comment">
+					<div class="col-xs-10">
+						<p class="com-author">{{ com.author }}</p>
+					</div>
+					
+					<div class="col-xs-2 com-date-container">
+						<p class="com-date">{{ com.date|date('Y-m-d H:i:s')|prettydate }}</p>
+					</div>
+					
+					<div class="col-xs-12">
+						<p class="com-content">{{ com.content }}</p>
+					</div>
+					
+					{% if not com.editedName is null and not com.editedContent is null %}
+						<div class="col-xs-12 label-has-correction-container">
+							<div data-edited-code-name="{{ com.editedName }}" data-edited-code="{{ com.editedContent }}" class="label label-success label-has-correction">Correction de {{ com.editedName }}</div>
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+        </div>
         
     </section>
 
