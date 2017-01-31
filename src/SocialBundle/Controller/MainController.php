@@ -141,11 +141,11 @@ class MainController extends Controller
 				$editedCodeName = $editedCode->getName();
 				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
 				
-				array_push($comsContent, ["author" => $com->getAuteur()->getUsername(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent]);
+				array_push($comsContent, ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent]);
 			}
 			else
 			{
-				array_push($comsContent, ["author" => $com->getAuteur()->getUsername(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => null, "editedContent" => null]);
+				array_push($comsContent, ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => null, "editedContent" => null]);
 			}
 		}
         
@@ -181,6 +181,13 @@ class MainController extends Controller
         {
             $comment->setCorrection(true);
         }
+		
+		$validator = $this->get('validator');
+        $listErrors = $validator->validate($comment);
+        
+        if(count($listErrors) > 0) {
+            return new Response((string) $listErrors);
+        }
         
         $em = $this->getDoctrine()->getManager();
         $em->persist($comment);
@@ -204,4 +211,24 @@ class MainController extends Controller
         
         return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
     }
+	
+	/**
+     * @ParamConverter("comment", options={"mapping": {"comment_id": "id"}})
+     */
+	public function problemCommentRemoveAction(Comment $comment)
+	{
+		if($this->getUser() == $comment->getAuteur())
+		{
+			$problemSlug = $comment->getProblem()->getTitreSlug();
+			$em = $this->getDoctrine()->getManager();
+			$em->remove($comment);
+			$em->flush();
+			
+			return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problemSlug));
+		}
+		else
+		{
+			return new Response("Erreur lors de la supression du commentaire");
+		}
+	}
 }

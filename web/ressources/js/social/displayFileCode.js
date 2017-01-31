@@ -31,6 +31,8 @@ $(function()
 		$(".home-problems .display-code-tag").text(code);
         PR.prettyPrint();
         resizeCode();
+		
+		setTimeout(function() { resizeCode(); }, 600);
         
         $(".file-undisplay").click(function(){
             undisplayCode();

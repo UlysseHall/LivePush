@@ -17,3 +17,7 @@ social_problem_show:
 social_problem_comment_add:
     path:    /comment-add/{problem_id}
     defaults: { _controller: SocialBundle:Main:problemCommentAdd }
+
+social_problem_comment_remove:
+    path:    /comment-remove/{comment_id}
+    defaults: { _controller: SocialBundle:Main:problemCommentRemove }

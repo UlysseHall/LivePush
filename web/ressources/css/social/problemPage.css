@@ -200,3 +200,8 @@ div.com-date-container
 	cursor: pointer;
 	padding: 6px;
 }
+
+.comment-delete
+{
+	margin-right: 10px;
+}

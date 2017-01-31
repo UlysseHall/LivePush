@@ -10,6 +10,10 @@
 	{{ parent() }}
 	<script src="{{ asset('bundles/code-prettify/prettify.js') }}"></script>
 	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
+	<script>
+		$(function () {
+  			$('[data-toggle="popover"]').popover({html: true});
+		})</script>
 {% endblock %}
 
 {% block social_right_pan %}
@@ -48,26 +52,37 @@
     {% endif %}
     
     <section class="pb-comments row col-xs-10 col-xs-offset-1">
-       
-        <form class="comment-form row" method="POST" action="{{ path('social_problem_comment_add', {'problem_id': problem.id}) }}">
-           <div class="form-group row col-xs-10 col-xs-offset-1">
-                <textarea class="form-control comment-input" minlength="2" rows="4" id="comment" name="comment" placeholder="Publiez une solution" required></textarea>
-           </div>
-           
-           <div class="form-confirmation form-group row col-xs-10 col-xs-offset-1">
-                <button type="submit" class="btn btn-success pull-right">Publier</button>
-           </div>
-        </form>
+       	
+       	{% if connected == true %}
+			<form class="comment-form row" method="POST" action="{{ path('social_problem_comment_add', {'problem_id': problem.id}) }}">
+			   <div class="form-group row col-xs-10 col-xs-offset-1">
+					<textarea class="form-control comment-input" minlength="2" rows="4" id="comment" name="comment" placeholder="Publiez une solution" required></textarea>
+			   </div>
+
+			   <div class="form-confirmation form-group row col-xs-10 col-xs-offset-1">
+					<button type="submit" class="btn btn-success pull-right">Publier</button>
+			   </div>
+			</form>
+      	{% endif %}
         
         <div class="row pb-comments-list">
 			{% for com in comsContent %}
 				<div class="col-xs-12 pb-comments-comment">
-					<div class="col-xs-10">
-						<p class="com-author">{{ com.author }}</p>
+					<div class="col-xs-8">
+						<p class="com-author">{{ com.author.username }}</p>
 					</div>
 					
-					<div class="col-xs-2 com-date-container">
-						<p class="com-date">{{ com.date|date('Y-m-d H:i:s')|prettydate }}</p>
+					<div class="col-xs-4 com-date-container">
+						{% if com.author == app.user %}
+							<p class="com-date">
+								<button type="button" class="btn btn-danger btn-xs comment-delete" data-toggle="popover" data-content="<a class='btn btn-danger' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34;>Supprimer</a>" data-placement="top" data-trigger="focus">
+									<span class="glyphicon glyphicon-trash">
+									</span>
+								</button>
+								{{ com.date|date('Y-m-d H:i:s')|prettydate }}
+							</p>
+						{% endif %}
+						
 					</div>
 					
 					<div class="col-xs-12">
