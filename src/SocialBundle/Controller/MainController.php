@@ -137,7 +137,7 @@ class MainController extends Controller
 		{
 			if($com->getCorrection())
 			{
-				$editedCode = $fichierRep->findOneBy(array("comment" => $com->getId()));
+				$editedCode = $fichierRep->findOneBy(array("comment" => $com));
 				$editedCodeName = $editedCode->getName();
 				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
 				
@@ -219,8 +219,17 @@ class MainController extends Controller
 	{
 		if($this->getUser() == $comment->getAuteur())
 		{
-			$problemSlug = $comment->getProblem()->getTitreSlug();
 			$em = $this->getDoctrine()->getManager();
+			$problemSlug = $comment->getProblem()->getTitreSlug();
+			
+			if($comment->getCorrection())
+			{
+				$fileRep = $em->getRepository("SocialBundle:Fichier");
+				$fichier = $fileRep->findOneBy(array("comment" => $comment));
+				unlink("ressources/txt/" . $fichier->getPathName());
+				$em->remove($fichier);
+			}
+			
 			$em->remove($comment);
 			$em->flush();
 			

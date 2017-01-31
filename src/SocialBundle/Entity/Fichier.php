@@ -42,7 +42,7 @@ class Fichier
     private $problem;
     
     /**
-     * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment")
      */
     private $comment;
 
