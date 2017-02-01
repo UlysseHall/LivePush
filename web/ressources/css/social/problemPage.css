@@ -164,6 +164,7 @@ div.pb-comments-comment
 	padding: 10px 15px 10px 15px;
 	margin-bottom: 15px;
 	border-radius: 10px;
+    box-shadow: 0px 2px 7px 0px #adadad;
 }
 
 div.pb-comments-comment p.com-author
@@ -204,4 +205,11 @@ div.com-date-container
 .comment-delete
 {
 	margin-right: 10px;
+    background: transparent;
+}
+
+.log-for-comment-label
+{
+    font-size: 0.9em;
+    background-color: #1d2247;
 }

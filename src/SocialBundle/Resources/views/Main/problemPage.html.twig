@@ -63,6 +63,8 @@
 					<button type="submit" class="btn btn-success pull-right">Publier</button>
 			   </div>
 			</form>
+        {% else %}
+            <span class="label label-primary log-for-comment-label">Connectez-vous pour commenter</span>
       	{% endif %}
         
         <div class="row pb-comments-list">
@@ -75,8 +77,8 @@
 					<div class="col-xs-4 com-date-container">
 						{% if com.author == app.user %}
 							<p class="com-date">
-								<button type="button" class="btn btn-danger btn-xs comment-delete" data-toggle="popover" data-content="<a class='btn btn-danger' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34;>Supprimer</a>" data-placement="top" data-trigger="focus">
-									<span class="glyphicon glyphicon-trash">
+								<button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="<a class='btn btn-danger' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34;>Supprimer</a>" data-placement="top" data-trigger="focus">
+									<span class="glyphicon glyphicon-chevron-up">
 									</span>
 								</button>
 								{{ com.date|date('Y-m-d H:i:s')|prettydate }}
