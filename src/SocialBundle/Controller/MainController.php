@@ -155,6 +155,75 @@ class MainController extends Controller
 			"comsContent" => $comsContent
         ));
     }
+	
+	/**
+     * @ParamConverter("problem", options={"mapping": {"problem_titreSlug": "titreSlug"}})
+     */
+	public function problemRemoveAction(Problem $problem)
+	{
+		if($this->getUser() == $problem->getAuteur())
+		{
+			$em = $this->getDoctrine()->getManager();
+			$comRep = $em->getRepository("SocialBundle:Comment");
+			$fileRep = $em->getRepository("SocialBundle:Fichier");
+			$listCom = $comRep->findBy(array("problem" => $problem));
+			
+			foreach($listCom as $com)
+			{
+				if($com->getCorrection())
+				{
+					$fichier = $fileRep->findOneBy(array("comment" => $com));
+					unlink("ressources/txt/" . $fichier->getPathName());
+					$em->remove($fichier);
+				}
+				$em->remove($com);
+				$em->flush();
+			}
+			
+			$listFiles = $fileRep->findBy(array("problem" => $problem));
+			
+			foreach($listFiles as $file)
+			{
+				unlink("ressources/txt/" . $file->getPathName());
+				$em->remove($file);
+			}
+			
+			$em->remove($problem);
+			$em->flush();
+			
+			return $this->redirectToRoute("social_home");
+		}
+		else
+		{
+			return new Response("Erreur lors de la supression du problème");
+		}
+	}
+	
+	/**
+     * @ParamConverter("problem", options={"mapping": {"problem_titreSlug": "titreSlug"}})
+	 * @ParamConverter("comment", options={"mapping": {"comment_id": "id"}})
+     */
+	public function problemSolvedAction(Problem $problem, Comment $comment = null)
+	{
+		if($this->getUser() == $problem->getAuteur())
+		{
+			$em = $this->getDoctrine()->getManager();
+			$problem->setResolu(true);
+			
+			if(!is_null($comment))
+			{
+				$comment->setSolution(true);
+			}
+			
+			$em->flush();
+			
+			return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
+		}
+		else
+		{
+			return new Response("Erreur lors de la résolution du problème");
+		}
+	}
     
     /**
      * @ParamConverter("problem", options={"mapping": {"problem_id": "id"}})

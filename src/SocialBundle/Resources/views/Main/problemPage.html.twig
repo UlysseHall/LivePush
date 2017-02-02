@@ -21,14 +21,42 @@
     <div class="row pb-page-header">
         <h1>
             {{ problem.titre|raw }}
-            
             <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
+		</h1>
             
             <span class="pb-page-date">
+                {% if problem.auteur == app.user %}
+                	<button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="
+                		{% if not problem.resolu %}
+							<center>Définissez un commentaire comme solution avec <span class='glyphicon glyphicon-chevron-up'></span></center>
+							
+							<a class='btn btn-success col-xs-12' href=&#34;{{ path('social_problem_solved', {'problem_titreSlug': problem.titreSlug}) }}&#34; style='margin:7px 0 7px 0;'>
+								Résolu, sans commentaire
+							</a>
+                		{% endif %}
+                		
+                		<a class='btn btn-danger col-xs-12' href=&#34;{{ path('social_problem_remove', {'problem_titreSlug': problem.titreSlug}) }}&#34; style='margin-bottom:7px;'>
+                			Supprimer
+                		</a>" 
+                		data-placement="bottom" data-trigger="focus">
+						<span class="glyphicon glyphicon-chevron-down">
+						</span>
+					</button>
+                {% endif %}
                 {{ problem.auteur }} - 
                 Il y a {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
             </span>
-        </h1>
+            
+            {% if problem.resolu %}
+            	<center>
+            		<p class="problem-solved-label">
+            			<span class="label label-success">
+            				Résolu
+            			</span>
+            		</p>
+            	</center>
+            {% endif %}
+        
     </div>
     
     <div class="row pb-page-content">
@@ -64,7 +92,11 @@
 			   </div>
 			</form>
         {% else %}
-            <span class="label label-primary log-for-comment-label">Connectez-vous pour commenter</span>
+           	<div class="col-xs-12 log-for-comment-container">
+            	<a href="{{ path('fos_user_security_login') }}">
+            		<span class="label label-primary log-for-comment-label">Connectez-vous pour commenter</span>
+            	</a>
+           	</div>
       	{% endif %}
         
         <div class="row pb-comments-list">
@@ -75,9 +107,23 @@
 					</div>
 					
 					<div class="col-xs-4 com-date-container">
-						{% if com.author == app.user %}
+						{% if (com.author == app.user) or (not problem.resolu and problem.auteur == app.user) %}
 							<p class="com-date">
-								<button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="<a class='btn btn-danger' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34;>Supprimer</a>" data-placement="top" data-trigger="focus">
+								<button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="
+								
+								{% if not problem.resolu and problem.auteur == app.user%}
+									<a class='btn btn-success col-xs-12' href=&#34;{{ path('social_problem_solved', {'problem_titreSlug': problem.titreSlug, 'comment_id': com.id}) }}&#34; style='margin-bottom: 7px;'>
+										Solution validée
+									</a>
+								{% endif %}
+								
+								{% if com.author == app.user %}
+									<a class='btn btn-danger col-xs-12' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34; style='margin-bottom: 7px;'>
+										Supprimer
+									</a>
+								{% endif %}"
+								
+								data-placement="top" data-trigger="focus">
 									<span class="glyphicon glyphicon-chevron-up">
 									</span>
 								</button>

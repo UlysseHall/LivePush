@@ -14,6 +14,14 @@ social_problem_show:
     path:    /problem-page/{problem_titreSlug}
     defaults: { _controller: SocialBundle:Main:problemShow }
 
+social_problem_remove:
+    path:    /problem-remove/{problem_titreSlug}
+    defaults: { _controller: SocialBundle:Main:problemRemove }
+
+social_problem_solved:
+    path:    /problem-solved/{problem_titreSlug}/{comment_id}
+    defaults: { _controller: SocialBundle:Main:problemSolved, comment_id: -1 }
+
 social_problem_comment_add:
     path:    /comment-add/{problem_id}
     defaults: { _controller: SocialBundle:Main:problemCommentAdd }

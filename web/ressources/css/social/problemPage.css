@@ -5,25 +5,32 @@
 	word-break: break-all;
 }
 
-h1
+.pb-page-header h1
 {
     font-weight: bold;
     text-align: center;
     margin: 0;
 }
 
-h1 .pb-page-date
+.pb-page-header .pb-page-date
 {
-    font-size: 0.5em;
+    font-size: 1.5em;
     color: #828282;
     font-weight: normal;
     display: block;
     margin-top: 10px;
+    text-align: center;
 }
 
-h1 img
+.pb-page-header img
 {
     width: 1em;
+}
+
+.pb-page-header .problem-solved-label
+{
+	margin: 10px 0 0 0;
+	font-size: 1.3em;
 }
 
 .pb-page-content
@@ -206,6 +213,17 @@ div.com-date-container
 {
 	margin-right: 10px;
     background: transparent;
+}
+
+.log-for-comment-container
+{
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.log-for-comment-container a
+{
+	text-decoration: none;
 }
 
 .log-for-comment-label

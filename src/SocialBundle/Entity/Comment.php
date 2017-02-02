@@ -58,12 +58,20 @@ class Comment
      * @ORM\Column(name="correction", type="boolean")
      */
     private $correction;
+	
+	/**
+     * @var bool
+     *
+     * @ORM\Column(name="solution", type="boolean")
+     */
+    private $solution;
     
     
     public function __construct()
 	{
 		$this->date = new \Datetime();
 		$this->correction = false;
+		$this->solution = false;
 	}
 
 
@@ -195,5 +203,29 @@ class Comment
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set solution
+     *
+     * @param boolean $solution
+     *
+     * @return Comment
+     */
+    public function setSolution($solution)
+    {
+        $this->solution = $solution;
+
+        return $this;
+    }
+
+    /**
+     * Get solution
+     *
+     * @return boolean
+     */
+    public function getSolution()
+    {
+        return $this->solution;
     }
 }
