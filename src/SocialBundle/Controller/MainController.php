@@ -135,18 +135,26 @@ class MainController extends Controller
 		
 		foreach($listComs as $com)
 		{
+            $editedCodeName = null;
+            $editedCodeContent = null;
+            
 			if($com->getCorrection())
 			{
 				$editedCode = $fichierRep->findOneBy(array("comment" => $com));
 				$editedCodeName = $editedCode->getName();
 				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
-				
-				array_push($comsContent, ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent]);
-			}
-			else
-			{
-				array_push($comsContent, ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => null, "editedContent" => null]);
-			}
+            }
+            
+            $comObject = ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent, "solution" => $com->getSolution()];
+            
+            if(!$com->getSolution())
+            {
+                array_push($comsContent, $comObject);
+            }
+            else
+            {
+                array_unshift($comsContent, $comObject);
+            }
 		}
         
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
