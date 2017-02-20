@@ -24,7 +24,7 @@
             </div>
         {% endfor %}
 
-		<form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ path('social_problem_add_upload') }}">
+		<form enctype="multipart/form-data" class="form-horizontal problem-add-form" method="post" action="{{ path('social_problem_add_upload') }}">
 			<div class="form-group">
 				<label for="title" class="col-xs-3 control-label">Titre</label>
 				<div class="col-md-7 col-sm-9">
@@ -62,7 +62,7 @@
                     <label>
                         <span class="btn btn-default">
                             Importer <span class="badge badge-nb-fichiers">0</span>
-                            <input type="file" name="files[]" id="files" multiple>
+                            <input type="file" id="files" multiple>
                         </span>
                     </label>
                     <div class="noms-fichiers"><span class="italic">Facultatif</span></div>

@@ -29,13 +29,18 @@ class MainController extends Controller
         $title = ucfirst(htmlspecialchars($request->request->get('pbAddTitle')));
         $content = ucfirst(htmlspecialchars($request->request->get('pbAddContent')));
         $langage = htmlspecialchars($request->request->get('pbAddLangage'));
+		$upFiles = json_decode($request->request->get('upFiles'), true);
         $asFile = false;
         
-        if(isset($_FILES['files']["name"][0]) && $_FILES['files']["name"][0] != "")
+        if(isset($upFiles) && !empty($upFiles))
         {
-            $files = $_FILES['files'];
             $asFile = true;
+			return new Response("oui" . utf8_encode(base64_decode($upFiles[0]["content"])));
         }
+		else
+		{
+			return new Response("non" . var_dump($upFiles));
+		}
         
         if($asFile && count($files['name']) > 6)
         {
@@ -245,7 +250,7 @@ class MainController extends Controller
         if(null !== $request->request->get('editedCodeName') && null !== $request->request->get('editedCodeContent'))
         {
             $correctionName = $request->request->get('editedCodeName');
-            $correctionContent = str_replace('$quot;', '"', $request->request->get('editedCodeContent'));
+            $correctionContent = utf8_encode(base64_decode($request->request->get('editedCodeContent')));
             $hasCorrection = true;
         }
         

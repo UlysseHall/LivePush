@@ -50,7 +50,7 @@ $(function()
             resizeCode();
             
             $("p.pb-code-edit").text("Valider").click(function() {
-                var codeEdited = $("pre.display-code-tag").text().replace(/'/g, "&#039;").replace(/"/g, "$quot;");
+                var codeEdited = window.btoa($("pre.display-code-tag").text());
                 undisplayCode();
                 $(".form-confirmation").prepend("<div class='label label-success label-code-saved'>Correction enregistrée</div>");
                 $("form.comment-form").prepend("<input type='hidden' name='editedCodeContent' value='"+codeEdited+"'>").prepend("<input type='hidden' name='editedCodeName' value='"+name+"'>");
