@@ -45,6 +45,18 @@ class Fichier
      * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment")
      */
     private $comment;
+    
+    /**
+     * @var bool
+     *
+     *@ORM\Column(name="image", type="boolean")
+     */
+    private $image;
+    
+    public function __construct()
+	{
+		$this->image = false;
+	}
 
 
     /**
@@ -151,5 +163,29 @@ class Fichier
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set image
+     *
+     * @param boolean $image
+     *
+     * @return Fichier
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return boolean
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

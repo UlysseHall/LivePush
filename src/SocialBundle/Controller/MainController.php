@@ -43,7 +43,6 @@ class MainController extends Controller
                     $asFile = true;
                 }
             }
-            //utf8_encode(base64_decode($upFiles[0]["content"]))
         }
         
         if($asFile && count($newUpFiles) > 6)
@@ -83,9 +82,25 @@ class MainController extends Controller
                     return $this->redirectToRoute("social_problem_add");
                 }
                 
-                $pathName = $pbId . "." . $key . ".txt";
-
-                if (!file_put_contents("ressources/txt/" . $pathName, utf8_encode(base64_decode($file["content"]))))
+                if($file["image"])
+                {
+                    $dataImg = explode(',', $file["content"]);
+                    $decodedImg = base64_decode($dataImg[1]);
+                    $realImg = imagecreatefromstring($decodedImg);
+                    
+                    if($realImg !== false)
+                    {
+                        $pathName = $pbId . "." . $key . ".jpeg";
+                        $uploaded = imagejpeg($realImg, "ressources/txt/" . $pathName);
+                    }
+                }
+                else
+                {
+                    $pathName = $pbId . "." . $key . ".txt";
+                    $uploaded = file_put_contents("ressources/txt/" . $pathName, utf8_encode(base64_decode($file["content"])));
+                }
+                
+                if(!isset($uploaded) || $uploaded == false)
                 {
                     $em->remove($problem);
                     $em->flush();
@@ -96,6 +111,11 @@ class MainController extends Controller
                 $fichier->setProblem($problem);
                 $fichier->setName($file["name"]);
                 $fichier->setPathName($pathName);
+                
+                if($file["image"])
+                {
+                    $fichier->setImage(true);
+                }
                 
                 $em->persist($fichier);
             }
@@ -139,7 +159,12 @@ class MainController extends Controller
 		
 		foreach($listFichiers as $fichier)
 		{
-			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => file_get_contents("ressources/txt/" . $fichier->getPathName())]);
+            $fileContent = "";
+            if($fichier->getImage() == false)
+            {
+                $fileContent = file_get_contents("ressources/txt/" . $fichier->getPathName());
+            }
+			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => $fileContent, "image" => $fichier->getImage()]);
 		}
 		
 		foreach($listComs as $com)

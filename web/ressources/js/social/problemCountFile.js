@@ -1,17 +1,31 @@
 $(function()
 {
 	var upFiles = [];
+    var imgType = ["jpg", "jpeg", "png", "gif"];
 	
 	function getInfos(file)
 	{
 		var reader = new FileReader();
+        var fileType = file.name.split(".");
+        fileType = fileType[fileType.length - 1].toLowerCase();
 		
 		reader.onload = function(e)
 		{
-            var content = window.btoa(e.target.result);
             var name = file.name;
             var size = file.size;
-            var fileObject = {"name": name, "content": content, "size": size};
+            
+            if(imgType.indexOf(fileType) != -1)
+            {
+                var content = e.target.result;
+                var image = true;
+            }
+            else
+            {
+                var content = window.btoa(e.target.result);
+                var image = false;
+            }
+            
+            var fileObject = {"name": name, "content": content, "size": size, "image": image};
 
             upFiles.push(fileObject);
             var fileIndex = jQuery.inArray(fileObject, upFiles);
@@ -20,7 +34,15 @@ $(function()
 
             delableFile(fileIndex);
 		}
-		reader.readAsText(file, "UTF-8");
+        
+        if(imgType.indexOf(fileType) != -1)
+        {
+            reader.readAsDataURL(file);
+        }
+        else
+        {
+            reader.readAsText(file, "UTF-8");
+        }
 	}
 	
 	function delableFile(index)

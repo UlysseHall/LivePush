@@ -76,9 +76,9 @@
         <div class="row pb-page-files">
             
 			{% for fichier in fichiersContent %}
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container" data-file-code="{{ fichier.content }}" data-file-name="{{ fichier.name }}">
+				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container" data-file-code="{{ fichier.content }}" data-file-name="{{ fichier.name }}" data-file-image="{% if fichier.image %}true{% else %}false{% endif %}">
 					<center>
-						<img class="page-file-icon" src="{{ asset('ressources/img/icons/file.png') }}" alt="file-icon">
+						<img class="page-file-icon" src="{% if fichier.image %} {{ asset('ressources/img/icons/picture.png') }} {% else %} {{ asset('ressources/img/icons/file.png') }} {% endif %}" alt="file-icon">
 					</center>
 					
 					<p class="page-file-name">{{ fichier.name }}</p>
