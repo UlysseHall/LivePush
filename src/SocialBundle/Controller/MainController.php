@@ -30,19 +30,23 @@ class MainController extends Controller
         $content = ucfirst(htmlspecialchars($request->request->get('pbAddContent')));
         $langage = htmlspecialchars($request->request->get('pbAddLangage'));
 		$upFiles = json_decode($request->request->get('upFiles'), true);
+        $newUpFiles = [];
         $asFile = false;
         
         if(isset($upFiles) && !empty($upFiles))
         {
-            $asFile = true;
-			return new Response("oui" . utf8_encode(base64_decode($upFiles[0]["content"])));
+            foreach($upFiles as $upFile)
+            {
+                if($upFile !== "deleted")
+                {
+                    array_push($newUpFiles, $upFile);
+                    $asFile = true;
+                }
+            }
+            //utf8_encode(base64_decode($upFiles[0]["content"]))
         }
-		else
-		{
-			return new Response("non" . var_dump($upFiles));
-		}
         
-        if($asFile && count($files['name']) > 6)
+        if($asFile && count($newUpFiles) > 6)
         {
             return new Response("Nombre de fichiers dépassé");
         }
@@ -52,7 +56,7 @@ class MainController extends Controller
         $problem->setContenu($content);
         $problem->setLangage($langage);
         $problem->setAuteur($this->getUser());
-        if($asFile) { $problem->setNbFiles(count($files['name'])); }
+        if($asFile) { $problem->setNbFiles(count($newUpFiles)); }
         
         $validator = $this->get('validator');
         $listErrors = $validator->validate($problem);
@@ -69,19 +73,19 @@ class MainController extends Controller
         
         if($asFile)
         {
-            for($i = 0; $i < count($files['name']); $i++)
+            foreach($newUpFiles as $key=>$file)
             {
-                if($files["size"][$i] > 2097152 || $files["error"][$i] == 1)
+                if($file["size"] > 2097152)
                 {
-                    $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $files["name"][$i] . " dépasse la taille maximum de 2Mo");
+                    $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $file["name"] . " dépasse la taille maximum de 2Mo");
                     $em->remove($problem);
                     $em->flush();
                     return $this->redirectToRoute("social_problem_add");
                 }
                 
-                $pathName = $pbId . "." . $i . ".txt";
+                $pathName = $pbId . "." . $key . ".txt";
 
-                if (!move_uploaded_file($files['tmp_name'][$i], "ressources/txt/" . $pathName))
+                if (!file_put_contents("ressources/txt/" . $pathName, utf8_encode(base64_decode($file["content"]))))
                 {
                     $em->remove($problem);
                     $em->flush();
@@ -90,7 +94,7 @@ class MainController extends Controller
                 
                 $fichier = new Fichier;
                 $fichier->setProblem($problem);
-                $fichier->setName($files["name"][$i]);
+                $fichier->setName($file["name"]);
                 $fichier->setPathName($pathName);
                 
                 $em->persist($fichier);
