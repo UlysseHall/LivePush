@@ -10,6 +10,7 @@
 	{{ parent() }}
 	<script src="{{ asset('bundles/code-prettify/prettify.js') }}"></script>
 	<script src="{{ asset('ressources/js/social/displayFileCode.js') }}"></script>
+	<script src="{{ asset('ressources/js/social/displayImg.js') }}"></script>
 	<script>
 		$(function () {
   			$('[data-toggle="popover"]').popover({html: true});
@@ -76,7 +77,7 @@
         <div class="row pb-page-files">
             
 			{% for fichier in fichiersContent %}
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container" data-file-code="{{ fichier.content }}" data-file-name="{{ fichier.name }}" data-file-image="{% if fichier.image %}true{% else %}false{% endif %}">
+				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 file-container" data-file-code="{% if fichier.image %} {{ asset('ressources/txt/') }}{% endif %}{{ fichier.content }}" data-file-name="{{ fichier.name }}" data-file-image="{% if fichier.image %}true{% else %}false{% endif %}">
 					<center>
 						<img class="page-file-icon" src="{% if fichier.image %} {{ asset('ressources/img/icons/picture.png') }} {% else %} {{ asset('ressources/img/icons/file.png') }} {% endif %}" alt="file-icon">
 					</center>

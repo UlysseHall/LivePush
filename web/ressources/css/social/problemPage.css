@@ -260,3 +260,39 @@ div.com-date-container
     background-color: #1d2247;
     padding: 6px;
 }
+
+.img-display-container
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    padding: 40px;
+}
+
+.img-display-container img
+{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.undisplay-image-cross
+{
+    position: absolute;
+    color: #fff;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.undisplay-image-cross:hover
+{
+    color: #d6d6d6;
+}

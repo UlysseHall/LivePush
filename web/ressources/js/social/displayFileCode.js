@@ -66,13 +66,16 @@ $(function()
 	}
 	
 	$(".page-file-icon, .page-file-name").click(function() {
-        var name = $(this).closest(".file-container").data("file-name");
-        var code = $(this).closest(".file-container").data("file-code");
-        displayCode(name, code);
-		
-		$(".file-container").addClass("file-unfocus");
-        $(this).closest(".file-container").removeClass("file-unfocus");
-		$(".pb-comments-comment").removeClass("file-unfocus");
+        if($(this).closest(".file-container").data("file-image") == false)
+        {
+            var name = $(this).closest(".file-container").data("file-name");
+            var code = $(this).closest(".file-container").data("file-code");
+            displayCode(name, code);
+
+            $(".file-container").addClass("file-unfocus");
+            $(this).closest(".file-container").removeClass("file-unfocus");
+            $(".pb-comments-comment").removeClass("file-unfocus");
+        }
 	});
 	
 	$(".label-has-correction").click(function() {

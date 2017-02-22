@@ -159,10 +159,13 @@ class MainController extends Controller
 		
 		foreach($listFichiers as $fichier)
 		{
-            $fileContent = "";
             if($fichier->getImage() == false)
             {
                 $fileContent = file_get_contents("ressources/txt/" . $fichier->getPathName());
+            }
+            else
+            {
+                $fileContent = $fichier->getPathName();
             }
 			array_push($fichiersContent, ["name" => $fichier->getName(), "content" => $fileContent, "image" => $fichier->getImage()]);
 		}
