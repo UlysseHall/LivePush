@@ -66,12 +66,18 @@ class Comment
      */
     private $solution;
     
+    /**
+     * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment")
+     */
+    private $comFrom;
+    
     
     public function __construct()
 	{
 		$this->date = new \Datetime();
 		$this->correction = false;
 		$this->solution = false;
+        $this->comFrom = null;
 	}
 
 
@@ -227,5 +233,29 @@ class Comment
     public function getSolution()
     {
         return $this->solution;
+    }
+
+    /**
+     * Set commentFrom
+     *
+     * @param \SocialBundle\Entity\Comment $commentFrom
+     *
+     * @return Comment
+     */
+    public function setCommentFrom(\SocialBundle\Entity\Comment $commentFrom = null)
+    {
+        $this->commentFrom = $commentFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get commentFrom
+     *
+     * @return \SocialBundle\Entity\Comment
+     */
+    public function getCommentFrom()
+    {
+        return $this->commentFrom;
     }
 }

@@ -11,7 +11,6 @@ $(function()
         img.css("opacity", 0).animate({"opacity": 1}, 150, "linear");
         
         cont.click(function(event) {
-            console.log(event.offsetY);
             if(event.target == this)
             {
                 undisplayImg();

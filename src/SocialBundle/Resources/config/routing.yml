@@ -23,8 +23,8 @@ social_problem_solved:
     defaults: { _controller: SocialBundle:Main:problemSolved, comment_id: -1 }
 
 social_problem_comment_add:
-    path:    /comment-add/{problem_id}
-    defaults: { _controller: SocialBundle:Main:problemCommentAdd }
+    path:    /comment-add/{problem_id}/{comFromId}
+    defaults: { _controller: SocialBundle:Main:problemCommentAdd, comFromId: -1 }
 
 social_problem_comment_remove:
     path:    /comment-remove/{comment_id}

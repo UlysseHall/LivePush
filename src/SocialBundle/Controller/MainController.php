@@ -273,7 +273,7 @@ class MainController extends Controller
     /**
      * @ParamConverter("problem", options={"mapping": {"problem_id": "id"}})
      */
-    public function problemCommentAddAction(Problem $problem)
+    public function problemCommentAddAction(Problem $problem, $comFromId)
     {
         $request = Request::createFromGlobals();
         $content = ucfirst(htmlspecialchars($request->request->get('comment')));
