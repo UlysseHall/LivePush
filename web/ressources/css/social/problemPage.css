@@ -170,8 +170,8 @@ div.pb-comments-comment
 	background-color: #ecf0f1;
 	padding: 10px 15px 10px 15px;
 	margin-bottom: 15px;
-	border-radius: 10px;
-    box-shadow: 0px 2px 7px 0px #adadad;
+	border-radius: 5px;
+    box-shadow: 0px 2px 2px 1px #a2a2a2;
 }
 
 div.pb-comments-comment-validated
@@ -207,8 +207,8 @@ div.pb-comments-comment-answering
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .pb-coms-com-validated span

@@ -182,18 +182,37 @@ class MainController extends Controller
 				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
             }
             
-            $comObject = ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent, "solution" => $com->getSolution()];
+            $comObject = ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent, "solution" => $com->getSolution(), "comfrom" => $com->getComFrom()];
             
-            if(!$com->getSolution())
+            
+            if($com->getHasResponse())
             {
                 array_push($comsContent, $comObject);
+                    
+                foreach($listComs as $comRep)
+                {
+                    if($comRep->getComFrom() != null && $comRep->getComFrom()->getId() == $com->getId())
+                    {
+                        $comRepObject = ["id" => $comRep->getId(), "author" => $comRep->getAuteur(), "content" => $comRep->getContenu(), "date" => $comRep->getDate(), "editedName" => null, "editedContent" => null, "solution" => $comRep->getSolution(), "comfrom" => $comRep->getComFrom()];
+                            
+                        array_push($comsContent, $comRepObject);
+                    }
+                }
             }
             else
+            {
+                if($com->getComFrom() == null)
+                {
+                    array_push($comsContent, $comObject);
+                }
+            }
+            
+            if($com->getSolution())
             {
                 array_unshift($comsContent, $comObject);
             }
 		}
-        
+
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
             "problem" => $problem,
 			"fichiersContent" => $fichiersContent,
@@ -295,6 +314,16 @@ class MainController extends Controller
         {
             $comment->setCorrection(true);
         }
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        if($comFromId != -1)
+        {
+            $comRep = $em->getRepository("SocialBundle:Comment");
+            $comFrom = $comRep->find($comFromId);
+            $comFrom->setHasResponse(true);
+            $comment->setComFrom($comFrom);
+        }
 		
 		$validator = $this->get('validator');
         $listErrors = $validator->validate($comment);
@@ -303,7 +332,6 @@ class MainController extends Controller
             return new Response((string) $listErrors);
         }
         
-        $em = $this->getDoctrine()->getManager();
         $em->persist($comment);
         $em->flush();
         

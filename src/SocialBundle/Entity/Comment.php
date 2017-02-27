@@ -67,9 +67,16 @@ class Comment
     private $solution;
     
     /**
-     * @ORM\OneToOne(targetEntity="SocialBundle\Entity\Comment")
+     * @ORM\ManyToOne(targetEntity="SocialBundle\Entity\Comment")
      */
     private $comFrom;
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="hasResponse", type="boolean")
+     */
+    private $hasResponse;
     
     
     public function __construct()
@@ -78,6 +85,7 @@ class Comment
 		$this->correction = false;
 		$this->solution = false;
         $this->comFrom = null;
+        $this->hasResponse = false;
 	}
 
 
@@ -236,26 +244,50 @@ class Comment
     }
 
     /**
-     * Set commentFrom
+     * Set comFrom
      *
-     * @param \SocialBundle\Entity\Comment $commentFrom
+     * @param \SocialBundle\Entity\Comment $comFrom
      *
      * @return Comment
      */
-    public function setCommentFrom(\SocialBundle\Entity\Comment $commentFrom = null)
+    public function setComFrom(\SocialBundle\Entity\Comment $comFrom = null)
     {
-        $this->commentFrom = $commentFrom;
+        $this->comFrom = $comFrom;
 
         return $this;
     }
 
     /**
-     * Get commentFrom
+     * Get comFrom
      *
      * @return \SocialBundle\Entity\Comment
      */
-    public function getCommentFrom()
+    public function getComFrom()
     {
-        return $this->commentFrom;
+        return $this->comFrom;
+    }
+
+    /**
+     * Set hasResponse
+     *
+     * @param boolean $hasResponse
+     *
+     * @return Comment
+     */
+    public function setHasResponse($hasResponse)
+    {
+        $this->hasResponse = $hasResponse;
+
+        return $this;
+    }
+
+    /**
+     * Get hasResponse
+     *
+     * @return boolean
+     */
+    public function getHasResponse()
+    {
+        return $this->hasResponse;
     }
 }

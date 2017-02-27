@@ -112,60 +112,9 @@
         
         <div class="row pb-comments-list">
 			{% for com in comsContent %}
-				<div class="col-xs-12 pb-comments-comment">
-                    {% if com.solution %}
-                        <div class="col-xs-1 pb-coms-com-validated">
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </div>
-                    {% endif %}
-                    <div class="col-xs-12 pb-coms-com-content {% if com.solution %} pb-coms-com-content-validated {% endif %}">
-                        <div class="col-xs-6">
-                            <p class="com-author">{{ com.author.username }}</p>
-                        </div>
-
-                        <div class="col-xs-6 com-date-container">
-                            <p class="com-date">
-                                 {% if connected %}
-                                     <button type="button" class="btn btn-xs comment-reply">
-                                         <i class="fa fa-reply" aria-hidden="true"></i>
-                                     </button>
-                                 {% endif %}
-                                 
-                                 {% if (com.author == app.user) or (not problem.resolu and problem.auteur == app.user) %}
-                                     <button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="
-
-                                       {% if not problem.resolu and problem.auteur == app.user%}
-                                           <a class='btn btn-success col-xs-12' href=&#34;{{ path('social_problem_solved', {'problem_titreSlug': problem.titreSlug, 'comment_id': com.id}) }}&#34; style='margin-bottom: 7px;'>
-                                                Solution validée
-                                            </a>
-                                        {% endif %}
-
-                                        {% if com.author == app.user %}
-                                            <a class='btn btn-danger col-xs-12' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': com.id}) }}&#34; style='margin-bottom: 7px;'>
-                                                Supprimer
-                                            </a>
-                                        {% endif %}"
-
-                                        data-placement="top" data-trigger="focus">
-                                        <span class="glyphicon glyphicon-chevron-up">
-                                        </span>
-                                    </button>
-                                {% endif %}
-                                {{ com.date|date('Y-m-d H:i:s')|prettydate }}
-                             </p>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <p class="com-content">{{ com.content }}</p>
-                        </div>
-
-                        {% if not com.editedName is null and not com.editedContent is null %}
-                            <div class="col-xs-12 label-has-correction-container">
-                                <div data-edited-code-name="{{ com.editedName }}" data-edited-code="{{ com.editedContent }}" class="label label-success label-has-correction">Correction de {{ com.editedName }}</div>
-                            </div>
-                        {% endif %}
-                    </div>
-				</div>
+            
+			    {% include "SocialBundle:Main:commentContent.html.twig" %}
+			    
 			{% endfor %}
         </div>
         
