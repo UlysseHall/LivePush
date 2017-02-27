@@ -10,4 +10,20 @@ namespace SocialBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findResponses($problem)
+	{
+		$qb = $this->createQueryBuilder("c");
+		
+		$qb
+			->where("c.problem = :problem")
+				->setParameter("problem", $problem)
+			->andWhere("c.comFrom IS NOT NULL")
+			->orderBy("c.date", "DESC")
+		;
+		
+		return $qb
+			->getQuery()
+			->getResult()
+		;
+	}
 }

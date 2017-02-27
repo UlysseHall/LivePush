@@ -20,6 +20,10 @@
             {
                 var contElem = $(".pb-coms-com-validated").closest(".pb-comments-comment");
                 contElem.addClass("pb-comments-comment-validated");
+				if(!contElem.next(".pb-comments-comment").hasClass("pb-comments-comment-response") && contElem.next(".pb-comment-reply-logo").length < 1)
+				{
+					contElem.css("margin-bottom", "40px");
+				}
                 var contHeight = contElem.innerHeight();
                 $(".pb-coms-com-validated").innerHeight(contHeight);
             }
@@ -112,8 +116,14 @@
         
         <div class="row pb-comments-list">
 			{% for com in comsContent %}
-            
-			    {% include "SocialBundle:Main:commentContent.html.twig" %}
+            	
+			    {% include "SocialBundle:Main:commentContent.html.twig" with {"response" : false, "commentaire": com.object} %}
+           	
+            	{% if com.responses is defined %}
+            		{% for comRep in com.responses %}
+            			{% include "SocialBundle:Main:commentContent.html.twig" with {"response" : true, "commentaire": comRep} %}
+            		{% endfor %}
+            	{% endif %}
 			    
 			{% endfor %}
         </div>

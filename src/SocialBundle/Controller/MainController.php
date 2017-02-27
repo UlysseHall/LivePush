@@ -74,9 +74,9 @@ class MainController extends Controller
         {
             foreach($newUpFiles as $key=>$file)
             {
-                if($file["size"] > 2097152)
+                if($file["size"] > 5242880)
                 {
-                    $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $file["name"] . " dépasse la taille maximum de 2Mo");
+                    $this->get('session')->getFlashBag()->add('error', 'Le fichier ' . $file["name"] . " dépasse la taille maximum de 5Mo");
                     $em->remove($problem);
                     $em->flush();
                     return $this->redirectToRoute("social_problem_add");
@@ -150,9 +150,11 @@ class MainController extends Controller
         );
 		
 		$listComs = $comRep->findBy(
-            array("problem" => $problem),
+            array("problem" => $problem, "comFrom" => null),
             array("date" => "desc")
         );
+		
+		$listRepComs = $comRep->findResponses($problem);
 		
 		$fichiersContent = [];
 		$comsContent = [];
@@ -182,35 +184,31 @@ class MainController extends Controller
 				$editedCodeContent = file_get_contents("ressources/txt/" . $editedCode->getPathName());
             }
             
-            $comObject = ["id" => $com->getId(), "author" => $com->getAuteur(), "content" => $com->getContenu(), "date" => $com->getDate(), "editedName" => $editedCodeName, "editedContent" => $editedCodeContent, "solution" => $com->getSolution(), "comfrom" => $com->getComFrom()];
-            
+            $comObject = ["object" => $com, "editedName" => $editedCodeName, "editedContent" => $editedCodeContent];
             
             if($com->getHasResponse())
             {
-                array_push($comsContent, $comObject);
-                    
-                foreach($listComs as $comRep)
+				$comResponses = [];
+				
+                foreach($listRepComs as $repCom)
                 {
-                    if($comRep->getComFrom() != null && $comRep->getComFrom()->getId() == $com->getId())
+                    if($repCom->getComFrom()->getId() == $com->getId())
                     {
-                        $comRepObject = ["id" => $comRep->getId(), "author" => $comRep->getAuteur(), "content" => $comRep->getContenu(), "date" => $comRep->getDate(), "editedName" => null, "editedContent" => null, "solution" => $comRep->getSolution(), "comfrom" => $comRep->getComFrom()];
-                            
-                        array_push($comsContent, $comRepObject);
+                        array_push($comResponses, $repCom);
                     }
                 }
+				
+				$comObject["responses"] = $comResponses;
             }
-            else
-            {
-                if($com->getComFrom() == null)
-                {
-                    array_push($comsContent, $comObject);
-                }
-            }
-            
+			
             if($com->getSolution())
             {
                 array_unshift($comsContent, $comObject);
             }
+			else
+			{
+				array_push($comsContent, $comObject);
+			}
 		}
 
         return $this->render("SocialBundle:Main:problemPage.html.twig", array(
@@ -363,6 +361,8 @@ class MainController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$problemSlug = $comment->getProblem()->getTitreSlug();
+			$comRep = $em->getRepository("SocialBundle:Comment");
+			$listRepCom = $comRep->findBy(array("comFrom" => $comment));
 			
 			if($comment->getCorrection())
 			{
@@ -370,6 +370,11 @@ class MainController extends Controller
 				$fichier = $fileRep->findOneBy(array("comment" => $comment));
 				unlink("ressources/txt/" . $fichier->getPathName());
 				$em->remove($fichier);
+			}
+			
+			foreach($listRepCom as $repCom)
+			{
+				$em->remove($repCom);
 			}
 			
 			$em->remove($comment);

@@ -169,7 +169,8 @@ div.pb-comments-comment
 {
 	background-color: #ecf0f1;
 	padding: 10px 15px 10px 15px;
-	margin-bottom: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border-radius: 5px;
     box-shadow: 0px 2px 2px 1px #a2a2a2;
 }
@@ -179,12 +180,34 @@ div.pb-comments-comment-validated
     padding-left: 0;
     padding-top: 0;
     padding-bottom: 0;
-    margin-bottom: 40px;
 }
 
 div.pb-comments-comment-answering
 {
     margin-bottom: 10px;
+}
+
+div.pb-comments-comment-response
+{
+	padding: 5px;
+	font-size: 0.9em;
+	margin-top: 0;
+}
+
+div.pb-comments-comment-response-last
+{
+	margin-bottom: 30px;
+}
+
+.pb-comment-reply-logo
+{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pb-comment-reply-logo i
+{
+	font-size: 1.2em;
 }
 
 .comment-reply-form
