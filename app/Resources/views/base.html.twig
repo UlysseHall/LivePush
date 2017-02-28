@@ -26,7 +26,7 @@
 		<div class="container-fluid">
 		
 			<nav class="row">
-				<div class="col-xs-6">
+				<div class="col-xs-3 nav-brand">
 					<a href="{{ path('social_home') }}">
 						<h2>
 							Livepush
@@ -34,7 +34,7 @@
 					</a>
 				</div>
 				
-				<div class="nav-account-button col-xs-6 pull-right">
+				<div class="nav-account-button col-xs-9 pull-right">
 					{% if connected == false %}
 						<a href="{{ path('fos_user_registration_register') }}" class="nav-account-button-link">
 							<span class="glyphicon glyphicon-pencil"></span>Inscription
@@ -46,6 +46,10 @@
 					{% else %}
 						<div href="{{ path('fos_user_profile_show') }}" class="nav-account-button-link nav-account-button-link-user">
 							{{ app.user.username }}
+						</div>
+						
+						<div class="nav-account-notification">
+						    <span class="glyphicon glyphicon-bell"></span>
 						</div>
 						
 						<div class="btn-group nav-account-drop-options">

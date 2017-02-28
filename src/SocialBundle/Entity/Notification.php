@@ -1,0 +1,288 @@
+<?php
+
+namespace SocialBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Notification
+ *
+ * @ORM\Table(name="notification")
+ * @ORM\Entity(repositoryClass="SocialBundle\Repository\NotificationRepository")
+ */
+class Notification
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     *
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $expediteur;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     *
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $destinataire;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SocialBundle\Entity\Problem")
+     *
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $problem;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SocialBundle\Entity\Comment")
+     */
+    private $comment;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="ouvert", type="boolean")
+     */
+    private $ouvert;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenu", type="string", length=255)
+     */
+    private $contenu;
+    
+    
+    public function __construct()
+	{
+		$this->date = new \Datetime();
+		$this->comment = null;
+        $this->ouvert = false;
+	}
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Notification
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set ouvert
+     *
+     * @param boolean $ouvert
+     *
+     * @return Notification
+     */
+    public function setOuvert($ouvert)
+    {
+        $this->ouvert = $ouvert;
+
+        return $this;
+    }
+
+    /**
+     * Get ouvert
+     *
+     * @return bool
+     */
+    public function getOuvert()
+    {
+        return $this->ouvert;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Notification
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set contenu
+     *
+     * @param string $contenu
+     *
+     * @return Notification
+     */
+    public function setContenu($contenu)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get contenu
+     *
+     * @return string
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    /**
+     * Set expediteur
+     *
+     * @param \UserBundle\Entity\User $expediteur
+     *
+     * @return Notification
+     */
+    public function setExpediteur(\UserBundle\Entity\User $expediteur)
+    {
+        $this->expediteur = $expediteur;
+
+        return $this;
+    }
+
+    /**
+     * Get expediteur
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getExpediteur()
+    {
+        return $this->expediteur;
+    }
+
+    /**
+     * Set destinataire
+     *
+     * @param \UserBundle\Entity\User $destinataire
+     *
+     * @return Notification
+     */
+    public function setDestinataire(\UserBundle\Entity\User $destinataire)
+    {
+        $this->destinataire = $destinataire;
+
+        return $this;
+    }
+
+    /**
+     * Get destinataire
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getDestinataire()
+    {
+        return $this->destinataire;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param \UserBundle\Entity\Problem $problem
+     *
+     * @return Notification
+     */
+    public function setProblem(\UserBundle\Entity\Problem $problem)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return \UserBundle\Entity\Problem
+     */
+    public function getProblem()
+    {
+        return $this->problem;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \UserBundle\Entity\Comment $comment
+     *
+     * @return Notification
+     */
+    public function setComment(\UserBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \UserBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+}
