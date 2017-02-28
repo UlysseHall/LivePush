@@ -333,6 +333,12 @@ class MainController extends Controller
         $em->persist($comment);
         $em->flush();
         
+		$this->forward("SocialBundle:Notification:addNotification", array(
+			"problem" => $problem,
+			"comment" => null,
+			"type" => "com-add"
+		));
+			
         $commentId = $comment->getId();
         
         if($hasCorrection)

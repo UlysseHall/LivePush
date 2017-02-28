@@ -36,14 +36,14 @@ class Notification
     private $destinataire;
     
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Problem")
+     * @ORM\ManyToOne(targetEntity="SocialBundle\Entity\Problem")
      *
      * @ORM\JoinColumn(nullable=false)
      */
     private $problem;
     
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Comment")
+     * @ORM\ManyToOne(targetEntity="SocialBundle\Entity\Comment")
      */
     private $comment;
 
@@ -84,110 +84,5 @@ class Notification
 	}
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Notification
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set ouvert
-     *
-     * @param boolean $ouvert
-     *
-     * @return Notification
-     */
-    public function setOuvert($ouvert)
-    {
-        $this->ouvert = $ouvert;
-
-        return $this;
-    }
-
-    /**
-     * Get ouvert
-     *
-     * @return bool
-     */
-    public function getOuvert()
-    {
-        return $this->ouvert;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Notification
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set contenu
-     *
-     * @param string $contenu
-     *
-     * @return Notification
-     */
-    public function setContenu($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get contenu
-     *
-     * @return string
-     */
-    public function getContenu()
-    {
-        return $this->contenu;
-    }
+    
 }
-

@@ -82,12 +82,12 @@ class Notification
 		$this->comment = null;
         $this->ouvert = false;
 	}
-
+    
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -135,7 +135,7 @@ class Notification
     /**
      * Get ouvert
      *
-     * @return bool
+     * @return boolean
      */
     public function getOuvert()
     {
@@ -241,11 +241,11 @@ class Notification
     /**
      * Set problem
      *
-     * @param \UserBundle\Entity\Problem $problem
+     * @param \SocialBundle\Entity\Problem $problem
      *
      * @return Notification
      */
-    public function setProblem(\UserBundle\Entity\Problem $problem)
+    public function setProblem(\SocialBundle\Entity\Problem $problem)
     {
         $this->problem = $problem;
 
@@ -255,7 +255,7 @@ class Notification
     /**
      * Get problem
      *
-     * @return \UserBundle\Entity\Problem
+     * @return \SocialBundle\Entity\Problem
      */
     public function getProblem()
     {
@@ -265,11 +265,11 @@ class Notification
     /**
      * Set comment
      *
-     * @param \UserBundle\Entity\Comment $comment
+     * @param \SocialBundle\Entity\Comment $comment
      *
      * @return Notification
      */
-    public function setComment(\UserBundle\Entity\Comment $comment = null)
+    public function setComment(\SocialBundle\Entity\Comment $comment = null)
     {
         $this->comment = $comment;
 
@@ -279,7 +279,7 @@ class Notification
     /**
      * Get comment
      *
-     * @return \UserBundle\Entity\Comment
+     * @return \SocialBundle\Entity\Comment
      */
     public function getComment()
     {
