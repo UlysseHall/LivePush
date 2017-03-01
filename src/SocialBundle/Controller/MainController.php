@@ -275,6 +275,11 @@ class MainController extends Controller
 			if(!is_null($comment))
 			{
 				$comment->setSolution(true);
+                    $this->forward("SocialBundle:Notification:addNotification", array(
+                    "problem" => $problem,
+                    "comment" => $comment,
+                    "type" => "problem-solved-with-com"
+                ));
 			}
 			
 			$em->flush();
@@ -321,6 +326,12 @@ class MainController extends Controller
             $comFrom = $comRep->find($comFromId);
             $comFrom->setHasResponse(true);
             $comment->setComFrom($comFrom);
+            
+            $this->forward("SocialBundle:Notification:addNotification", array(
+                "problem" => $problem,
+                "comment" => $comFrom,
+                "type" => "com-reply-add"
+            ));
         }
 		
 		$validator = $this->get('validator');

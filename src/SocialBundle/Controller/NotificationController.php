@@ -15,10 +15,27 @@ class NotificationController extends Controller
 {
     public function addNotificationAction($problem, $comment, $type)
     {
-		$contenu = "test";
-		
         $notif = new Notification;
-		$notif->setExpediteur($this->getUser());
+        $expediteur = $this->getUser();
+        
+        switch($type)
+        {
+            case "com-add":
+                $contenu = ucfirst($expediteur->getUsername()) . " a commenté votre problème " . $problem->getTitre();
+                break;
+            
+            case "com-reply-add":
+                $contenu = ucfirst($expediteur->getUsername()) . " a répondu à votre commentaire " . $comment->getContenu();
+                $notif->setComment($comment);
+                break;
+                
+            case "problem-solved-with-com":
+                $contenu = "Votre solution à été validée sur le problème " . $problem->getTitre();
+                $notif->setComment($comment);
+                break;
+        }
+		
+		$notif->setExpediteur($expediteur);
 		$notif->setDestinataire($problem->getAuteur());
 		$notif->setProblem($problem);
 		$notif->setType($type);
