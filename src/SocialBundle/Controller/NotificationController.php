@@ -47,4 +47,21 @@ class NotificationController extends Controller
 		
 		return new Response("sent");
     }
+    
+    public function getNotificationAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $notifRep = $em->getRepository("SocialBundle:Notification");
+        $user = $this->getUser();
+        
+        $listNotif = $notifRep->findBy(
+            array("destinataire" => $user, "ouvert" => false),
+            array("date", "desc")
+        );
+        
+        foreach($listNotif as $notif)
+        {
+            
+        }
+    }
 }

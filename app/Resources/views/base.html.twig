@@ -48,8 +48,14 @@
 							{{ app.user.username }}
 						</div>
 						
-						<div class="nav-account-notification">
-						    <span class="glyphicon glyphicon-bell"></span>
+						<div class="btn-group nav-account-notification">
+                            <a type="button" class="dropdown-toggle nav-account-notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						        <span class="glyphicon glyphicon-bell"></span>
+                            </a>
+                            
+                            <ul class="dropdown-menu dropdown-menu-right">
+								
+				            </ul>
 						</div>
 						
 						<div class="btn-group nav-account-drop-options">
@@ -62,7 +68,7 @@
 								<li><a href="{{ path('fos_user_change_password') }}">Modifier mot de passe</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-							  </ul>
+				            </ul>
 						</div>
 					{% endif %}
 				</div>

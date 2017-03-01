@@ -57,6 +57,16 @@ nav h2
     margin-right: 20px;
 }
 
+.nav-account-notification-link,
+.nav-account-notification-link:hover,
+.nav-account-notification-link:active,
+.nav-account-notification-link:visited,
+.nav-account-notification-link:link
+{
+    color: #fff;
+    cursor: pointer;
+}
+
 .nav-account-button-link,
 .nav-account-button-link:hover,
 .nav-account-button-link:active,
