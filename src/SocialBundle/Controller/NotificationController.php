@@ -13,35 +13,40 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class NotificationController extends Controller
 {
-    public function addNotificationAction($problem, $comment, $type)
+    public function addNotificationAction($problem, $comment = null, $type)
     {
-        $notif = new Notification;
+        $em = $this->getDoctrine()->getManager();
+        $notifRep = $em->getRepository("SocialBundle:Notification");
         $expediteur = $this->getUser();
+        $destinataire = $problem->getAuteur();
         
-        switch($type)
+        $listNotif = $notifRep->findBy(
+            array("destinataire" => $destinataire, "ouvert" => false, "type" => $type, "problem" => $problem, "comment" => $comment)
+        );
+        
+        if(count($listNotif) > 0)
         {
-            case "com-add":
-                $contenu = ucfirst($expediteur->getUsername()) . " a commenté votre problème " . $problem->getTitre();
-                break;
+            foreach($listNotif as $sameNotif)
+            {
+                $sameNotif->setMultiple($sameNotif->getMultiple() + 1);
+            }
             
-            case "com-reply-add":
-                $contenu = ucfirst($expediteur->getUsername()) . " a répondu à votre commentaire " . $comment->getContenu();
-                $notif->setComment($comment);
-                break;
-                
-            case "problem-solved-with-com":
-                $contenu = "Votre solution à été validée sur le problème " . $problem->getTitre();
-                $notif->setComment($comment);
-                break;
+            $em->flush();
+            return new Response("sent");
+        }
+        
+        $notif = new Notification;
+        
+        if($type == "com-reply-add" || $type == "problem-solved-with-com")
+        {
+            $notif->setComment($comment);
         }
 		
 		$notif->setExpediteur($expediteur);
-		$notif->setDestinataire($problem->getAuteur());
+		$notif->setDestinataire($destinataire);
 		$notif->setProblem($problem);
 		$notif->setType($type);
-		$notif->setContenu($contenu);
 		
-		$em = $this->getDoctrine()->getManager();
 		$em->persist($notif);
 		$em->flush();
 		
@@ -56,12 +61,11 @@ class NotificationController extends Controller
         
         $listNotif = $notifRep->findBy(
             array("destinataire" => $user, "ouvert" => false),
-            array("date", "desc")
+            array("date" => "desc")
         );
         
-        foreach($listNotif as $notif)
-        {
-            
-        }
+        return $this->render("SocialBundle:Notification:notification.html.twig", array(
+            "listNotif" => $listNotif
+        ));
     }
 }

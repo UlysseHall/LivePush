@@ -1,0 +1,24 @@
+{% for notif in listNotif %}
+
+    {% if notif.type == "com-add" %}
+       
+        {% set contenu = 
+            notif.expediteur.username|capitalize ~
+            " <b>a</b>a commenté votre problème " ~
+            notif.problem.titre %}
+        
+    {% elseif notif.type == "com-reply-add" %}
+       
+        {% set contenu = notif.expediteur.username|capitalize ~ " a répondu à votre commentaire " ~ notif.comment.contenu %}
+        
+    {% elseif notif.type == "problem-solved-with-com" %}
+       
+        {% set contenu = notif.expediteur.username|capitalize ~ " a validé votre réponse sur le problème " ~ notif.problem.titre %}
+        
+    {% endif %}
+   
+    <li>
+        <p>{{ contenu }}</p>
+    </li>
+
+{% endfor %}

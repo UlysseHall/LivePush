@@ -346,7 +346,6 @@ class MainController extends Controller
         
 		$this->forward("SocialBundle:Notification:addNotification", array(
 			"problem" => $problem,
-			"comment" => null,
 			"type" => "com-add"
 		));
 			
@@ -365,7 +364,7 @@ class MainController extends Controller
             $em->persist($correction);
             $em->flush();
         }
-        
+
         return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
     }
 	

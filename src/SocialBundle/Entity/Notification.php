@@ -67,13 +67,13 @@ class Notification
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
-
+    
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="multiple", type="integer")
      */
-    private $contenu;
+    private $multiple;
     
     
     public function __construct()
@@ -81,6 +81,7 @@ class Notification
 		$this->date = new \Datetime();
 		$this->comment = null;
         $this->ouvert = false;
+        $this->multiple = 1;
 	}
     
 
@@ -164,30 +165,6 @@ class Notification
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set contenu
-     *
-     * @param string $contenu
-     *
-     * @return Notification
-     */
-    public function setContenu($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get contenu
-     *
-     * @return string
-     */
-    public function getContenu()
-    {
-        return $this->contenu;
     }
 
     /**
@@ -284,5 +261,29 @@ class Notification
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set multiple
+     *
+     * @param integer $multiple
+     *
+     * @return Notification
+     */
+    public function setMultiple($multiple)
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    /**
+     * Get multiple
+     *
+     * @return integer
+     */
+    public function getMultiple()
+    {
+        return $this->multiple;
     }
 }

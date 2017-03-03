@@ -1,0 +1,21 @@
+.nav-account-notification ul
+{
+    min-width: 320px;
+}
+
+.nav-account-notification li
+{
+    color: #333333;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.nav-account-notification li:last-child
+{
+    margin: 0;
+}
+
+.nav-account-notification li p
+{
+    margin: 0;
+}

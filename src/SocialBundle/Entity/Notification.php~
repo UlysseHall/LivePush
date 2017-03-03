@@ -67,13 +67,13 @@ class Notification
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
-
+    
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="multiple", type="integer")
      */
-    private $contenu;
+    private $multiple;
     
     
     public function __construct()
@@ -81,8 +81,185 @@ class Notification
 		$this->date = new \Datetime();
 		$this->comment = null;
         $this->ouvert = false;
+        $this->multiple = 0;
 	}
-
-
     
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Notification
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set ouvert
+     *
+     * @param boolean $ouvert
+     *
+     * @return Notification
+     */
+    public function setOuvert($ouvert)
+    {
+        $this->ouvert = $ouvert;
+
+        return $this;
+    }
+
+    /**
+     * Get ouvert
+     *
+     * @return boolean
+     */
+    public function getOuvert()
+    {
+        return $this->ouvert;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Notification
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set expediteur
+     *
+     * @param \UserBundle\Entity\User $expediteur
+     *
+     * @return Notification
+     */
+    public function setExpediteur(\UserBundle\Entity\User $expediteur)
+    {
+        $this->expediteur = $expediteur;
+
+        return $this;
+    }
+
+    /**
+     * Get expediteur
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getExpediteur()
+    {
+        return $this->expediteur;
+    }
+
+    /**
+     * Set destinataire
+     *
+     * @param \UserBundle\Entity\User $destinataire
+     *
+     * @return Notification
+     */
+    public function setDestinataire(\UserBundle\Entity\User $destinataire)
+    {
+        $this->destinataire = $destinataire;
+
+        return $this;
+    }
+
+    /**
+     * Get destinataire
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getDestinataire()
+    {
+        return $this->destinataire;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param \SocialBundle\Entity\Problem $problem
+     *
+     * @return Notification
+     */
+    public function setProblem(\SocialBundle\Entity\Problem $problem)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return \SocialBundle\Entity\Problem
+     */
+    public function getProblem()
+    {
+        return $this->problem;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \SocialBundle\Entity\Comment $comment
+     *
+     * @return Notification
+     */
+    public function setComment(\SocialBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \SocialBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }
