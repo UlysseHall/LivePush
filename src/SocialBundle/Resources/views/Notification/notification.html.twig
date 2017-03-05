@@ -1,24 +1,65 @@
 {% for notif in listNotif %}
-
-    {% if notif.type == "com-add" %}
-       
-        {% set contenu = 
-            notif.expediteur.username|capitalize ~
-            " <b>a</b>a commenté votre problème " ~
-            notif.problem.titre %}
-        
-    {% elseif notif.type == "com-reply-add" %}
-       
-        {% set contenu = notif.expediteur.username|capitalize ~ " a répondu à votre commentaire " ~ notif.comment.contenu %}
-        
-    {% elseif notif.type == "problem-solved-with-com" %}
-       
-        {% set contenu = notif.expediteur.username|capitalize ~ " a validé votre réponse sur le problème " ~ notif.problem.titre %}
-        
-    {% endif %}
-   
     <li>
-        <p>{{ contenu }}</p>
+        {% if notif.type == "com-add" %}
+            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+                <p>
+                    <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
+                    
+                    {% if notif.multiple <= 1 %}
+                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a commenté votre problème&#160"<b>{{ notif.problem.titre }}</b>"
+                    {% else %}
+                        <b>{{ notif.multiple }}</b>&#160commentaires ont été ajoutés sur votre problème&#160"<b>{{ notif.problem.titre }}</b>"
+                    {% endif %}
+                </p>
+
+                <p class="notif-date">
+                    <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
+                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                </p>
+            </a>
+
+        {% elseif notif.type == "com-reply-add" %}
+            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+                <p>
+                    <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
+                    
+                    {% if notif.multiple <= 1 %}
+                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.comment.contenu }}</b>"
+                    {% else %}
+                        <b>{{ notif.multiple }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.comment.contenu }}</b>"
+                    {% endif %}
+                </p>
+
+                <p class="notif-date">
+                    <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
+                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                </p>
+            </a>
+
+        {% elseif notif.type == "problem-solved-with-com" %}
+            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+                <p>
+                    <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
+                    <b>{{ notif.expediteur.username|capitalize }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.problem.titre }}</b>"
+                </p>
+
+                <p class="notif-date">
+                    <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
+                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                </p>
+            </a>
+        {% endif %}
     </li>
 
 {% endfor %}
+
+
+{% if listNotif|length < 1 %}
+    <li>
+        <p>
+            <center>
+                Aucune notification
+            </center>
+        </p>
+    </li>
+{% endif %}
