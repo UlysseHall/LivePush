@@ -1,3 +1,6 @@
+<div class="nb-new-notifs-hidden" data-nb="{{ listNotif|length }}">
+</div>
+
 {% for notif in listNotif %}
     <li>
         {% if notif.type == "com-add" %}

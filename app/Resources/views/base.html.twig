@@ -49,13 +49,15 @@
 							{{ app.user.username }}
 						</div>
 						
-						<div class="btn-group nav-account-notification">
+						<div class="btn-group nav-account-notification" data-path="{{ path('social_notification_get') }}">
                             <a type="button" class="dropdown-toggle nav-account-notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						        <span class="glyphicon glyphicon-bell"></span>
+                                <span class="badge nav-nb-notification-badge">
+						            <span class="glyphicon glyphicon-bell"></span>
+                                    <span class="nav-nb-notification-badge-replace">...</span>
+                                </span>
                             </a>
                             
                             <ul class="dropdown-menu dropdown-menu-right">
-								{{ render(controller("SocialBundle:Notification:getNotification")) }}
 				            </ul>
 						</div>
 						
@@ -65,8 +67,8 @@
 							</a>
 							
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="{{ path('fos_user_profile_edit') }}">Editer profil</a></li>
-								<li><a href="{{ path('fos_user_change_password') }}">Modifier mot de passe</a></li>
+								<li><a href="{{ path('fos_user_profile_edit') }}">Editer votre profil</a></li>
+								<li><a href="{{ path('fos_user_change_password') }}">Modifier votre mot de passe</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
 				            </ul>
@@ -83,6 +85,7 @@
         {% block javascripts %}
 			<script src="{{ asset('bundles/jquery/jquery.js') }}"></script>
 			<script src="{{ asset('bundles/bootstrap/js/bootstrap.js') }}"></script>
+			<script src="{{ asset('ressources/js/app/refreshNotif.js') }}"></script>
 		{% endblock %}
     </body>
 </html>

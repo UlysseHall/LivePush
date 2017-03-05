@@ -69,3 +69,8 @@
 {
     opacity: 0;
 }
+
+.nb-new-notifs
+{
+    display: none;
+}

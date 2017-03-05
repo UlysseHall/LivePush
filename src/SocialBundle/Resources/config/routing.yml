@@ -29,3 +29,7 @@ social_problem_comment_add:
 social_problem_comment_remove:
     path:    /comment-remove/{comment_id}
     defaults: { _controller: SocialBundle:Main:problemCommentRemove }
+
+social_notification_get:
+    path:    /notification-get
+    defaults: { _controller: SocialBundle:Notification:getNotification }
