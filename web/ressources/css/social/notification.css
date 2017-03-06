@@ -4,13 +4,14 @@
     max-width: 650px;
     max-height: 80vh;
     overflow: auto;
+    padding: 0;
 }
 
 .nav-account-notification li
 {
     color: #333333;
     padding: 8px;
-    border-bottom: 1px solid #c1c1c1;
+    border-top: 1px solid #c1c1c1;
     cursor: pointer;
 }
 
@@ -22,7 +23,6 @@
 .nav-account-notification li:last-child
 {
     margin: 0;
-    border: none;
 }
 
 .nav-account-notification li a
@@ -74,4 +74,18 @@
 .nb-new-notifs
 {
     display: none;
+}
+
+.nav-notif-clear-list
+{
+    color: #333;
+    margin: 0;
+    text-align: center;
+    padding: 5px 0 5px 0;
+    cursor: pointer;
+}
+
+.nav-notif-clear-list:hover
+{
+    background-color: #f5f5f5;
 }

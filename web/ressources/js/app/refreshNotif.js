@@ -15,6 +15,7 @@ $(function() {
             $(".nav-nb-notification-badge-replace").text(nbNotifs);
             
             notifClicked();
+            notifClear();
         });
         
     }
@@ -25,6 +26,15 @@ $(function() {
             $.post(pathOpened);
             
             window.location.href = $(this).find(".nav-notif-redirect-link").attr("data-redirect");
+        });
+    }
+    
+    function notifClear() {
+        $(".nav-notif-clear-list").click(function() {
+            var clearPath = $(this).attr("data-path");
+            $.post(clearPath);
+            $(".nav-notification-li").remove();
+            notifRefresh();
         });
     }
     

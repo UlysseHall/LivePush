@@ -86,12 +86,29 @@ class NotificationController extends Controller
     /**
      * @ParamConverter("notif", options={"mapping": {"notification_id": "id"}})
      */
-    public function openedNotificationAction(Notification $notif)
+    public function openedNotificationAction(Notification $notif = null, $clear = 0)
     {
+        $em = $this->getDoctrine()->getManager();
+            
+        if($clear == 1)
+        {
+            $notifRep = $em->getRepository("SocialBundle:Notification");
+            $listNotif = $notifRep->findBy(
+                array("destinataire" => $this->getUser(), "ouvert" => false)
+            );
+                
+            foreach($listNotif as $clearNotif)
+            {
+                $clearNotif->setOuvert(true);
+            }
+                
+            $em->flush();
+            return new Response("Notifications vidées");
+        }
+            
         if($this->getUser() == $notif->getDestinataire())
         {
             $notif->setOuvert(true);
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             
             return new Response("Notification ouverte");

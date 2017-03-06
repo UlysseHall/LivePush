@@ -1,6 +1,12 @@
 <div class="nb-new-notifs-hidden" data-nb="{{ listNotif|length }}">
 </div>
 
+{% if listNotif|length > 0 %}
+    <div class="nav-notif-clear-list" data-path="{{ path('social_notification_opened', {'notification_id': -1, 'clear': 1}) }}">
+        <span class="glyphicon glyphicon-trash"></span>
+    </div>
+{% endif %}
+
 {% for notif in listNotif %}
     <li class="nav-notification-li" data-path-clicked="{{ path('social_notification_opened', {'notification_id': notif.id}) }}">
         {% if notif.type == "com-add" %}
