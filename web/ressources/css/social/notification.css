@@ -11,6 +11,7 @@
     color: #333333;
     padding: 8px;
     border-bottom: 1px solid #c1c1c1;
+    cursor: pointer;
 }
 
 .nav-account-notification li:hover

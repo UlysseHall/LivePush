@@ -27,10 +27,10 @@
                     </button>
                 {% endif %}
                                  
-              	{% if (commentaire.auteur == app.user) or (not problem.resolu and commentaire.auteur == app.user) %}
+              	{% if (commentaire.auteur == app.user) or (not problem.resolu and problem.auteur == app.user and not response) %}
                 	<button type="button" class="btn btn-xs comment-delete" data-toggle="popover" data-content="
 
-                    	{% if not problem.resolu and commentaire.auteur == app.user and not response %}
+                    	{% if not problem.resolu and problem.auteur == app.user and not response %}
                     		<a class='btn btn-success col-xs-12' href=&#34;{{ path('social_problem_solved', {'problem_titreSlug': problem.titreSlug, 'comment_id': commentaire.id}) }}&#34; style='margin-bottom: 7px;'>
                             	Solution validée
                             </a>

@@ -33,3 +33,7 @@ social_problem_comment_remove:
 social_notification_get:
     path:    /notification-get
     defaults: { _controller: SocialBundle:Notification:getNotification }
+
+social_notification_opened:
+    path:    /notification-opened/{notification_id}
+    defaults: { _controller: SocialBundle:Notification:openedNotification }

@@ -2,9 +2,9 @@
 </div>
 
 {% for notif in listNotif %}
-    <li>
+    <li class="nav-notification-li" data-path-clicked="{{ path('social_notification_opened', {'notification_id': notif.id}) }}">
         {% if notif.type == "com-add" %}
-            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
                 <p>
                     <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
                     
@@ -19,10 +19,10 @@
                     <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
                     {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
-            </a>
+            </div>
 
         {% elseif notif.type == "com-reply-add" %}
-            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
                 <p>
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
                     
@@ -37,10 +37,10 @@
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
                     {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
-            </a>
+            </div>
 
         {% elseif notif.type == "problem-solved-with-com" %}
-            <a href="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
                 <p>
                     <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
                     <b>{{ notif.expediteur.username|capitalize }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.problem.titre }}</b>"
@@ -50,7 +50,7 @@
                     <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
                     {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
-            </a>
+            </div>
         {% endif %}
     </li>
 

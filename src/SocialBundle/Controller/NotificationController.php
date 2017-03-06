@@ -18,7 +18,21 @@ class NotificationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $notifRep = $em->getRepository("SocialBundle:Notification");
         $expediteur = $this->getUser();
-        $destinataire = $problem->getAuteur();
+        
+        switch($type)
+        {
+            case "com-add":
+                $destinataire = $problem->getAuteur();
+                break;
+            
+            case "com-reply-add":
+                $destinataire = $comment->getAuteur();
+                break;
+                
+            case "problem-solved-with-com":
+                $destinataire = $comment->getAuteur();
+                break;
+        }
         
         $listNotif = $notifRep->findBy(
             array("destinataire" => $destinataire, "ouvert" => false, "type" => $type, "problem" => $problem, "comment" => $comment)
@@ -67,5 +81,22 @@ class NotificationController extends Controller
         return $this->render("SocialBundle:Notification:notification.html.twig", array(
             "listNotif" => $listNotif
         ));
+    }
+    
+    /**
+     * @ParamConverter("notif", options={"mapping": {"notification_id": "id"}})
+     */
+    public function openedNotificationAction(Notification $notif)
+    {
+        if($this->getUser() == $notif->getDestinataire())
+        {
+            $notif->setOuvert(true);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            
+            return new Response("Notification ouverte");
+        }
+        
+        return new Response("Erreur d'authentification");
     }
 }
