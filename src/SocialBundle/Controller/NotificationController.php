@@ -26,7 +26,7 @@ class NotificationController extends Controller
                 break;
             
             case "com-reply-add":
-                $destinataire = $comment->getAuteur();
+                $destinataire = $comment->getComFrom()->getAuteur();
                 break;
                 
             case "problem-solved-with-com":
@@ -35,27 +35,35 @@ class NotificationController extends Controller
         }
         
         $listNotif = $notifRep->findBy(
-            array("destinataire" => $destinataire, "ouvert" => false, "type" => $type, "problem" => $problem, "comment" => $comment)
+            array("destinataire" => $destinataire, "ouvert" => false, "type" => $type, "problem" => $problem)
         );
         
         if(count($listNotif) > 0)
         {
+            $flush = 0;
+            
             foreach($listNotif as $sameNotif)
             {
-                $sameNotif->setMultiple($sameNotif->getMultiple() + 1);
+                if(($type == "com-add") || (!is_null($sameNotif->getComment()->getComFrom()) && $sameNotif->getComment()->getComFrom() == $comment->getComFrom()))
+                {
+                    $sameNotif->setMultiple($sameNotif->getMultiple() + 1);
+                    $listeId = $sameNotif->getListe();
+                    array_push($listeId, $comment->getId());
+                    $sameNotif->setListe($listeId);
+                    $flush = 1;
+                }
             }
             
-            $em->flush();
-            return new Response("sent");
+            if($flush == 1)
+            {
+                $em->flush();
+                return new Response("sent");
+            }
         }
         
         $notif = new Notification;
-        
-        if($type == "com-reply-add" || $type == "problem-solved-with-com")
-        {
-            $notif->setComment($comment);
-        }
-		
+        $notif->setComment($comment);
+        $notif->setListe(array($comment->getId()));
 		$notif->setExpediteur($expediteur);
 		$notif->setDestinataire($destinataire);
 		$notif->setProblem($problem);
@@ -115,5 +123,40 @@ class NotificationController extends Controller
         }
         
         return new Response("Erreur d'authentification");
+    }
+    
+    public function removeNotificationAction(Problem $problem = null, Comment $comment = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $notifRep = $em->getRepository("SocialBundle:Notification");
+        
+        if(!is_null($problem))
+        {
+            $notifList = $notifRep->findBy(array("problem" => $problem));
+            foreach($notifList as $notif)
+            {
+                $em->remove($notif);
+            }
+            $em->flush();
+            return new Response("Notification supprimée");
+        }
+        
+        if(!is_null($comment))
+        {
+            $notifList = $notifRep->findBy(array("comment" => $comment));
+            foreach($notifList as $notif)
+            {
+                if($notif->getMultiple <= 1)
+                {
+                    $em->remove($notif);
+                }
+                else
+                {
+                    $notif->setMultiple($notif->getMultiple() -1);
+                }
+            }
+            $em->flush();
+            return new Response("Notification supprimée");
+        }
     }
 }

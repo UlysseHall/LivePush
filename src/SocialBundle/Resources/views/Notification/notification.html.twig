@@ -33,9 +33,9 @@
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
                     
                     {% if notif.multiple <= 1 %}
-                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.comment.contenu }}</b>"
+                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.comment.comfrom.contenu }}</b>"
                     {% else %}
-                        <b>{{ notif.multiple }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.comment.contenu }}</b>"
+                        <b>{{ notif.multiple }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.comment.comfrom.contenu }}</b>"
                     {% endif %}
                 </p>
 

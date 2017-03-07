@@ -3,6 +3,7 @@
 namespace SocialBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Notification
@@ -75,10 +76,17 @@ class Notification
      */
     private $multiple;
     
+    /**
+     * @var array
+     * @ORM\Column(name="list", type="array")
+     */
+    private $liste;
+    
     
     public function __construct()
 	{
 		$this->date = new \Datetime();
+        $this->liste = new ArrayCollection();
 		$this->comment = null;
         $this->ouvert = false;
         $this->multiple = 1;
@@ -285,5 +293,29 @@ class Notification
     public function getMultiple()
     {
         return $this->multiple;
+    }
+
+    /**
+     * Set liste
+     *
+     * @param array $liste
+     *
+     * @return Notification
+     */
+    public function setListe($liste)
+    {
+        $this->liste = $liste;
+
+        return $this;
+    }
+
+    /**
+     * Get liste
+     *
+     * @return array
+     */
+    public function getListe()
+    {
+        return $this->liste;
     }
 }

@@ -75,13 +75,20 @@ class Notification
      */
     private $multiple;
     
+    /**
+     * @var array
+     * @ORM\Column(name="list", type="array")
+     */
+    private $liste;
+    
     
     public function __construct()
 	{
 		$this->date = new \Datetime();
+        $this->liste = new ArrayCollection();
 		$this->comment = null;
         $this->ouvert = false;
-        $this->multiple = 0;
+        $this->multiple = 1;
 	}
     
 
@@ -261,5 +268,29 @@ class Notification
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set multiple
+     *
+     * @param integer $multiple
+     *
+     * @return Notification
+     */
+    public function setMultiple($multiple)
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    /**
+     * Get multiple
+     *
+     * @return integer
+     */
+    public function getMultiple()
+    {
+        return $this->multiple;
     }
 }

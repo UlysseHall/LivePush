@@ -228,8 +228,21 @@ class MainController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$comRep = $em->getRepository("SocialBundle:Comment");
 			$fileRep = $em->getRepository("SocialBundle:Fichier");
-			$listCom = $comRep->findBy(array("problem" => $problem));
+            $listCom = $comRep->findBy(array("problem" => $problem));
+            
+            $this->forward("SocialBundle:Notification:removeNotification", array(
+                "problem" => $problem
+            ));
 			
+            foreach($listCom as $com)
+			{
+                if($com->getComFrom() !== null)
+                {
+                    $em->remove($com);
+				    $em->flush();
+                }
+			}
+            
 			foreach($listCom as $com)
 			{
 				if($com->getCorrection())
@@ -239,7 +252,6 @@ class MainController extends Controller
 					$em->remove($fichier);
 				}
 				$em->remove($com);
-				$em->flush();
 			}
 			
 			$listFiles = $fileRep->findBy(array("problem" => $problem));
@@ -276,10 +288,10 @@ class MainController extends Controller
 			{
 				$comment->setSolution(true);
                     $this->forward("SocialBundle:Notification:addNotification", array(
-                    "problem" => $problem,
-                    "comment" => $comment,
-                    "type" => "problem-solved-with-com"
-                ));
+                        "problem" => $problem,
+                        "comment" => $comment,
+                        "type" => "problem-solved-with-com"
+                    ));
 			}
 			
 			$em->flush();
@@ -326,12 +338,6 @@ class MainController extends Controller
             $comFrom = $comRep->find($comFromId);
             $comFrom->setHasResponse(true);
             $comment->setComFrom($comFrom);
-            
-            $this->forward("SocialBundle:Notification:addNotification", array(
-                "problem" => $problem,
-                "comment" => $comFrom,
-                "type" => "com-reply-add"
-            ));
         }
 		
 		$validator = $this->get('validator');
@@ -346,10 +352,20 @@ class MainController extends Controller
         
 		$this->forward("SocialBundle:Notification:addNotification", array(
 			"problem" => $problem,
+            "comment" => $comment,
 			"type" => "com-add"
 		));
 			
         $commentId = $comment->getId();
+        
+        if($comFromId != -1)
+        {
+            $this->forward("SocialBundle:Notification:addNotification", array(
+                "problem" => $problem,
+                "comment" => $comment,
+                "type" => "com-reply-add"
+            ));
+        }
         
         if($hasCorrection)
         {
@@ -379,6 +395,10 @@ class MainController extends Controller
 			$problemSlug = $comment->getProblem()->getTitreSlug();
 			$comRep = $em->getRepository("SocialBundle:Comment");
 			$listRepCom = $comRep->findBy(array("comFrom" => $comment));
+            
+            $this->forward("SocialBundle:Notification:removeNotification", array(
+                "comment" => $comment
+            ));
 			
 			if($comment->getCorrection())
 			{
