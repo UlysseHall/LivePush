@@ -34,36 +34,8 @@ class NotificationController extends Controller
                 break;
         }
         
-        $listNotif = $notifRep->findBy(
-            array("destinataire" => $destinataire, "ouvert" => false, "type" => $type, "problem" => $problem)
-        );
-        
-        if(count($listNotif) > 0)
-        {
-            $flush = 0;
-            
-            foreach($listNotif as $sameNotif)
-            {
-                if(($type == "com-add") || (!is_null($sameNotif->getComment()->getComFrom()) && $sameNotif->getComment()->getComFrom() == $comment->getComFrom()))
-                {
-                    $sameNotif->setMultiple($sameNotif->getMultiple() + 1);
-                    $listeId = $sameNotif->getListe();
-                    array_push($listeId, $comment->getId());
-                    $sameNotif->setListe($listeId);
-                    $flush = 1;
-                }
-            }
-            
-            if($flush == 1)
-            {
-                $em->flush();
-                return new Response("sent");
-            }
-        }
-        
         $notif = new Notification;
         $notif->setComment($comment);
-        $notif->setListe(array($comment->getId()));
 		$notif->setExpediteur($expediteur);
 		$notif->setDestinataire($destinataire);
 		$notif->setProblem($problem);
@@ -82,47 +54,97 @@ class NotificationController extends Controller
         $user = $this->getUser();
         
         $listNotif = $notifRep->findBy(
-            array("destinataire" => $user, "ouvert" => false),
+            array("destinataire" => $user),
             array("date" => "desc")
         );
         
+        $notifTab = [];
+        
+        foreach($listNotif as $notif)
+        {
+            if(empty($notifTab))
+            {
+                $notifObject = ["object" => $notif, "nb" => 1, "liste" => serialize([$notif->getId()])];
+                array_push($notifTab, $notifObject);
+                continue;
+            }
+            
+            $nbNotif = count($notifTab);
+
+            for($i = 0; $i < $nbNotif; $i++)
+            {
+                if($notif->getType() == $notifTab[$i]["object"]->getType() && $notif->getProblem() == $notifTab[$i]["object"]->getProblem())
+                {
+                    if($notif->getType() == "com-reply-add")
+                    {
+                        if($notif->getComment()->getComFrom() == $notifTab[$i]["object"]->getComment()->getComFrom())
+                        {
+                            $notifTab[$i]["nb"] = $notifTab[$i]["nb"] + 1;
+                            $liste = unserialize($notifTab[$i]["liste"]);
+                            array_push($liste, $notif->getId());
+                            $notifTab[$i]["liste"] = serialize($liste);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        $notifTab[$i]["nb"] = $notifTab[$i]["nb"] + 1;
+                        $liste = unserialize($notifTab[$i]["liste"]);
+                        array_push($liste, $notif->getId());
+                        $notifTab[$i]["liste"] = serialize($liste);
+                        break;
+                    }
+                }
+                
+                if($i == count($notifTab) - 1)
+                {
+                    $notifObject = ["object" => $notif, "nb" => 1, "liste" => serialize([$notif->getId()])];
+                    array_push($notifTab, $notifObject);
+                }
+            }
+        }
+        
         return $this->render("SocialBundle:Notification:notification.html.twig", array(
-            "listNotif" => $listNotif
+            "listNotif" => $notifTab
         ));
     }
     
-    /**
-     * @ParamConverter("notif", options={"mapping": {"notification_id": "id"}})
-     */
-    public function openedNotificationAction(Notification $notif = null, $clear = 0)
+    
+    public function openedNotificationAction($listeId = null, $clear = 0)
     {
         $em = $this->getDoctrine()->getManager();
+        $notifRep = $em->getRepository("SocialBundle:Notification");
             
         if($clear == 1)
         {
-            $notifRep = $em->getRepository("SocialBundle:Notification");
             $listNotif = $notifRep->findBy(
-                array("destinataire" => $this->getUser(), "ouvert" => false)
+                array("destinataire" => $this->getUser())
             );
                 
             foreach($listNotif as $clearNotif)
             {
-                $clearNotif->setOuvert(true);
+                $em->remove($clearNotif);
             }
                 
             $em->flush();
             return new Response("Notifications vidées");
         }
             
-        if($this->getUser() == $notif->getDestinataire())
-        {
-            $notif->setOuvert(true);
-            $em->flush();
-            
-            return new Response("Notification ouverte");
-        }
+        $listNotif = unserialize($listeId);
         
-        return new Response("Erreur d'authentification");
+        $notifToRemove = $notifRep->findBy(array("id" => $listNotif));
+            
+        foreach($notifToRemove as $notifRem)
+        {
+            if($notifRem->getDestinataire() == $this->getUser())
+            {
+                $em->remove($notifRem);
+            }
+        }
+            
+        $em->flush();
+            
+        return new Response("Notification ouverte");
     }
     
     public function removeNotificationAction(Problem $problem = null, Comment $comment = null)
@@ -146,12 +168,18 @@ class NotificationController extends Controller
             $notifList = $notifRep->findBy(array("comment" => $comment));
             foreach($notifList as $notif)
             {
-                if($notif->getMultiple <= 1)
+                if($notif->getMultiple() <= 1)
                 {
                     $em->remove($notif);
                 }
                 else
                 {
+                    $listeId = $notif->getListe();
+                    $comKey = array_search($comment->getId(), $listeId);
+                    array_splice($listeId, $comKey, 1);
+                    $newCom = $em->getRepository("SocialBundle:Comment")->findOneBy(array("id" => $listeId[0]));
+                    $notif->setListe($listeId);
+                    $notif->setComment($newCom);
                     $notif->setMultiple($notif->getMultiple() -1);
                 }
             }

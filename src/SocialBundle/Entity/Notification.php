@@ -56,40 +56,17 @@ class Notification
     private $date;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="ouvert", type="boolean")
-     */
-    private $ouvert;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
     
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="multiple", type="integer")
-     */
-    private $multiple;
-    
-    /**
-     * @var array
-     * @ORM\Column(name="list", type="array")
-     */
-    private $liste;
-    
     
     public function __construct()
 	{
 		$this->date = new \Datetime();
-        $this->liste = new ArrayCollection();
 		$this->comment = null;
-        $this->ouvert = false;
-        $this->multiple = 1;
 	}
     
 
@@ -125,30 +102,6 @@ class Notification
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set ouvert
-     *
-     * @param boolean $ouvert
-     *
-     * @return Notification
-     */
-    public function setOuvert($ouvert)
-    {
-        $this->ouvert = $ouvert;
-
-        return $this;
-    }
-
-    /**
-     * Get ouvert
-     *
-     * @return boolean
-     */
-    public function getOuvert()
-    {
-        return $this->ouvert;
     }
 
     /**
@@ -269,53 +222,5 @@ class Notification
     public function getComment()
     {
         return $this->comment;
-    }
-
-    /**
-     * Set multiple
-     *
-     * @param integer $multiple
-     *
-     * @return Notification
-     */
-    public function setMultiple($multiple)
-    {
-        $this->multiple = $multiple;
-
-        return $this;
-    }
-
-    /**
-     * Get multiple
-     *
-     * @return integer
-     */
-    public function getMultiple()
-    {
-        return $this->multiple;
-    }
-
-    /**
-     * Set liste
-     *
-     * @param array $liste
-     *
-     * @return Notification
-     */
-    public function setListe($liste)
-    {
-        $this->liste = $liste;
-
-        return $this;
-    }
-
-    /**
-     * Get liste
-     *
-     * @return array
-     */
-    public function getListe()
-    {
-        return $this->liste;
     }
 }

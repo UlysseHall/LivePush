@@ -35,5 +35,5 @@ social_notification_get:
     defaults: { _controller: SocialBundle:Notification:getNotification }
 
 social_notification_opened:
-    path:    /notification-opened/{notification_id}/{clear}
-    defaults: { _controller: SocialBundle:Notification:openedNotification, notification_id: -1, clear: 0 }
+    path:    /notification-opened/{listeId}/{clear}
+    defaults: { _controller: SocialBundle:Notification:openedNotification, listeId: -1, clear: 0 }

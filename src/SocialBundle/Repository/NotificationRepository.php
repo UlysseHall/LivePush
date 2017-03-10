@@ -10,4 +10,5 @@ namespace SocialBundle\Repository;
  */
 class NotificationRepository extends \Doctrine\ORM\EntityRepository
 {
+    
 }

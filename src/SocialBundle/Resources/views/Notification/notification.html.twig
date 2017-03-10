@@ -8,53 +8,53 @@
 {% endif %}
 
 {% for notif in listNotif %}
-    <li class="nav-notification-li" data-path-clicked="{{ path('social_notification_opened', {'notification_id': notif.id}) }}">
-        {% if notif.type == "com-add" %}
-            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+    <li class="nav-notification-li" data-path-clicked="{{ path('social_notification_opened', {'listeId': notif.liste}) }}">
+        {% if notif.object.type == "com-add" %}
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.object.problem.titreSlug}) }}">
                 <p>
                     <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
                     
-                    {% if notif.multiple <= 1 %}
-                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a commenté votre problème&#160"<b>{{ notif.problem.titre }}</b>"
+                    {% if notif.nb <= 1 %}
+                        <b>{{ notif.object.expediteur.username|capitalize }}</b>&#160a commenté votre problème&#160"<b>{{ notif.object.problem.titre }}</b>"
                     {% else %}
-                        <b>{{ notif.multiple }}</b>&#160commentaires ont été ajoutés sur votre problème&#160"<b>{{ notif.problem.titre }}</b>"
+                        <b>{{ notif.nb }}</b>&#160commentaires ont été ajoutés sur votre problème&#160"<b>{{ notif.object.problem.titre }}</b>"
                     {% endif %}
                 </p>
 
                 <p class="notif-date">
                     <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
-                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                    {{ notif.object.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
             </div>
 
-        {% elseif notif.type == "com-reply-add" %}
-            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+        {% elseif notif.object.type == "com-reply-add" %}
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.object.problem.titreSlug}) }}">
                 <p>
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
                     
-                    {% if notif.multiple <= 1 %}
-                        <b>{{ notif.expediteur.username|capitalize }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.comment.comfrom.contenu }}</b>"
+                    {% if notif.nb <= 1 %}
+                        <b>{{ notif.object.expediteur.username|capitalize }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu }}</b>"
                     {% else %}
-                        <b>{{ notif.multiple }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.comment.comfrom.contenu }}</b>"
+                        <b>{{ notif.nb }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu }}</b>"
                     {% endif %}
                 </p>
 
                 <p class="notif-date">
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
-                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                    {{ notif.object.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
             </div>
 
-        {% elseif notif.type == "problem-solved-with-com" %}
-            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.problem.titreSlug}) }}">
+        {% elseif notif.object.type == "problem-solved-with-com" %}
+            <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.object.problem.titreSlug}) }}">
                 <p>
                     <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
-                    <b>{{ notif.expediteur.username|capitalize }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.problem.titre }}</b>"
+                    <b>{{ notif.object.expediteur.username|capitalize }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.object.problem.titre }}</b>"
                 </p>
 
                 <p class="notif-date">
                     <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
-                    {{ notif.date|date('Y-m-d H:i:s')|prettydate }}
+                    {{ notif.object.date|date('Y-m-d H:i:s')|prettydate }}
                 </p>
             </div>
         {% endif %}
