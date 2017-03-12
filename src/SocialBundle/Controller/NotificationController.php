@@ -33,6 +33,11 @@ class NotificationController extends Controller
                 $destinataire = $comment->getAuteur();
                 break;
         }
+		
+		if($expediteur == $destinataire)
+		{
+			return new Response("Notification inutile");
+		}
         
         $notif = new Notification;
         $notif->setComment($comment);

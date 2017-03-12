@@ -39,5 +39,5 @@ $(function() {
     }
     
     notifRefresh();
-    setInterval(notifRefresh, 20000);
+    setInterval(notifRefresh, 60000);
 });

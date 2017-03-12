@@ -9,7 +9,7 @@ class GoodLangageValidator extends ConstraintValidator
 {
   public function validate($value, Constraint $constraint)
   {
-      $langages = ["HTML", "CSS", "PHP", "JS", "Python", "Jquery", "Bootstrap", "GIT", "Autre"];
+      $langages = ["HTML", "CSS", "PHP", "JS", "Python", "Jquery", "Bootstrap", "GIT", "Autre", "Illustrator", "Photoshop", "Wordpress"];
       
       if (!in_array($value, $langages))
       {
