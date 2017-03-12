@@ -228,10 +228,18 @@ class MainController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$comRep = $em->getRepository("SocialBundle:Comment");
 			$fileRep = $em->getRepository("SocialBundle:Fichier");
+			$notifRep = $em->getRepository("SocialBundle:Notification");
             $listCom = $comRep->findBy(array("problem" => $problem));
+			$listNotif = $notifRep->findBy(array("problem" => $problem));
+			$listIdNotif = [];
+			
+			foreach($listNotif as $notif)
+			{
+				array_push($listIdNotif, $notif->getId());
+			}
             
-            $this->forward("SocialBundle:Notification:removeNotification", array(
-                "problem" => $problem
+            $this->forward("SocialBundle:Notification:openedNotification", array(
+                "listeId" => serialize($listIdNotif)
             ));
 			
             foreach($listCom as $com)
@@ -394,11 +402,11 @@ class MainController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$problemSlug = $comment->getProblem()->getTitreSlug();
 			$comRep = $em->getRepository("SocialBundle:Comment");
+			$notifRep = $em->getRepository("SocialBundle:Notification");
 			$listRepCom = $comRep->findBy(array("comFrom" => $comment));
-            
-            $this->forward("SocialBundle:Notification:removeNotification", array(
-                "comment" => $comment
-            ));
+			$listNotif = $notifRep->findBy(array("comment" => $comment));
+			$listRepNotif = $notifRep->findBy(array("comment" => $listRepCom));
+			$listIdNotif = [];
 			
 			if($comment->getCorrection())
 			{
@@ -407,6 +415,20 @@ class MainController extends Controller
 				unlink("ressources/txt/" . $fichier->getPathName());
 				$em->remove($fichier);
 			}
+			
+			foreach($listNotif as $notif)
+			{
+				array_push($listIdNotif, $notif->getId());
+			}
+			
+			foreach($listRepNotif as $repNotif)
+			{
+				array_push($listIdNotif, $repNotif->getId());
+			}
+			
+			$this->forward("SocialBundle:Notification:openedNotification", array(
+                "listeId" => serialize($listIdNotif)
+            ));
 			
 			foreach($listRepCom as $repCom)
 			{

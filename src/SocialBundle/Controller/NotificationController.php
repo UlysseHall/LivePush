@@ -146,45 +146,4 @@ class NotificationController extends Controller
             
         return new Response("Notification ouverte");
     }
-    
-    public function removeNotificationAction(Problem $problem = null, Comment $comment = null)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $notifRep = $em->getRepository("SocialBundle:Notification");
-        
-        if(!is_null($problem))
-        {
-            $notifList = $notifRep->findBy(array("problem" => $problem));
-            foreach($notifList as $notif)
-            {
-                $em->remove($notif);
-            }
-            $em->flush();
-            return new Response("Notification supprimée");
-        }
-        
-        if(!is_null($comment))
-        {
-            $notifList = $notifRep->findBy(array("comment" => $comment));
-            foreach($notifList as $notif)
-            {
-                if($notif->getMultiple() <= 1)
-                {
-                    $em->remove($notif);
-                }
-                else
-                {
-                    $listeId = $notif->getListe();
-                    $comKey = array_search($comment->getId(), $listeId);
-                    array_splice($listeId, $comKey, 1);
-                    $newCom = $em->getRepository("SocialBundle:Comment")->findOneBy(array("id" => $listeId[0]));
-                    $notif->setListe($listeId);
-                    $notif->setComment($newCom);
-                    $notif->setMultiple($notif->getMultiple() -1);
-                }
-            }
-            $em->flush();
-            return new Response("Notification supprimée");
-        }
-    }
 }
