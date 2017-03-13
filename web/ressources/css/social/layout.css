@@ -5,6 +5,7 @@
 	padding: 0;
     overflow-y: auto;
 	transition: width 0.6s;
+	border-right: 1px solid #c1c1c1;
 }
 
 .home-problems .row
@@ -18,7 +19,6 @@
 .problem-add:visited,
 .problem-add:active
 {
-    margin-bottom: 10px;
 	background-color: #2ecc71;
 	text-align: center;
 	color: white;

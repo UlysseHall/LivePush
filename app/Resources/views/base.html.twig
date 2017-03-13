@@ -29,9 +29,7 @@
 			<nav class="row">
 				<div class="col-xs-3 nav-brand">
 					<a href="{{ path('social_home') }}">
-						<h2>
-							Livepush
-						</h2>
+						<img src="{{ asset('ressources/img/logo/sm-white.png') }}" alt="logo">
 					</a>
 				</div>
 				
@@ -67,9 +65,9 @@
 							</a>
 							
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="{{ path('fos_user_change_password') }}">Modifier votre mot de passe</a></li>
+								<li><a href="{{ path('fos_user_change_password') }}"><i class="fa fa-key"></i> Modifier votre mot de passe</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+								<li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
 				            </ul>
 						</div>
 					{% endif %}

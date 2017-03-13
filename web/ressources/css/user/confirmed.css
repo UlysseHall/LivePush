@@ -1,0 +1,20 @@
+h1.registration-confirmed
+{
+	font-weight: bold;
+	margin-top: 75px;
+}
+
+p.registration-confirmed
+{
+	margin: 20px 0 20px 0;
+}
+
+a.registration-confirmed
+{
+	font-weight: bold;
+}
+
+.registration-confirmed
+{
+	text-align: center;
+}

@@ -42,11 +42,11 @@
 			<div class="form-group">
 				<label for="langage" class="col-xs-3 control-label">Technologie problématique</label>
 				<div class="col-md-7 col-sm-9">
-					<select class="form-control" id="langage" name="pbAddLangage">
+					<select class="form-control" id="langage" name="pbAddLangage" required>
                         <option value="Bootstrap">Bootstrap</option>
 				    	<option value="CSS">CSS</option>
                         <option value="GIT">GIT</option>
-				    	<option value="HTML">HTML</option>
+				    	<option value="HTML" selected>HTML</option>
 				    	<option value="Illustrator">Illustrator</option>
 				    	<option value="JS">JavaScript</option>
                         <option value="Jquery">Jquery</option>
@@ -74,7 +74,7 @@
 			
 			<div class="form-group">
 				<div class="col-md-9 col-sm-offset-3 col-xs-offset-5">
-					<button type="submit" class="btn btn-success">Valider</button>
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Valider</button>
 				</div>
 			</div>
 		</form>

@@ -2,6 +2,13 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/user/check-mail.css') }}">
+{% endblock %}
+
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <p class="check-mail">
+    	Un e-mail a été envoyé à l'adresse <strong>{{ user.email }}</strong>. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte.
+    </p>
 {% endblock fos_user_content %}

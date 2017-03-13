@@ -2,8 +2,27 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/user/confirmed.css') }}">
+{% endblock %}
+
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+   
+    <h1 class="registration-confirmed">
+    	{{ user.username }}
+    </h1>
+    
+    <p class="registration-confirmed">
+    	Bienvenue sur LivePush	
+    </p>
+    
+    <center>
+		<a href="{{ path('social_home') }}" class="btn btn-default registration-confirmed">
+			Accueil
+		</a>
+	</center>
+    
     {% if targetUrl %}
     <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
     {% endif %}

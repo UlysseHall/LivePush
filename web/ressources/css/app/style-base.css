@@ -34,13 +34,9 @@ nav .nav-brand
     text-align: center;
 }
 
-nav h2	
+.nav-brand img	
 {
-	margin: 0px;
-	display: inline-block;
-	text-decoration: none;
-	color: white;
-	font-family: "FrancoisOne", Arial, sans-serif;
+	height: 30px;
 }
 
 .nav-account-button
