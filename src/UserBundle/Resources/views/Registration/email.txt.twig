@@ -1,12 +1,15 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
 {% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+Confirmation de ton adresse email
 {% endautoescape %}
 {% endblock %}
 {% block body_text %}
 {% autoescape false %}
-{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+Coucou {{ user.username }} :)
+
+Pour valider ton compte LivePush cliques sur ce lien : {{ confirmationUrl }}
+
+À tout de suite !
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
