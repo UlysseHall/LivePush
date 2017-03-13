@@ -18,17 +18,23 @@
 				</div>
 			{% endif %}
 			
+			{% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger col-xs-6 col-xs-offset-3" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+			
 			<div class="form-group">
-				{{ form_label(form.email, "Adresse mail", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
+				{{ form_label(form.email, "Adresse HETIC", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
 				<div class="col-xs-3">
-					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'maxlength': 255, 'placeholder': 'jean.neymar@gmail.com'}}) }}
+					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'maxlength': 255, 'placeholder': 'jean.neymar@hetic.net'}}) }}
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group" style="display:none;">
 				{{ form_label(form.username, "Prénom Nom", {'label_attr': {'class': 'col-xs-4 col-xs-offset-1 control-label'}}) }}
 				<div class="col-xs-3">
-					{{ form_widget(form.username, {'attr': {'class': 'form-control', 'maxlength': 30, 'placeholder': 'Jean Neymar'}}) }}
+					{{ form_widget(form.username, {'attr': {'class': 'form-control', 'maxlength': 30, 'placeholder': 'Jean Neymar', 'value': 'default'}}) }}
 				</div>
 			</div>
 			
