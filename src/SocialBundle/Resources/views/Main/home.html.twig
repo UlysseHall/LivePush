@@ -4,3 +4,151 @@
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('ressources/css/social/home.css') }}">
 {% endblock %}
+
+
+{% block social_right_pan %}
+    
+    <div class="row">
+        <div class="home-logo col-xs-4 col-xs-offset-4">
+            <img src="{{ asset('ressources/img/logo/bg-blue.png') }}">
+        </div>
+    </div>
+    
+    <section class="home-tuto row">
+        <article class="home-tuto-probleme col-md-6">
+            <h2>Un problème ?</h2>
+            
+            <p class="tuto-pb-add">
+                <b>1-</b> Clique sur <a href="{{ path('social_problem_add') }}"><img alt="problem-add" src="{{ asset('ressources/img/tuto/problem-add.png') }}"></a>
+            </p>
+            
+            <p>
+                <b>2-</b> Explique l'embrouille puis, si tu en as, <strong>importe tes fichiers de code et tes captures d'écran</strong>
+            </p>
+            
+            <p class="tuto-pb-view">
+                <b>3-</b> Regarde la <strong>correction de ton code</strong> qu'on t'a envoyée en cliquant sur <span class="label label-success">Correction de fichier.html</span>
+            </p>
+            
+            <p>
+                <b>4-</b> Si un commentaire t'a aidé, clique sur "<b>Solution validée</b>", sinon passe juste ton problème en "<b>Résolu</b>"
+            </p>
+        </article>
+        
+        <article class="home-tuto-solution col-md-6">
+            <h2>Une solution ?</h2>
+            
+            <p>
+                <b>1-</b> La liste des problèmes est située <strong>à gauche de l'écran</strong>
+            </p>
+            
+            <p>
+                <b>2-</b> Visualise les fichiers de code <strong>directement dans le navigateur</strong> en cliquant sur un des fichiers
+            </p>
+            
+            <p>
+                <b>3-</b> Propose une correction de code en cliquant sur <span class="tuto-sol-edit">Corriger ce code</span>
+            </p>
+            
+            <p>
+                <b>4-</b> Ta correction est envoyée en commentaire, <strong>n'importe qui peut venir la consulter</strong>
+            </p>
+        </article>
+    </section>
+    
+    <div class="row home-feedback">
+        <div class="col-md-6 col-feedback-button">
+            <button class="btn btn-default lauch-modal-feedback" data-toggle="modal" data-target="#feedback-modal">
+                <span class="glyphicon glyphicon-thumbs-up"></span> Suggestion ? Retour d'utilisation ? Bug ?
+            </button>
+        </div>
+        
+        <div class="col-md-6 col-info-project-button">
+            <button class="btn btn-default lauch-modal-infos" data-toggle="modal" data-target="#infos-modal">
+                <span class="glyphicon glyphicon-info-sign"></span> Informations
+            </button>
+        </div>
+        
+        <div class="modal fade" id="feedback-modal" role="dialog" arial-labelledby="modalFeedbacks" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span></button>
+                        <h3>Feedbacks</h3>
+                        
+                    </div>
+                    
+                    <div class="modal-body">
+                       
+                        <form class="form-horizontal" method="post" action="{{ path('social_feedback_send') }}">
+                           
+                            <div class="form-group">
+                                <label for="type" class="col-xs-3 control-label">Type</label>
+                                <div class="col-xs-9">
+                                    <select class="form-control" id="type" name="type" required>
+                                        <option value="suggestion">Suggestion</option>
+                                        <option value="feedback">Retour d'utilisation</option>
+                                        <option value="bug">Bug</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="col-xs-3 control-label">Message</label>
+                                <div class="col-xs-9">
+                                    <textarea class="form-control" rows="4" id="message" name="message" minlength="3" required></textarea>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <div class="form-group feedback-send-group">
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="infos-modal" role="dialog" arial-labelledby="modalInfos" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span></button>
+                        <h3>Informations</h3>
+                        
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p>
+                           <b>LivePush</b> est une plateforme d'aide créée par un Heticien pour les Heticiens.
+                        </p>
+                        <p>
+                            Le projet a été monté avec <b>Symfony3</b>, les ressources externes utilisées sont :
+                            <ul class="infos-ressources-externes">
+                                <li><b>Bootstrap</b></li>
+                                <li><b>Jquery</b></li>
+                                <li><b>Font Awesome</b></li>
+                                <li><b>Google</b></li>
+                                <li><b>Google Code Prettify</b> (utilisé pour la coloration syntaxique des codes et le numérotage des lignes)</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Cimer au poto <b>Antoine Perrin</b> pour le logo <span class="glyphicon glyphicon-fire"></span>
+                        </p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <p>Ulysse Hall</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

@@ -24,7 +24,7 @@ $(function()
         $("textarea.comment-input").popover("hide");
         $("form.comment-form input[type=hidden]").remove();
         
-        var headerNavHtml = "<div class='file-display-header row'><p class='pb-code-edit'>Corriger ce code</p><p>"+name+"</p><span class='glyphicon glyphicon-remove file-undisplay'></span></div>";
+        var headerNavHtml = "<div class='file-display-header row'><p class='pb-code-edit'><span class='glyphicon glyphicon-pencil'></span> Corriger ce code</p><p>"+name+"</p><span class='glyphicon glyphicon-remove file-undisplay'></span></div>";
         
 		$(".home-content, .home-problems").css("width", "50%");
 		$(".home-problems").html(headerNavHtml+"<pre class='display-code-tag prettyprint linenums row'></pre>");

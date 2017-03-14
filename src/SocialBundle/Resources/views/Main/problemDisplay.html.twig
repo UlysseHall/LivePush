@@ -1,32 +1,46 @@
-<ul class="list-pb-display row">
-        
-    {% for problem in listProblems %}
-        
-        <li class="col-xs-12">
-            <a href="{{ path('social_problem_show', {'problem_titreSlug': problem.titreSlug}) }}">
-                <div class="row">
-                   
-                    <div class="col-xs-9 col pb-display-titre">
-                    	<div class="pb-display-logo">
-                    		<img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
-                    	</div>
-                       
-                        {{ problem.titre|raw }}
-                        <br>
-                        
-                        <span class="pb-display-auteur">
-                        	{{ problem.auteur }}
-                        </span>
-                    </div>
+<div class="pb-select-list-container" data-loader="{{ asset('ressources/img/icons/loader.gif') }}">
+    
+    <div class="row pb-display-select-list">
+        <p class="col-md-6  display-select-list-problem-solved {% if typeList == 'solved' %} display-list-active {% endif %}" data-link="{{ path('social_problem_get_list', {'list': 'solved'}) }}">
+            <span class="glyphicon glyphicon-ok"></span> Résolus
+        </p>
 
-                    <div class="col-xs-3 col pb-display-date">
-                        {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
-                    </div>
+        <p class="col-md-6 display-select-list-problem-unsolved {% if typeList == 'unsolved' %} display-list-active {% endif %}" data-link="{{ path('social_problem_get_list', {'list': 'unsolved'}) }}">
+            <i class="fa fa-exclamation"></i> Non résolus
+        </p>
+    </div>     
 
-                </div>
-            </a>
-        </li>
-        
-      {% endfor %}
-        
- </ul>
+    <ul class="list-pb-display row">
+
+        {% for problem in listProblems %}
+
+            <li class="col-xs-12">
+                <a href="{{ path('social_problem_show', {'problem_titreSlug': problem.titreSlug}) }}">
+                    <div class="row">
+
+                        <div class="col-xs-9 col pb-display-titre">
+                            <div class="pb-display-logo">
+                                <img src="{{ asset('ressources/img/langage-logo/'~problem.langage|lower~'.png') }}" alt="langage-logo">
+                            </div>
+
+                            {{ problem.titre|raw }}
+                            <br>
+
+                            <span class="pb-display-auteur">
+                                {{ problem.auteur }}
+                            </span>
+                        </div>
+
+                        <div class="col-xs-3 col pb-display-date">
+                            {{ problem.date|date('Y-m-d H:i:s')|prettydate }}
+                        </div>
+
+                    </div>
+                </a>
+            </li>
+
+          {% endfor %}
+
+    </ul>
+    
+</div>

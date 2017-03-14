@@ -125,13 +125,22 @@ class MainController extends Controller
 		return $this->redirectToRoute("social_problem_show", array("problem_titreSlug" => $problem->getTitreSlug()));
     }
     
-    public function problemsGetAction()
+    public function problemsGetAction($list)
     {
         $pbRep = $this->getDoctrine()->getManager()->getRepository("SocialBundle:Problem");
-        $listProblems = $pbRep->findBy(array(), array('date' => 'desc'));
+        
+        if($list == "solved")
+        {
+            $listProblems = $pbRep->findBy(array("resolu" => true), array('date' => 'desc'));
+        }
+        else
+        {
+            $listProblems = $pbRep->findBy(array("resolu" => false), array('date' => 'desc'));
+        }
         
         return $this->render("SocialBundle:Main:problemDisplay.html.twig", array(
-            "listProblems" => $listProblems
+            "listProblems" => $listProblems,
+            "typeList" => $list
         ));
     }
     

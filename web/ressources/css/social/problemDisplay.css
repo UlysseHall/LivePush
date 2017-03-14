@@ -64,3 +64,44 @@
     letter-spacing: 0.08em;
 	font-weight: normal;
 }
+
+.pb-display-select-list
+{
+    text-align: center;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.pb-display-select-list p
+{
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+    cursor: pointer;
+}
+
+.pb-display-select-list p:hover
+{
+    background-color: #ecf0f1;
+}
+
+.display-select-list-problem-unsolved, .display-select-list-problem-solved
+{
+    padding: 8px;
+}
+
+.display-select-list-problem-solved
+{
+    border-right: 1px solid #c1c1c1;
+}
+
+.display-list-active
+{
+    background-color: #ecf0f1;
+}
+
+.list-pb-loading
+{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}

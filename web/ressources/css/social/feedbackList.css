@@ -1,0 +1,11 @@
+h1.feedback-list-title
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+.list-feedback-sent li
+{
+    margin: 30px 0 30px 0;
+    background-color: #ecf0f1;
+}

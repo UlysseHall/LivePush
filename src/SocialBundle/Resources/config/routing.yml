@@ -2,6 +2,10 @@ social_home:
     path:     /
     defaults: { _controller: SocialBundle:Main:home }
 
+social_problem_get_list:
+    path: /problem-get-list/{list}
+    defaults: { _controller: SocialBundle:Main:problemsGet, list: "unsolved" }
+
 social_problem_add:
     path:    /problem-add
     defaults: { _controller: SocialBundle:Main:problemAdd }
@@ -37,3 +41,11 @@ social_notification_get:
 social_notification_opened:
     path:    /notification-opened/{listeId}/{clear}
     defaults: { _controller: SocialBundle:Notification:openedNotification, listeId: -1, clear: 0 }
+
+social_feedback_send:
+    path: /feedback-send
+    defaults: { _controller: SocialBundle:Feedback:sendFeedback }
+
+social_feedback_get:
+    path: /feedback-list
+    defaults: { _controller: SocialBundle:Feedback:getFeedback }

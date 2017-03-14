@@ -32,13 +32,13 @@
 
                     	{% if not problem.resolu and problem.auteur == app.user and not response %}
                     		<a class='btn btn-success col-xs-12' href=&#34;{{ path('social_problem_solved', {'problem_titreSlug': problem.titreSlug, 'comment_id': commentaire.id}) }}&#34; style='margin-bottom: 7px;'>
-                            	Solution validée
+                            	<span class='glyphicon glyphicon-ok'></span> Solution validée
                             </a>
                         {% endif %}
 
 						{% if commentaire.auteur == app.user %}
                         	<a class='btn btn-danger col-xs-12' href=&#34;{{ path('social_problem_comment_remove', {'comment_id': commentaire.id}) }}&#34; style='margin-bottom: 7px;'>
-                            	Supprimer
+                            	<span class='glyphicon glyphicon-trash'></span> Supprimer
                             </a>
                      	{% endif %}"
 

@@ -1,0 +1,114 @@
+section.home-content
+{
+    background-color: #ecf0f1;
+}
+
+.home-logo
+{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home-logo img
+{
+    width: 80%;
+}
+
+.home-version
+{
+    margin: 0;
+    align-self: flex-end;
+    margin-left: 5px;
+}
+
+section.home-tuto
+{
+    margin-top: 50px;
+}
+
+article.home-tuto-probleme, article.home-tuto-solution
+{
+    padding-left: 25px;
+}
+
+section.home-tuto h2
+{
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+section.home-tuto p
+{
+    padding-left: 30px;
+    margin-bottom: 30px;
+}
+
+.tuto-pb-add img
+{
+    width: 120px;
+}
+
+.tuto-pb-view .label
+{
+    font-size: 0.8em;
+}
+
+.tuto-sol-edit
+{
+    background-color: #2ecc71;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 0.85em;
+}
+
+.home-feedback
+{
+    margin-top: 80px;
+    margin-bottom: 15px;
+}
+
+.col-feedback-button, .col-info-project-button
+{
+    padding-left: 55px;
+    margin-bottom: 10px;
+}
+
+.home-feedback .lauch-modal-feedback, .home-feedback .lauch-modal-feedback:active, .home-feedback .lauch-modal-feedback:visited, .home-feedback .lauch-modal-feedback:focus
+{
+    background-color: #34495e;
+    color: #fff;
+}
+
+.home-feedback .lauch-modal-feedback:hover
+{
+    background-color: #3D5469;
+    color: #fff;
+}
+
+.modal-header button.close
+{
+    background: none;
+    color: #000;
+}
+
+.modal-header h3
+{
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
+.feedback-send-group
+{
+    margin: 0;
+}
+
+#infos-modal .modal-footer p
+{
+    margin: 0;
+    text-align: center;
+}

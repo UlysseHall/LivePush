@@ -13,6 +13,7 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('ressources/js/social/containerHeight.js') }}"></script>
+	<script src="{{ asset('ressources/js/social/loadList.js') }}"></script>
 <!--	<script src="{{ asset('ressources/js/social/langageLogoHeigth.js') }}"></script>-->
 {% endblock %}
 
@@ -35,13 +36,14 @@
         </div>
 
 		{% block social_left_pan %}
-		    {{ render(controller("SocialBundle:Main:problemsGet")) }}
+		    {{ render(controller("SocialBundle:Main:problemsGet", {"list": "unsolved"})) }}
 		{% endblock %}
 
 	</section>
 
 	<section class="home-content col-xs-9">
 		{% block social_right_pan %}
+		    {{ render(controller("SocialBundle:Main:home")) }}
 		{% endblock %}
 	</section
 

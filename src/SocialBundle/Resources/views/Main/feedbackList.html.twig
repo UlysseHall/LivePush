@@ -1,0 +1,24 @@
+{% extends "SocialBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('ressources/css/social/feedbackList.css') }}">
+{% endblock %}
+
+
+{% block social_right_pan %}
+    
+    <h1 class="feedback-list-title">Feedbacks</h1>
+    
+    <ul class="list-feedback-sent">
+        {% for fb in listFb %}
+
+            <li>
+                <p><b>{{ fb.auteur.username }}</b>, {{ fb.date|date('Y-m-d H:i:s')|prettydate }}</p>
+                <p><b>{{ fb.type }}</b> : {{ fb.message }}</p>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}
