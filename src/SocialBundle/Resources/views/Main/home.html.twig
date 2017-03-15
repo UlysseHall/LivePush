@@ -75,41 +75,47 @@
                     <div class="modal-header">
                        
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span></button>
-                        <h3>Feedbacks</h3>
+                        {% if connected %}
+                        	<h3>Feedbacks</h3>
+                        {% else %}
+                        	<h3>Vous devez être connecté</h3>
+                        {% endif %}
                         
                     </div>
                     
-                    <div class="modal-body">
-                       
-                        <form class="form-horizontal" method="post" action="{{ path('social_feedback_send') }}">
-                           
-                            <div class="form-group">
-                                <label for="type" class="col-xs-3 control-label">Type</label>
-                                <div class="col-xs-9">
-                                    <select class="form-control" id="type" name="type" required>
-                                        <option value="suggestion">Suggestion</option>
-                                        <option value="feedback">Retour d'utilisation</option>
-                                        <option value="bug">Bug</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message" class="col-xs-3 control-label">Message</label>
-                                <div class="col-xs-9">
-                                    <textarea class="form-control" rows="4" id="message" name="message" minlength="3" required></textarea>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    
-                        <div class="modal-footer">
-                            <div class="form-group feedback-send-group">
-                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Envoyer</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    {% if connected %}
+						<div class="modal-body">
+
+							<form class="form-horizontal" method="post" action="{{ path('social_feedback_send') }}">
+
+								<div class="form-group">
+									<label for="type" class="col-xs-3 control-label">Type</label>
+									<div class="col-xs-9">
+										<select class="form-control" id="type" name="type" required>
+											<option value="suggestion">Suggestion</option>
+											<option value="feedback">Retour d'utilisation</option>
+											<option value="bug">Bug</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="message" class="col-xs-3 control-label">Message</label>
+									<div class="col-xs-9">
+										<textarea class="form-control" rows="4" id="message" name="message" minlength="3" required></textarea>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="modal-footer">
+								<div class="form-group feedback-send-group">
+									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Envoyer</button>
+								</div>
+							</div>
+						</form>
+					</div>
+                {% endif %}
             </div>
         </div>
         

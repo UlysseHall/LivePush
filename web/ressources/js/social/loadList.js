@@ -14,5 +14,9 @@ $(function() {
     }
     
     clickOnList();
+	
+	$(".home-problems").bind("DOMSubtreeModified", function(){
+	  clickOnList();
+	});
     
 });

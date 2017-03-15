@@ -77,11 +77,12 @@
     font-weight: bold;
     margin: 0;
     cursor: pointer;
+	background-color: #ecf0f1;
 }
 
 .pb-display-select-list p:hover
 {
-    background-color: #ecf0f1;
+    background-color: #fff;
 }
 
 .display-select-list-problem-unsolved, .display-select-list-problem-solved
@@ -96,7 +97,7 @@
 
 .display-list-active
 {
-    background-color: #ecf0f1;
+    background-color: #fff !important;
 }
 
 .list-pb-loading

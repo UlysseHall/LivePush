@@ -141,10 +141,7 @@ class NotificationController extends Controller
             
         foreach($notifToRemove as $notifRem)
         {
-            if($notifRem->getDestinataire() == $this->getUser())
-            {
-                $em->remove($notifRem);
-            }
+        	$em->remove($notifRem);
         }
             
         $em->flush();

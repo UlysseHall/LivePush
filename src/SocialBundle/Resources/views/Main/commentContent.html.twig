@@ -54,7 +54,7 @@
        	</div>
 
         <div class="col-xs-12">
-        	<p class="com-content">{{ commentaire.contenu }}</p>
+        	<p class="com-content">{{ commentaire.contenu|raw }}</p>
         </div>
 
        	{% if not com.editedName is null and not com.editedContent is null and not response %}

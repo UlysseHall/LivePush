@@ -5,7 +5,7 @@ section.home-content
 
 .home-logo
 {
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -13,7 +13,7 @@ section.home-content
 
 .home-logo img
 {
-    width: 80%;
+    width: 60%;
 }
 
 .home-version
@@ -25,7 +25,7 @@ section.home-content
 
 section.home-tuto
 {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 article.home-tuto-probleme, article.home-tuto-solution
@@ -42,7 +42,7 @@ section.home-tuto h2
 section.home-tuto p
 {
     padding-left: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .tuto-pb-add img
@@ -67,7 +67,7 @@ section.home-tuto p
 
 .home-feedback
 {
-    margin-top: 80px;
+    margin-top: 50px;
     margin-bottom: 15px;
 }
 
