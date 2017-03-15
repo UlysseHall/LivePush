@@ -10,12 +10,21 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <img src="{{ asset('ressources/img/logo/bg-white.png') }}" alt="logo">
+               	<div class="col-xs-4 col-xs-offset-4">
+                	<img src="{{ asset('ressources/img/logo/bg-white-error.png') }}" alt="logo">
+				</div>
+			</div>
+          	
+           	<div class="row">
                 <h1>Flute.. Y'a un p'ti soucis</h1>
-                <h3>L'erreur {{ status_code }} {{ status_text }} a été déclenchée, je sais pas trop pourquoi..<br>
+                
+				<h3>La page demandée est <b>introuvable</b> ou a été <b>supprimée</b>, erreur 404 tu coco.<br><br>
+                
                 Écoute je te propose de retourner à la page d'accueil parceque y'a pas grand chose à voir ici. Bisous.</h3>
 
-                <a class="btn btn-default" href="{{ path('social_home') }}">Retour à l'accueil</a>
+                <a class="btn btn-default" href="{{ path('social_home') }}">
+                	<span class="glyphicon glyphicon-home"></span> Retour à l'accueil
+                </a>
             </div>
         </div>
     </body>

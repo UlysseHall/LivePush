@@ -37,6 +37,10 @@ $(function() {
             notifRefresh();
         });
     }
+	
+	$(".nav-account-notification-link").click(function() {
+		notifRefresh();
+	});
     
     notifRefresh();
     setInterval(notifRefresh, 60000);

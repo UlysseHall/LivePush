@@ -15,9 +15,9 @@
                     <span class="glyphicon glyphicon-comment notif-icon notif-icon-comment"></span>
                     
                     {% if notif.nb <= 1 %}
-                        <b>{{ notif.object.expediteur.username }}</b>&#160a commenté votre problème&#160"<b>{{ notif.object.problem.titre }}</b>"
+                        <b>{{ notif.object.expediteur.username }}</b>&#160a commenté votre problème&#160"<b>{{ notif.object.problem.titre|raw }}</b>"
                     {% else %}
-                        <b>{{ notif.nb }}</b>&#160commentaires ont été ajoutés sur votre problème&#160"<b>{{ notif.object.problem.titre }}</b>"
+                        <b>{{ notif.nb }}</b>&#160commentaires ont été ajoutés sur votre problème&#160"<b>{{ notif.object.problem.titre|raw }}</b>"
                     {% endif %}
                 </p>
 
@@ -33,9 +33,9 @@
                     <i class="fa fa-reply fa-rotate-180 notif-icon notif-icon-reply" aria-hidden="true"></i>
                     
                     {% if notif.nb <= 1 %}
-                        <b>{{ notif.object.expediteur.username }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu }}</b>"
+                        <b>{{ notif.object.expediteur.username }}</b>&#160a répondu à votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu|raw }}</b>"
                     {% else %}
-                        <b>{{ notif.nb }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu }}</b>"
+                        <b>{{ notif.nb }}</b>&#160réponses ont été ajoutées sur votre commentaire&#160"<b>{{ notif.object.comment.comfrom.contenu|raw }}</b>"
                     {% endif %}
                 </p>
 
@@ -49,7 +49,7 @@
             <div class="nav-notif-redirect-link" data-redirect="{{ path('social_problem_show', {'problem_titreSlug': notif.object.problem.titreSlug}) }}">
                 <p>
                     <span class="glyphicon glyphicon-ok notif-icon notif-icon-validated"></span>
-                    <b>{{ notif.object.expediteur.username }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.object.problem.titre }}</b>"
+                    <b>{{ notif.object.expediteur.username }}</b>&#160a validé votre réponse sur son problème&#160"<b>{{ notif.object.problem.titre|raw }}</b>"
                 </p>
 
                 <p class="notif-date">
