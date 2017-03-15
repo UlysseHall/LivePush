@@ -19,6 +19,10 @@ class MainController extends Controller
 
 	public function problemAddAction()
 	{
+        $securityContext = $this->container->get('security.authorization_checker');
+        if (!$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute("fos_user_security_login");
+        }
 		return $this->render('SocialBundle:Main:problemAdd.html.twig');
 	}
     

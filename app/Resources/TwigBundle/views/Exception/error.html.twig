@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Erreur : {{ status_text }}</title>
+        <link href="{{ asset('ressources/css/app/error.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}">
+    </head>
+    
+    <body>
+        <h1>Flute.. Y'a un p'ti soucis</h1>
+        <h3>L'erreur {{ status_code }} {{ status_text }} a été déclenchée, je sais pas trop pourquoi..<br>
+        Écoute je te propose de retourner à la page d'accueil parceque y'a pas grand chose à voir ici. Bisous.</h3>
+
+        <a class="btn btn-default" href="{{ path('social_home') }}">Retour à l'accueil</a>
+    </body>
+    
+</html>
